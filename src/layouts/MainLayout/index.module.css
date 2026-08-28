@@ -1,0 +1,82 @@
+.layout {
+  min-height: 100vh;
+}
+
+.sider {
+  box-shadow: 2px 0 8px rgba(15, 23, 42, 0.04);
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.logo {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logoImg {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.menu {
+  border-inline-end: none !important;
+  padding: 8px;
+}
+
+.menu :global(.ant-menu-item) {
+  border-radius: 8px;
+  margin-bottom: 2px;
+}
+
+.header {
+  background: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  margin-left: 240px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerIcon {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.headerIcon:hover {
+  color: var(--color-primary);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.content {
+  margin-left: 240px;
+  padding: 24px;
+  background: var(--color-bg);
+  min-height: calc(100vh - 64px);
+}

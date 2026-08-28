@@ -1,0 +1,119 @@
+.audioPlayerReal {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+}
+
+.audioElement {
+  width: 100%;
+  display: block;
+}
+
+.audioFileName {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
+}
+
+.audioPlayerPlaceholder {
+  aspect-ratio: 16 / 4;
+  background: #0f172a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  gap: 8px;
+}
+
+.pluginHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(22, 119, 255, 0.06), rgba(124, 92, 252, 0.04));
+  border-radius: 12px;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+}
+
+.pluginTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 6px;
+}
+
+.pluginDesc {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.aiPanel {
+  background: linear-gradient(135deg, rgba(124, 92, 252, 0.08), rgba(22, 119, 255, 0.06));
+  border: 1px solid rgba(124, 92, 252, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.metaItem {
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.metaLabel {
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.metaValue {
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.clipList {
+  margin-top: 16px;
+}
+
+.trimActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actionHint {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 40px;
+}
+
+.summaryBlock {
+  background: #f8fafc;
+  border-left: 3px solid #7c5cfc;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}

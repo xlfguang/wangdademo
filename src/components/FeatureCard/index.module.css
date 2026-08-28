@@ -1,0 +1,39 @@
+.card {
+  box-shadow: var(--shadow-card);
+  border-radius: 12px;
+  height: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 28px;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+}
+
+.list {
+  padding-left: 16px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.list li {
+  margin-bottom: 4px;
+}

@@ -1,0 +1,85 @@
+.pluginHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, rgba(22, 119, 255, 0.06), rgba(124, 92, 252, 0.04));
+  border-radius: 12px;
+  border: 1px solid rgba(22, 119, 255, 0.08);
+}
+
+.pluginTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 6px;
+}
+
+.pluginDesc {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.aiPanel {
+  background: linear-gradient(135deg, rgba(124, 92, 252, 0.08), rgba(22, 119, 255, 0.06));
+  border: 1px solid rgba(124, 92, 252, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.dedupeStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dedupeItem {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.dedupeValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.dedupeLabel {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+.sourceCard {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  height: 100%;
+}
+
+.storageBar {
+  margin-bottom: 16px;
+}
+
+.hotspotTitle {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hotspotTitle:hover {
+  color: #1677ff;
+}
+
+.strategyBlock {
+  background: #fff7e6;
+  border-left: 3px solid #fa8c16;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.7;
+}

@@ -1,0 +1,9 @@
+.card {
+  box-shadow: var(--shadow-card);
+  border-radius: 12px;
+  height: 100%;
+}
+
+.card :global(.ant-card-head-title) {
+  font-weight: 600;
+}

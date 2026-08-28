@@ -1,0 +1,132 @@
+import type {
+  CrawlerTask, CrawlerDataRecord, CrawlerDataSource, TrustedSource,
+  OpinionHotspot, AlertRecord, CrawlerSearchLog,
+} from '@/types'
+
+export const crawlerPluginMeta = {
+  name: '搜索爬虫插件',
+  description: '面向 AI Agent 提供精准数据获取与实时舆情监控能力',
+  status: 'running' as const,
+  version: 'v2.3.0',
+}
+
+export const crawlerOverviewStats = {
+  totalTasks: 3240,
+  todayCollected: 18600,
+  hotspotCount: 28,
+  alertCount: 156,
+  apiCalls: 45800,
+}
+
+export const crawlerScenarios = [
+  { title: '行业趋势调研', description: '多关键词组合检索，权威信源筛选，快速获取行业动态', items: ['多关键词', '信源筛选', '定时检索', '数据导出'] },
+  { title: '品牌舆情监控', description: '热点自动识别，分级预警推送，全链路追溯分析', items: ['热点识别', '分级预警', '情感分析', '策略建议'] },
+  { title: '竞品动态追踪', description: '定时抓取竞品信息，去重合并，结构化存储', items: ['定时任务', '数据去重', '变更对比', '报告生成'] },
+  { title: '政策法规采集', description: '按地域与时间筛选，优先保留政府权威信源', items: ['地域筛选', '时间范围', '信源等级', 'PDF 提取'] },
+  { title: '学术情报收集', description: '对接行业数据库，批量抓取论文与报告摘要', items: ['数据库对接', '批量抓取', '摘要提取', '引用导出'] },
+]
+
+export const keywordGroups = [
+  { id: 'g1', name: '品牌舆情监控组', keywords: '品牌名 OR 产品名 NOT 广告', count: 12 },
+  { id: 'g2', name: '行业趋势调研组', keywords: '人工智能 AND 政策动态', count: 8 },
+  { id: 'g3', name: '竞品监控组', keywords: '竞品A OR 竞品B AND 定价', count: 6 },
+]
+
+export const crawlerTasks: CrawlerTask[] = [
+  { id: 'c1', taskId: 'CR202608280001', name: '新能源汽车政策检索', keyword: '新能源汽车 政策', keywords: ['新能源汽车', '政策'], logic: 'and', source: '百度', dataSource: '百度', collectCount: 1000, collectedCount: 1000, progress: 100, status: 'completed', scheduleType: 'instant', timeRange: '近7天', dedupeRate: 12, createdAt: '2026-08-28 09:52', updatedAt: '2026-08-28 10:30' },
+  { id: 'c2', taskId: 'CR202608280002', name: 'AI 行业资讯采集', keyword: '大模型 应用', keywords: ['大模型', '应用'], logic: 'and', source: '搜狗', dataSource: '搜狗', collectCount: 500, collectedCount: 320, progress: 64, status: 'running', scheduleType: 'scheduled', scheduleFreq: '每天 02:00', timeRange: '近3天', dedupeRate: 8, createdAt: '2026-08-28 09:00', updatedAt: '2026-08-28 10:15' },
+  { id: 'c3', taskId: 'CR202608270003', name: '品牌舆情监控', keyword: '某品牌 投诉', keywords: ['某品牌', '投诉'], logic: 'and', source: '微博+知乎', dataSource: '多渠道', collectCount: 2000, collectedCount: 2000, progress: 100, status: 'completed', scheduleType: 'scheduled', scheduleFreq: '每小时', timeRange: '近24小时', dedupeRate: 22, createdAt: '2026-08-27 16:00', updatedAt: '2026-08-27 18:30' },
+  { id: 'c4', taskId: 'CR202608270004', name: '大模型论文采集', keyword: 'LLM RAG', source: '学术数据库', dataSource: '行业数据库', collectCount: 300, collectedCount: 180, progress: 60, status: 'running', scheduleType: 'instant', timeRange: '近30天', createdAt: '2026-08-27 14:00', updatedAt: '2026-08-28 08:00' },
+  { id: 'c5', taskId: 'CR202608270005', name: '竞品定价监控', keyword: 'SaaS 定价', source: '竞品官网', dataSource: '自定义', collectCount: 100, collectedCount: 0, progress: 0, status: 'queued', scheduleType: 'scheduled', scheduleFreq: '每周一', createdAt: '2026-08-27 10:00', updatedAt: '2026-08-27 10:00' },
+]
+
+export const dataSources: CrawlerDataSource[] = [
+  { id: 'ds1', name: '百度搜索', type: 'search', status: 'connected', priority: 1, timeout: 10, rateLimit: 3, maxRetry: 3, isDefault: true },
+  { id: 'ds2', name: '搜狗搜索', type: 'search', status: 'connected', priority: 2, timeout: 10, rateLimit: 3, maxRetry: 3 },
+  { id: 'ds3', name: '头条搜索', type: 'search', status: 'disconnected', priority: 3, timeout: 15, rateLimit: 2, maxRetry: 2 },
+  { id: 'ds4', name: '金融行业数据库', type: 'database', status: 'connected', priority: 4, timeout: 20, rateLimit: 1, maxRetry: 3 },
+  { id: 'ds5', name: '医疗行业数据库', type: 'database', status: 'error', priority: 5, timeout: 20, rateLimit: 1, maxRetry: 2 },
+]
+
+export const trustedSources: TrustedSource[] = [
+  { id: 'ts1', name: '中国政府网', url: 'www.gov.cn', level: '一级', industry: '政府' },
+  { id: 'ts2', name: '新华社', url: 'www.xinhuanet.com', level: '一级', industry: '新闻' },
+  { id: 'ts3', name: '中国人民银行', url: 'www.pbc.gov.cn', level: '一级', industry: '金融' },
+  { id: 'ts4', name: '36氪', url: '36kr.com', level: '二级', industry: '互联网' },
+  { id: 'ts5', name: '知乎', url: 'zhihu.com', level: '三级', industry: '社交' },
+  { id: 'ts6', name: '微博', url: 'weibo.com', level: '三级', industry: '社交' },
+]
+
+export const searchResultsMock: CrawlerDataRecord[] = [
+  { id: 'r1', title: '2026年新能源汽车补贴政策最新解读', content: '工信部发布最新新能源汽车补贴政策...', publishTime: '2026-08-28 08:30', source: '新华社', author: '财经组', url: 'https://example.com/1', dataType: '新闻报道', sentiment: 'neutral', sourceLevel: '一级', readCount: 12500 },
+  { id: 'r2', title: '大模型在智能体平台中的应用实践', content: '随着 AI Agent 快速发展...', publishTime: '2026-08-27 16:20', source: '36氪', author: '科技频道', url: 'https://example.com/2', dataType: '行业报告', sentiment: 'positive', sourceLevel: '二级', readCount: 8900 },
+  { id: 'r3', title: '某品牌产品质量问题引发网友讨论', content: '多位用户在社交平台反映...', publishTime: '2026-08-28 07:15', source: '微博', url: 'https://example.com/3', dataType: '微博内容', sentiment: 'negative', sourceLevel: '三级', readCount: 52000, isDuplicate: false },
+  { id: 'r4', title: 'RAG 技术在企业知识库中的落地指南', content: '检索增强生成（RAG）已成为...', publishTime: '2026-08-26 11:00', source: '知乎', author: 'AI从业者', url: 'https://example.com/4', dataType: '论坛帖子', sentiment: 'positive', sourceLevel: '三级', readCount: 3200 },
+  { id: 'r5', title: '2026年新能源汽车补贴政策最新解读', content: '工信部发布最新新能源汽车补贴政策...', publishTime: '2026-08-28 08:35', source: '网易新闻', url: 'https://example.com/5', dataType: '新闻报道', sentiment: 'neutral', sourceLevel: '二级', isDuplicate: true },
+  { id: 'r6', title: '国务院印发数字经济发展规划', content: '国务院近日印发关于加快...', publishTime: '2026-08-25 09:00', source: '中国政府网', url: 'https://example.com/6', dataType: 'PDF文档', sentiment: 'neutral', sourceLevel: '一级', readCount: 8900 },
+]
+
+export const searchLogsMock: CrawlerSearchLog[] = [
+  { id: 'l1', title: '2026年新能源汽车补贴政策最新解读', time: '2026-08-28 10:28:05', status: 'success' },
+  { id: 'l2', title: '大模型在智能体平台中的应用实践', time: '2026-08-28 10:28:12', status: 'success' },
+  { id: 'l3', title: '未知页面解析失败', time: '2026-08-28 10:28:18', status: 'failed', reason: '内容解析失败' },
+  { id: 'l4', title: 'RAG 技术在企业知识库中的落地指南', time: '2026-08-28 10:28:25', status: 'success' },
+]
+
+export const opinionHotspots: OpinionHotspot[] = [
+  { id: 'o1', title: '某品牌产品质量投诉集中爆发', summary: '多位用户在微博、知乎反映产品质量问题，负面评论快速传播', level: 'urgent', monitorTarget: '某品牌', platforms: ['微博', '知乎', '今日头条'], publishCount: 128, interactionCount: 52000, negativeRatio: 85, sentiment: '负面为主', firstSeen: '2026-08-28 06:30', spreadSpeed: '极快', status: '处理中' },
+  { id: 'o2', title: 'AI 大模型监管政策讨论升温', summary: '新版 AI 监管征求意见稿引发行业广泛讨论', level: 'important', monitorTarget: 'AI监管', platforms: ['新华社', '36氪', '知乎'], publishCount: 56, interactionCount: 12000, negativeRatio: 35, sentiment: '中性偏正', firstSeen: '2026-08-27 14:00', spreadSpeed: '较快', status: '未处理' },
+  { id: 'o3', title: '新能源汽车销量数据发布', summary: '8月新能源汽车销量同比增长35%，获正面报道', level: 'normal', monitorTarget: '新能源汽车', platforms: ['新华社', '新浪新闻'], publishCount: 23, interactionCount: 4500, negativeRatio: 5, sentiment: '正面', firstSeen: '2026-08-28 08:00', spreadSpeed: '平稳', status: '已处理' },
+  { id: 'o4', title: '竞品发布新品引发关注', summary: '竞品发布新一代 SaaS 产品，定价策略受关注', level: 'normal', monitorTarget: '竞品A', platforms: ['36氪', '今日头条'], publishCount: 18, interactionCount: 3200, negativeRatio: 10, sentiment: '中性', firstSeen: '2026-08-27 10:00', spreadSpeed: '平稳', status: '已处理' },
+]
+
+export const alertRecords: AlertRecord[] = [
+  { id: 'a1', time: '2026-08-28 07:00', level: 'urgent', title: '某品牌产品质量投诉集中爆发', channel: '企业微信', receiver: '公关部', pushStatus: 'success', handleStatus: '处理中' },
+  { id: 'a2', time: '2026-08-28 06:45', level: 'urgent', title: '某品牌产品质量投诉集中爆发', channel: '企业微信', receiver: '品牌负责人', pushStatus: 'success', handleStatus: '处理中' },
+  { id: 'a3', time: '2026-08-27 15:30', level: 'important', title: 'AI 大模型监管政策讨论升温', channel: '企业微信', receiver: '合规部', pushStatus: 'success', handleStatus: '未处理' },
+  { id: 'a4', time: '2026-08-26 09:00', level: 'normal', title: '竞品发布新品引发关注', channel: '邮件', receiver: '市场部', pushStatus: 'success', handleStatus: '已处理' },
+]
+
+export const storedDataRecords: CrawlerDataRecord[] = [
+  ...searchResultsMock.filter((r) => !r.isDuplicate),
+  { id: 'r7', title: '智能体平台数据插件生态建设', content: '平台持续扩展数据处理、音视频等插件能力...', publishTime: '2026-08-24 10:00', source: '内部报告', url: 'https://example.com/7', dataType: '行业报告', sentiment: 'positive', sourceLevel: '二级' },
+  { id: 'r8', title: '数据安全法合规要点梳理', content: '企业数据采集需遵循最小必要原则...', publishTime: '2026-08-23 14:30', source: '中国政府网', url: 'https://example.com/8', dataType: 'PDF文档', sentiment: 'neutral', sourceLevel: '一级' },
+]
+
+export const crawlerSettingsDefault = {
+  threads: 10,
+  interval: 500,
+  maxCollect: 1000,
+  dedupeLevel: 'medium',
+  sourceFilter: 'priority',
+  alertUrgentThreshold: 30,
+  alertImportantThreshold: 50,
+  alertChannel: 'wecom',
+  storagePath: '/data/crawler',
+  cloudSync: false,
+  backupFreq: 'daily',
+  agentSync: true,
+}
+
+export const storageStats = {
+  localUsed: '2.8 GB',
+  localTotal: '10 GB',
+  cloudUsed: '15.2 GB',
+  cloudTotal: '50 GB',
+  categories: [
+    { name: '抓取原始数据', size: '1.2 GB' },
+    { name: '去重后数据', size: '980 MB' },
+    { name: '舆情热点数据', size: '420 MB' },
+    { name: '预警记录', size: '85 MB' },
+    { name: '用户配置', size: '12 MB' },
+  ],
+}
+
+export const levelStrategy: Record<string, string> = {
+  urgent: '建议立即启动危机公关预案，2 小时内发布官方声明，成立专项应对小组，密切监测舆情趋势。',
+  important: '建议 1 小时内完成舆情评估，明确责任部门，制定响应方案，通过官方渠道发布信息。',
+  normal: '建议持续监测舆情变化，收集公众反馈，根据情况决定是否进一步回应。',
+}
+
+export const getCrawlerTask = (id: string): CrawlerTask | undefined =>
+  crawlerTasks.find((t) => t.id === id)
