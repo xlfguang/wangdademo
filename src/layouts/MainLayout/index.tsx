@@ -17,6 +17,7 @@ import {
 } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { removeToken } from '@/utils/auth'
+import { assetUrl } from '@/utils/assetUrl'
 import styles from './index.module.css'
 
 const { Header, Sider, Content } = Layout
@@ -154,7 +155,7 @@ export default function MainLayout() {
     <Layout className={styles.layout}>
       <Sider width={240} className={styles.sider} theme="light">
         <div className={styles.logo}>
-          <img src="/logoandtext.png" alt="网达智能体调度平台" className={styles.logoImg} />
+          <img src={assetUrl('/logoandtext.png')} alt="网达智能体调度平台" className={styles.logoImg} />
         </div>
         <Menu
           mode="inline"

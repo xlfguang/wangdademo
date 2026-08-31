@@ -2,6 +2,7 @@ import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { setToken } from '@/utils/auth'
+import { assetUrl } from '@/utils/assetUrl'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -20,7 +21,7 @@ export default function Login() {
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.leftContent}>
-          <img src="/logo.png" alt="网达软件" className={styles.leftLogo} />
+          <img src={assetUrl('/logo.png')} alt="网达软件" className={styles.leftLogo} />
           <h1 className={styles.leftTitle}>网达智能体调度平台</h1>
           <p className={styles.leftSubtitle}>统一调度、编排与管理企业级 AI 智能体与能力插件</p>
           <div className={styles.features}>
@@ -47,7 +48,7 @@ export default function Login() {
       <div className={styles.right}>
         <div className={styles.formWrapper}>
           <div className={styles.formHeader}>
-            <img src="/logo.png" alt="网达软件" className={styles.formLogo} />
+            <img src={assetUrl('/logo.png')} alt="网达软件" className={styles.formLogo} />
             <h2>欢迎登录</h2>
             <p>网达智能体调度平台</p>
           </div>
