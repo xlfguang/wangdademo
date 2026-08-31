@@ -58,6 +58,7 @@ export default function ProjectDetail() {
             <Descriptions.Item label="项目状态"><StatusTag status={project.status} /></Descriptions.Item>
             <Descriptions.Item label="开始时间">{project.startDate}</Descriptions.Item>
             <Descriptions.Item label="结束时间">{project.endDate}</Descriptions.Item>
+            {project.appKey && <Descriptions.Item label="AppKey">{project.appKey}</Descriptions.Item>}
             <Descriptions.Item label="项目描述" span={2}>{project.description}</Descriptions.Item>
           </Descriptions>
           <Card title="项目里程碑" bordered={false} style={{ marginBottom: 24, boxShadow: 'var(--shadow-card)' }}>

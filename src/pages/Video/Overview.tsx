@@ -1,10 +1,5 @@
 import { Row, Col, Card, Table, Button } from 'antd'
 import {
-  ThunderboltOutlined,
-  PlayCircleOutlined,
-  DatabaseOutlined,
-  CheckCircleOutlined,
-  ApiOutlined,
   ScissorOutlined,
   SwapOutlined,
   CompressOutlined,
@@ -13,17 +8,14 @@ import {
   RobotOutlined,
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import StatCard from '@/components/StatCard'
 import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import VideoSubNav from './components/VideoSubNav'
 import { useVideoTasks } from './VideoTaskContext'
 import {
   videoPluginMeta,
-  videoOverviewStats,
   videoCapabilities,
 } from '@/mock/video'
-import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { videoCapabilityLinks } from '@/config/capabilityLinks'
 import styles from './index.module.css'
@@ -72,24 +64,6 @@ export default function Overview() {
       </div>
 
       <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} lg={8} xl={4}>
-          <StatCard title="总处理任务" value={formatNumber(videoOverviewStats.totalTasks)} icon={<ThunderboltOutlined />} />
-        </Col>
-        <Col xs={24} sm={12} lg={8} xl={5}>
-          <StatCard title="当前运行任务" value={videoOverviewStats.runningTasks} icon={<PlayCircleOutlined />} />
-        </Col>
-        <Col xs={24} sm={12} lg={8} xl={5}>
-          <StatCard title="视频处理量" value={videoOverviewStats.processedVolume} icon={<DatabaseOutlined />} />
-        </Col>
-        <Col xs={24} sm={12} lg={8} xl={5}>
-          <StatCard title="任务成功率" value={`${videoOverviewStats.successRate}%`} icon={<CheckCircleOutlined />} />
-        </Col>
-        <Col xs={24} sm={12} lg={8} xl={5}>
-          <StatCard title="API 调用次数" value={formatNumber(videoOverviewStats.apiCalls)} icon={<ApiOutlined />} />
-        </Col>
-      </Row>
-
-      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         {videoCapabilities.map((cap, i) => {
           const link = videoCapabilityLinks[cap.title]
           return (

@@ -20,33 +20,7 @@ export default function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div className={styles.leftContent}>
-          <h1 className={styles.leftTitle}>网达智能体调度平台</h1>
-          <p className={styles.leftSubtitle}>
-            统一调度、编排与管理企业级 AI 智能体与能力插件
-          </p>
-          <div className={styles.features}>
-            <div className={styles.featureItem}>
-              <span className={styles.featureDot} />
-              模块化 AI 能力插件
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureDot} />
-              企业级知识库管理
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureDot} />
-              数据智能治理与运营
-            </div>
-            <div className={styles.featureItem}>
-              <span className={styles.featureDot} />
-              行业解决方案交付
-            </div>
-          </div>
-        </div>
-        <div className={styles.leftFooter}>
-          网达软件 · 智能体调度 · 持续运营
-        </div>
+        <h1 className={styles.leftTitle}>网达智能体调度平台</h1>
       </div>
       <div className={styles.right}>
         <div className={styles.formWrapper}>
@@ -57,7 +31,6 @@ export default function Login() {
               className={styles.formLogo}
             />
             <h2>欢迎登录</h2>
-            <p>网达智能体调度平台</p>
           </div>
           <Form
             form={form}

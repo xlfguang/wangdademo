@@ -10,7 +10,6 @@ const tabItems = [
   { key: '/data/quality', label: '数据质量' },
   { key: '/data/ai-analysis', label: 'AI智能分析' },
   { key: '/data/sync', label: '同步任务' },
-  { key: '/data/system', label: '系统管理' },
 ]
 
 export default function DataSubNav() {

@@ -38,8 +38,6 @@ export const channels: Channel[] = [
   { id: 'ch2', name: '企业微信', icon: 'wework', status: 'connected', todaySent: randomInt(1500, 3400), totalSent: randomInt(60000, 120000) },
   { id: 'ch3', name: '短信', icon: 'sms', status: 'connected', todaySent: randomInt(200, 900), totalSent: randomInt(15000, 32000) },
   { id: 'ch4', name: '邮件', icon: 'email', status: 'connected', todaySent: randomInt(400, 1500), totalSent: randomInt(38000, 78000) },
-  { id: 'ch5', name: 'Telegram', icon: 'telegram', status: 'configuring', todaySent: 0, totalSent: 0 },
-  { id: 'ch6', name: 'Web', icon: 'web', status: 'connected', todaySent: randomInt(2000, 5200), totalSent: randomInt(90000, 180000) },
 ]
 
 export const communityGroups: CommunityGroup[] = [

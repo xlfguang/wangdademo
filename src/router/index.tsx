@@ -7,7 +7,6 @@ import Dashboard from '@/pages/Dashboard'
 import Video from '@/pages/Video'
 import VideoLayout from '@/pages/Video/layout'
 import VideoOverview from '@/pages/Video/Overview'
-import VideoWorkspace from '@/pages/Video/Workspace'
 import VideoTasks from '@/pages/Video/Tasks'
 import VideoAnalysis from '@/pages/Video/Analysis'
 import VideoApiDebug from '@/pages/Video/ApiDebug'
@@ -25,7 +24,6 @@ import DataReportDetail from '@/pages/Data/ReportDetail'
 import DataQuality from '@/pages/Data/Quality'
 import DataAiAnalysis from '@/pages/Data/AiAnalysis'
 import DataSync from '@/pages/Data/Sync'
-import DataSystem from '@/pages/Data/System'
 import DataTaskDetail from '@/pages/Data/TaskDetail'
 import Audio from '@/pages/Audio'
 import AudioLayout from '@/pages/Audio/layout'
@@ -116,7 +114,6 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Video /> },
           { path: 'overview', element: <VideoOverview /> },
-          { path: 'workspace', element: <VideoWorkspace /> },
           { path: 'tasks', element: <VideoTasks /> },
           { path: 'analysis', element: <VideoAnalysis /> },
           { path: 'api-debug', element: <VideoApiDebug /> },
@@ -139,7 +136,6 @@ export const router = createBrowserRouter([
           { path: 'quality', element: <DataQuality /> },
           { path: 'ai-analysis', element: <DataAiAnalysis /> },
           { path: 'sync', element: <DataSync /> },
-          { path: 'system', element: <DataSystem /> },
           { path: 'task/:id', element: <DataTaskDetail /> },
         ],
       },

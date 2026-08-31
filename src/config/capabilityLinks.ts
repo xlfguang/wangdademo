@@ -6,7 +6,7 @@ export interface CapabilityLink {
 }
 
 export const videoCapabilityLinks: Record<string, CapabilityLink> = {
-  '视频剪辑': { path: '/video/workspace' },
+  '视频剪辑': { path: '/video/tasks', params: { action: 'create', processType: '视频剪辑' } },
   '视频转码': { path: '/video/tasks', params: { action: 'create', processType: '视频转码' } },
   '视频压缩': { path: '/video/tasks', params: { action: 'create', processType: '视频压缩' } },
   '关键帧提取': { path: '/video/tasks', params: { action: 'create', processType: '关键帧提取' } },
@@ -69,5 +69,5 @@ export const dataStatLinks: Record<string, CapabilityLink> = {
   '数据处理任务': { path: '/data/governance', params: { action: 'create' } },
   '数据质量评分': { path: '/data/quality' },
   '异常数据量': { path: '/data/quality' },
-  'API 调用次数': { path: '/data/system' },
+  'API 调用次数': { path: '/data/overview' },
 }

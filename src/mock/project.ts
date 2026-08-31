@@ -1,6 +1,18 @@
 import type { Project } from '@/types'
 import { formatCount, randomFloat, randomInt } from '@/utils/mockApi'
 
+export const projectPluginOptions = [
+  '视频处理插件',
+  '数据处理插件',
+  '音频交互处理',
+  '搜索爬虫插件',
+  '社群管理',
+  '数据清洗服务',
+  '知识库管理',
+  '任务协作助手',
+  '模型管理',
+]
+
 /** 进度与项目阶段保持一致：规划中/实施中/运营中在各自合理区间随机，已完成固定 100 */
 const projectProgress = (status: Project['status']): number => {
   switch (status) {

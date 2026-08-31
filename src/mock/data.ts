@@ -222,7 +222,6 @@ export const permissionTree = [
     { title: '数据分析', key: 'analysis' },
     { title: '报表管理', key: 'reports' },
     { title: '数据质量', key: 'quality' },
-    { title: '系统管理', key: 'system' },
   ]},
 ]
 

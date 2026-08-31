@@ -7,9 +7,8 @@
   flex: 1;
   background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1677ff 100%);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 60px;
   position: relative;
   overflow: hidden;
@@ -26,60 +25,17 @@
   border-radius: 50%;
 }
 
-.leftContent {
+.leftTitle {
   position: relative;
   z-index: 1;
-  max-width: 480px;
-}
-
-.leftLogo {
-  height: 40px;
-  width: auto;
-  margin-bottom: 24px;
-  object-fit: contain;
-}
-
-.leftTitle {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.leftSubtitle {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 40px;
-}
-
-.features {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.featureItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
-}
-
-.featureDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #69b1ff;
-  flex-shrink: 0;
-}
-
-.leftFooter {
-  position: absolute;
-  bottom: 40px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0;
+  padding: 0 40px;
 }
 
 .right {
@@ -111,12 +67,7 @@
 .formHeader h2 {
   font-size: 24px;
   color: var(--color-dark);
-  margin-bottom: 8px;
-}
-
-.formHeader p {
-  color: var(--color-text-secondary);
-  font-size: 14px;
+  margin: 0;
 }
 
 .loginBtn {
@@ -124,13 +75,6 @@
   font-size: 16px;
   background: var(--gradient-primary);
   border: none;
-}
-
-.hint {
-  text-align: center;
-  color: var(--color-text-secondary);
-  font-size: 13px;
-  margin-top: 16px;
 }
 
 @media (max-width: 900px) {

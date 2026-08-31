@@ -128,7 +128,7 @@ export interface QuickAction {
 }
 
 export const dashboardQuickActions: QuickAction[] = [
-  { label: '进入视频工作台', route: '/video/workspace', icon: 'video' },
+  { label: '进入视频任务', route: '/video/tasks', icon: 'video' },
   { label: '语音合成', route: '/audio/synthesis', icon: 'audio' },
   { label: '创建治理任务', route: '/data/governance?action=create', icon: 'data' },
   { label: '新建定时采集', route: '/crawler/schedules', icon: 'crawler' },

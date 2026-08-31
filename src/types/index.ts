@@ -458,6 +458,11 @@ export interface QAPair {
   answer: string
 }
 
+export interface ProjectPluginConfig {
+  name: string
+  callQuota: number
+}
+
 export interface Project {
   id: string
   name: string
@@ -468,6 +473,8 @@ export interface Project {
   startDate: string
   endDate: string
   description: string
+  appKey?: string
+  pluginConfigs?: ProjectPluginConfig[]
 }
 
 export type TaskPriority = 'high' | 'medium' | 'low'
