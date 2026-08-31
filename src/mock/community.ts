@@ -8,6 +8,7 @@ import type {
   CommunityAlert,
   TaskStatus,
 } from '@/types'
+import { randomFloat, randomInt } from '@/utils/mockApi'
 
 export const communityPluginMeta = {
   name: '社群管理及多渠道消息推送插件',
@@ -17,11 +18,11 @@ export const communityPluginMeta = {
 }
 
 export const communityOverviewStats = {
-  totalGroups: 36,
-  todayMessages: 4280,
-  aiReplyRate: 78.5,
-  pushReachRate: 92.3,
-  apiCalls: 28600,
+  totalGroups: randomInt(24, 48),
+  todayMessages: randomInt(2800, 6800),
+  aiReplyRate: randomFloat(70, 88, 1),
+  pushReachRate: randomFloat(86, 97, 1),
+  apiCalls: randomInt(18000, 42000),
 }
 
 export const communityScenarios = [
@@ -33,21 +34,21 @@ export const communityScenarios = [
 ]
 
 export const channels: Channel[] = [
-  { id: 'ch1', name: '微信公众号', icon: 'wechat', status: 'connected', todaySent: 1280, totalSent: 45680 },
-  { id: 'ch2', name: '企业微信', icon: 'wework', status: 'connected', todaySent: 2340, totalSent: 89200 },
-  { id: 'ch3', name: '短信', icon: 'sms', status: 'connected', todaySent: 560, totalSent: 23400 },
-  { id: 'ch4', name: '邮件', icon: 'email', status: 'connected', todaySent: 890, totalSent: 56700 },
+  { id: 'ch1', name: '微信公众号', icon: 'wechat', status: 'connected', todaySent: randomInt(800, 2000), totalSent: randomInt(32000, 68000) },
+  { id: 'ch2', name: '企业微信', icon: 'wework', status: 'connected', todaySent: randomInt(1500, 3400), totalSent: randomInt(60000, 120000) },
+  { id: 'ch3', name: '短信', icon: 'sms', status: 'connected', todaySent: randomInt(200, 900), totalSent: randomInt(15000, 32000) },
+  { id: 'ch4', name: '邮件', icon: 'email', status: 'connected', todaySent: randomInt(400, 1500), totalSent: randomInt(38000, 78000) },
   { id: 'ch5', name: 'Telegram', icon: 'telegram', status: 'configuring', todaySent: 0, totalSent: 0 },
-  { id: 'ch6', name: 'Web', icon: 'web', status: 'connected', todaySent: 3200, totalSent: 128000 },
+  { id: 'ch6', name: 'Web', icon: 'web', status: 'connected', todaySent: randomInt(2000, 5200), totalSent: randomInt(90000, 180000) },
 ]
 
 export const communityGroups: CommunityGroup[] = [
-  { id: 'g1', name: 'AI 技术交流社群', memberCount: 12580, activity: 85, lastActive: '2026-08-28 10:30', status: 'running' },
-  { id: 'g2', name: '企业数字化转型社群', memberCount: 8920, activity: 72, lastActive: '2026-08-28 10:15', status: 'running' },
-  { id: 'g3', name: '新能源行业资讯群', memberCount: 15600, activity: 68, lastActive: '2026-08-28 09:50', status: 'running' },
-  { id: 'g4', name: '智能制造解决方案群', memberCount: 6780, activity: 45, lastActive: '2026-08-28 08:30', status: 'completed' },
-  { id: 'g5', name: '金融科技创新社群', memberCount: 9340, activity: 58, lastActive: '2026-08-27 18:00', status: 'running' },
-  { id: 'g6', name: '政务数字化交流群', memberCount: 4520, activity: 32, lastActive: '2026-08-27 16:00', status: 'waiting' },
+  { id: 'g1', name: 'AI 技术交流社群', memberCount: randomInt(9000, 16000), activity: randomInt(72, 95), lastActive: '2026-08-28 10:30', status: 'running' },
+  { id: 'g2', name: '企业数字化转型社群', memberCount: randomInt(6000, 12000), activity: randomInt(58, 88), lastActive: '2026-08-28 10:15', status: 'running' },
+  { id: 'g3', name: '新能源行业资讯群', memberCount: randomInt(11000, 20000), activity: randomInt(52, 84), lastActive: '2026-08-28 09:50', status: 'running' },
+  { id: 'g4', name: '智能制造解决方案群', memberCount: randomInt(4000, 9500), activity: randomInt(28, 62), lastActive: '2026-08-28 08:30', status: 'completed' },
+  { id: 'g5', name: '金融科技创新社群', memberCount: randomInt(6000, 13000), activity: randomInt(42, 74), lastActive: '2026-08-27 18:00', status: 'running' },
+  { id: 'g6', name: '政务数字化交流群', memberCount: randomInt(3000, 7000), activity: randomInt(18, 48), lastActive: '2026-08-27 16:00', status: 'waiting' },
 ]
 
 export const aggregatedMessages: AggregatedMessage[] = [
@@ -62,9 +63,9 @@ export const aggregatedMessages: AggregatedMessage[] = [
 ]
 
 export const intentTop3Mock: IntentRecord[] = [
-  { intent: '产品咨询', confidence: 0.92, description: '用户询问产品版本、功能或发布时间' },
-  { intent: '技术支持', confidence: 0.68, description: '用户需要技术集成或使用帮助' },
-  { intent: '账号问题', confidence: 0.35, description: '用户遇到账号、权限或登录相关问题' },
+  { intent: '产品咨询', confidence: randomFloat(0.85, 0.98, 2), description: '用户询问产品版本、功能或发布时间' },
+  { intent: '技术支持', confidence: randomFloat(0.55, 0.8, 2), description: '用户需要技术集成或使用帮助' },
+  { intent: '账号问题', confidence: randomFloat(0.2, 0.5, 2), description: '用户遇到账号、权限或登录相关问题' },
 ]
 
 export const autoReplyMock = '您好！AI 插件最新版本 v2.1.0 已于本周发布，支持多平台消息聚合与智能回复。集成文档可在「帮助中心 → 开发者指南」查看。如需进一步协助，请随时告知。'
@@ -95,27 +96,27 @@ export const pushStrategies: PushStrategyItem[] = [
 ]
 
 export const userPortraits: UserPortrait[] = [
-  { id: 'p1', userId: 'U10001', nickname: '张经理', tags: ['企业客户', '技术决策', '高活跃'], lifecycle: 'vip', lastActive: '2026-08-28 10:28', messageCount: 156, responseRate: 95, preferredChannel: '企业微信', strategyEffect: 88 },
-  { id: 'p2', userId: 'U10002', nickname: '李用户', tags: ['个人用户', '内容消费'], lifecycle: 'active', lastActive: '2026-08-28 10:15', messageCount: 42, responseRate: 72, preferredChannel: '微信公众号', strategyEffect: 65 },
-  { id: 'p3', userId: 'U10003', nickname: '王工程师', tags: ['开发者', 'API 集成'], lifecycle: 'active', lastActive: '2026-08-27 18:00', messageCount: 89, responseRate: 88, preferredChannel: '邮件', strategyEffect: 76 },
-  { id: 'p4', userId: 'U10004', nickname: '陈总监', tags: ['企业客户', '投诉反馈'], lifecycle: 'silent', lastActive: '2026-08-20 14:00', messageCount: 23, responseRate: 45, preferredChannel: '企业微信', strategyEffect: 32 },
-  { id: 'p5', userId: 'U10005', nickname: '赵同学', tags: ['学生', '新手'], lifecycle: 'new', lastActive: '2026-08-28 08:50', messageCount: 8, responseRate: 100, preferredChannel: 'Web', strategyEffect: 90 },
-  { id: 'p6', userId: 'U10006', nickname: '刘总', tags: ['企业客户', '已流失'], lifecycle: 'churned', lastActive: '2026-07-15 10:00', messageCount: 12, responseRate: 20, preferredChannel: '短信', strategyEffect: 15 },
+  { id: 'p1', userId: 'U10001', nickname: '张经理', tags: ['企业客户', '技术决策', '高活跃'], lifecycle: 'vip', lastActive: '2026-08-28 10:28', messageCount: randomInt(120, 220), responseRate: randomInt(88, 100), preferredChannel: '企业微信', strategyEffect: randomInt(70, 96) },
+  { id: 'p2', userId: 'U10002', nickname: '李用户', tags: ['个人用户', '内容消费'], lifecycle: 'active', lastActive: '2026-08-28 10:15', messageCount: randomInt(20, 70), responseRate: randomInt(55, 85), preferredChannel: '微信公众号', strategyEffect: randomInt(45, 80) },
+  { id: 'p3', userId: 'U10003', nickname: '王工程师', tags: ['开发者', 'API 集成'], lifecycle: 'active', lastActive: '2026-08-27 18:00', messageCount: randomInt(60, 130), responseRate: randomInt(75, 96), preferredChannel: '邮件', strategyEffect: randomInt(60, 90) },
+  { id: 'p4', userId: 'U10004', nickname: '陈总监', tags: ['企业客户', '投诉反馈'], lifecycle: 'silent', lastActive: '2026-08-20 14:00', messageCount: randomInt(10, 45), responseRate: randomInt(30, 60), preferredChannel: '企业微信', strategyEffect: randomInt(15, 45) },
+  { id: 'p5', userId: 'U10005', nickname: '赵同学', tags: ['学生', '新手'], lifecycle: 'new', lastActive: '2026-08-28 08:50', messageCount: randomInt(2, 20), responseRate: randomInt(90, 100), preferredChannel: 'Web', strategyEffect: randomInt(70, 98) },
+  { id: 'p6', userId: 'U10006', nickname: '刘总', tags: ['企业客户', '已流失'], lifecycle: 'churned', lastActive: '2026-07-15 10:00', messageCount: randomInt(5, 25), responseRate: randomInt(10, 35), preferredChannel: '短信', strategyEffect: randomInt(5, 25) },
 ]
 
 export const lifecycleStats = [
-  { stage: 'new', label: '新用户', count: 1280, color: '#1677ff' },
-  { stage: 'active', label: '活跃', count: 28600, color: '#52c41a' },
-  { stage: 'silent', label: '沉默', count: 8900, color: '#faad14' },
-  { stage: 'churned', label: '流失', count: 3200, color: '#ff4d4f' },
-  { stage: 'vip', label: 'VIP', count: 1560, color: '#7c5cfc' },
+  { stage: 'new', label: '新用户', count: randomInt(800, 2200), color: '#1677ff' },
+  { stage: 'active', label: '活跃', count: randomInt(20000, 38000), color: '#52c41a' },
+  { stage: 'silent', label: '沉默', count: randomInt(6000, 13000), color: '#faad14' },
+  { stage: 'churned', label: '流失', count: randomInt(2000, 5000), color: '#ff4d4f' },
+  { stage: 'vip', label: 'VIP', count: randomInt(900, 2400), color: '#7c5cfc' },
 ]
 
 export const strategyEffectStats = {
-  pushConversionRate: 18.6,
-  retentionLift: 12.3,
-  repurchaseRate: 8.5,
-  avgResponseTime: '2.3min',
+  pushConversionRate: randomFloat(14, 26, 1),
+  retentionLift: randomFloat(8, 18, 1),
+  repurchaseRate: randomFloat(5, 13, 1),
+  avgResponseTime: `${randomFloat(1.2, 4.5, 1)}min`,
 }
 
 export const communityAlerts: CommunityAlert[] = [
@@ -140,7 +141,7 @@ export const communitySettingsDefault = {
 /** @deprecated use communityOverviewStats */
 export const communityStats = {
   totalGroups: communityOverviewStats.totalGroups,
-  totalMembers: 128600,
-  todayNew: 1280,
-  activeMembers: 45600,
+  totalMembers: randomInt(90000, 160000),
+  todayNew: randomInt(600, 2200),
+  activeMembers: randomInt(30000, 60000),
 }

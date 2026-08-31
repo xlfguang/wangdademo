@@ -4,6 +4,7 @@ import type {
   VideoApiEndpoint,
   VideoPluginConfig,
 } from '@/types'
+import { randomFloat, randomInt } from '@/utils/mockApi'
 
 export const videoPluginMeta = {
   name: '视频处理插件',
@@ -13,11 +14,11 @@ export const videoPluginMeta = {
 }
 
 export const videoOverviewStats = {
-  totalTasks: 2860,
-  runningTasks: 12,
-  processedVolume: '1.8 TB',
-  successRate: 98.6,
-  apiCalls: 45680,
+  totalTasks: randomInt(2200, 3800),
+  runningTasks: randomInt(6, 30),
+  processedVolume: `${randomFloat(1.2, 3.2, 1)} TB`,
+  successRate: randomFloat(96, 99.5, 1),
+  apiCalls: randomInt(32000, 62000),
 }
 
 export const videoCapabilities = [
@@ -53,6 +54,38 @@ export const videoCapabilities = [
   },
 ]
 
+/** 进度与任务状态保持一致：已完成固定 100，进行中随机 30-98，排队/失败按实际情况取值 */
+const taskProgress = (status: VideoTask['status']): number => {
+  switch (status) {
+    case 'completed':
+      return 100
+    case 'running':
+      return randomInt(30, 98)
+    case 'queued':
+      return 0
+    case 'failed':
+      return randomInt(5, 70)
+    default:
+      return randomInt(20, 80)
+  }
+}
+
+/** 随机生成 mm:ss 或 hh:mm:ss 格式的时长 */
+const randomDuration = (): string => {
+  const total = randomInt(120, 7800) // 2 分钟 ~ 2 小时 10 分钟
+  const h = Math.floor(total / 3600)
+  const m = Math.floor((total % 3600) / 60)
+  const s = total % 60
+  const pad = (n: number): string => String(n).padStart(2, '0')
+  return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`
+}
+
+/** 随机生成 MB / GB 格式的文件大小 */
+const randomSize = (): string => {
+  const mb = randomInt(80, 3800)
+  return mb >= 1024 ? `${(mb / 1024).toFixed(1)} GB` : `${mb} MB`
+}
+
 export const videoTasks: VideoTask[] = [
   {
     id: 'v1',
@@ -60,12 +93,12 @@ export const videoTasks: VideoTask[] = [
     name: '企业宣传视频 AI 全量分析',
     fileName: 'enterprise_promo_2026.mp4',
     processType: '全量分析',
-    progress: 68,
+    progress: taskProgress('running'),
     status: 'running',
     createdAt: '2026-08-28 10:32',
     updatedAt: '2026-08-28 10:45',
-    originalSize: '856 MB',
-    duration: '05:32',
+    originalSize: randomSize(),
+    duration: randomDuration(),
     resolution: '1920x1080',
     fps: '30',
   },
@@ -79,9 +112,9 @@ export const videoTasks: VideoTask[] = [
     status: 'completed',
     createdAt: '2026-08-28 09:20',
     updatedAt: '2026-08-28 09:35',
-    originalSize: '1.2 GB',
+    originalSize: randomSize(),
     outputSize: '680 MB',
-    duration: '45:18',
+    duration: randomDuration(),
     resolution: '1920x1080',
     fps: '30',
     outputFormat: 'MP4',
@@ -93,12 +126,12 @@ export const videoTasks: VideoTask[] = [
     name: '发布会录像智能摘要',
     fileName: 'launch_event_full.mp4',
     processType: 'AI视频摘要',
-    progress: 45,
+    progress: taskProgress('running'),
     status: 'running',
     createdAt: '2026-08-28 08:50',
     updatedAt: '2026-08-28 09:10',
-    originalSize: '2.4 GB',
-    duration: '01:45:22',
+    originalSize: randomSize(),
+    duration: randomDuration(),
     resolution: '3840x2160',
     fps: '60',
   },
@@ -112,8 +145,8 @@ export const videoTasks: VideoTask[] = [
     status: 'queued',
     createdAt: '2026-08-28 08:15',
     updatedAt: '2026-08-28 08:15',
-    originalSize: '520 MB',
-    duration: '12:08',
+    originalSize: randomSize(),
+    duration: randomDuration(),
     resolution: '1920x1080',
     fps: '30',
   },
@@ -127,9 +160,9 @@ export const videoTasks: VideoTask[] = [
     status: 'completed',
     createdAt: '2026-08-27 16:40',
     updatedAt: '2026-08-27 17:20',
-    originalSize: '380 MB',
+    originalSize: randomSize(),
     outputSize: '12 MB',
-    duration: '03:28',
+    duration: randomDuration(),
     resolution: '1920x1080',
     fps: '30',
     outputFormat: 'JSON',
@@ -145,9 +178,9 @@ export const videoTasks: VideoTask[] = [
     status: 'completed',
     createdAt: '2026-08-27 14:00',
     updatedAt: '2026-08-27 14:30',
-    originalSize: '128 MB',
+    originalSize: randomSize(),
     outputSize: '256 KB',
-    duration: '62:15',
+    duration: randomDuration(),
     outputFormat: 'SRT',
     outputUrl: 'https://cdn.example.com/transcripts/weekly_meeting.srt',
   },
@@ -157,12 +190,12 @@ export const videoTasks: VideoTask[] = [
     name: '峰会录像关键帧提取',
     fileName: 'summit_recording.avi',
     processType: '关键帧提取',
-    progress: 0,
+    progress: taskProgress('failed'),
     status: 'failed',
     createdAt: '2026-08-27 11:00',
     updatedAt: '2026-08-27 11:15',
-    originalSize: '3.6 GB',
-    duration: '02:10:00',
+    originalSize: randomSize(),
+    duration: randomDuration(),
     resolution: '1920x1080',
     fps: '25',
   },
@@ -179,10 +212,10 @@ export const videoAnalysis: VideoAnalysisResult = {
     { timeRange: '01:10 - 01:45', label: '应用场景' },
   ],
   keyFrames: [
-    { id: 'kf1', timestamp: '00:00:08', clarity: 92, similarity: 98 },
-    { id: 'kf2', timestamp: '00:00:22', clarity: 88, similarity: 85 },
-    { id: 'kf3', timestamp: '00:00:55', clarity: 95, similarity: 91 },
-    { id: 'kf4', timestamp: '00:01:28', clarity: 90, similarity: 87 },
+    { id: 'kf1', timestamp: '00:00:08', clarity: randomInt(84, 97), similarity: randomInt(80, 98) },
+    { id: 'kf2', timestamp: '00:00:22', clarity: randomInt(80, 95), similarity: randomInt(75, 94) },
+    { id: 'kf3', timestamp: '00:00:55', clarity: randomInt(86, 98), similarity: randomInt(82, 97) },
+    { id: 'kf4', timestamp: '00:01:28', clarity: randomInt(82, 96), similarity: randomInt(78, 95) },
   ],
   ocrSegments: [
     { timestamp: '00:00:05', text: '网达智能体调度平台' },

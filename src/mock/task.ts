@@ -2,6 +2,16 @@ import type {
   CollabTask, TaskProgressLog, TaskDocument, TaskComment,
   TaskChatMessage, TaskNotification, TaskLedger, TaskOperationLog,
 } from '@/types'
+import { randomInt } from '@/utils/mockApi'
+
+// 概览与团队统计共用同一组任务数量，保证两个页面数字一致
+const totalTasks = randomInt(150, 260)
+const inProgress = randomInt(18, 60)
+const overdue = randomInt(2, 24)
+const notStarted = randomInt(3, 20)
+const pendingAcceptance = randomInt(5, 28)
+const completed = totalTasks - inProgress - overdue - notStarted - pendingAcceptance
+const completionRate = Math.round((completed / totalTasks) * 100)
 
 export const taskPluginMeta = {
   name: '任务协作助手插件',
@@ -11,11 +21,11 @@ export const taskPluginMeta = {
 }
 
 export const taskOverviewStats = {
-  totalTasks: 186,
-  completedRate: 72,
-  overdueCount: 8,
-  pendingAcceptance: 12,
-  activeMembers: 48,
+  totalTasks,
+  completedRate: completionRate,
+  overdueCount: overdue,
+  pendingAcceptance,
+  activeMembers: randomInt(30, 70),
 }
 
 export const taskScenarios = [
@@ -26,14 +36,32 @@ export const taskScenarios = [
   { title: '成果闭环归档', description: '验收审核通过后自动归档生成台账', items: ['验收提交', '审核流程', '自动归档', '台账导出'] },
 ]
 
+/** 进度与任务状态保持一致：已完成/待验收固定 100，进行中随机 30-95，超时随机 10-60，未开始固定 0 */
+const collabProgress = (status: CollabTask['status']): number => {
+  switch (status) {
+    case 'completed':
+    case 'pending_acceptance':
+    case 'archived':
+      return 100
+    case 'in_progress':
+      return randomInt(30, 95)
+    case 'overdue':
+      return randomInt(10, 60)
+    case 'not_started':
+      return 0
+    default:
+      return randomInt(20, 80)
+  }
+}
+
 export const collabTasks: CollabTask[] = [
-  { id: 't1', name: 'AI 平台 Q3 交付项目', description: 'Q3 插件交付与验收总任务', priority: 'high', status: 'in_progress', progress: 68, owner: '张明', participants: ['李华', '王芳', '赵强'], watchers: ['刘总'], startDate: '2026-07-01', endDate: '2026-09-30', createdAt: '2026-07-01 09:00', createdBy: '张明' },
+  { id: 't1', name: 'AI 平台 Q3 交付项目', description: 'Q3 插件交付与验收总任务', priority: 'high', status: 'in_progress', progress: collabProgress('in_progress'), owner: '张明', participants: ['李华', '王芳', '赵强'], watchers: ['刘总'], startDate: '2026-07-01', endDate: '2026-09-30', createdAt: '2026-07-01 09:00', createdBy: '张明' },
   { id: 't1-1', parentId: 't1', name: '音频插件验收', priority: 'high', status: 'completed', progress: 100, owner: '李华', participants: ['王芳'], watchers: [], startDate: '2026-08-01', endDate: '2026-08-28', createdAt: '2026-08-01 10:00', createdBy: '张明', upstreamIds: [] },
-  { id: 't1-2', parentId: 't1', name: '爬虫插件验收', priority: 'high', status: 'in_progress', progress: 85, owner: '王芳', participants: ['赵强'], watchers: [], startDate: '2026-08-15', endDate: '2026-08-30', createdAt: '2026-08-15 10:00', createdBy: '张明', upstreamIds: ['t1-1'] },
-  { id: 't1-3', parentId: 't1', name: '社群/清洗/知识库模块联调', priority: 'medium', status: 'in_progress', progress: 55, owner: '赵强', participants: ['李华'], watchers: [], startDate: '2026-08-20', endDate: '2026-09-05', createdAt: '2026-08-20 10:00', createdBy: '张明', upstreamIds: ['t1-2'] },
+  { id: 't1-2', parentId: 't1', name: '爬虫插件验收', priority: 'high', status: 'in_progress', progress: collabProgress('in_progress'), owner: '王芳', participants: ['赵强'], watchers: [], startDate: '2026-08-15', endDate: '2026-08-30', createdAt: '2026-08-15 10:00', createdBy: '张明', upstreamIds: ['t1-1'] },
+  { id: 't1-3', parentId: 't1', name: '社群/清洗/知识库模块联调', priority: 'medium', status: 'in_progress', progress: collabProgress('in_progress'), owner: '赵强', participants: ['李华'], watchers: [], startDate: '2026-08-20', endDate: '2026-09-05', createdAt: '2026-08-20 10:00', createdBy: '张明', upstreamIds: ['t1-2'] },
   { id: 't2', name: '政务知识库二期', description: '知识库升级与检索优化', priority: 'medium', status: 'pending_acceptance', progress: 100, owner: '陈伟', participants: ['刘洋'], watchers: ['李总'], startDate: '2026-06-01', endDate: '2026-08-25', createdAt: '2026-06-01 09:00', createdBy: '陈伟' },
   { id: 't3', name: '金融客服话术整理', priority: 'low', status: 'not_started', progress: 0, owner: '刘洋', participants: [], watchers: [], startDate: '2026-09-01', endDate: '2026-09-30', createdAt: '2026-08-28 14:00', createdBy: '刘洋', upstreamIds: ['t2'] },
-  { id: 't4', name: '数据清洗流程优化', priority: 'medium', status: 'overdue', progress: 40, owner: '王芳', participants: ['张明'], watchers: [], startDate: '2026-08-01', endDate: '2026-08-20', createdAt: '2026-08-01 09:00', createdBy: '王芳' },
+  { id: 't4', name: '数据清洗流程优化', priority: 'medium', status: 'overdue', progress: collabProgress('overdue'), owner: '王芳', participants: ['张明'], watchers: [], startDate: '2026-08-01', endDate: '2026-08-20', createdAt: '2026-08-01 09:00', createdBy: '王芳' },
 ]
 
 export const progressLogs: TaskProgressLog[] = [
@@ -81,13 +109,13 @@ export const operationLogs: TaskOperationLog[] = [
 ]
 
 export const teamStats = {
-  total: 186,
-  completed: 134,
-  pendingAcceptance: 12,
-  inProgress: 32,
-  notStarted: 8,
-  overdue: 8,
-  completionRate: 72,
+  total: totalTasks,
+  completed,
+  pendingAcceptance,
+  inProgress,
+  notStarted,
+  overdue,
+  completionRate,
 }
 
 export const getCollabTask = (id: string): CollabTask | undefined =>

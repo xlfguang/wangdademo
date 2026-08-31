@@ -1,4 +1,5 @@
 import type { AudioTask, TranscriptSegment, ExtractedInfo, AudioHistoryRecord } from '@/types'
+import { randomInt } from '@/utils/mockApi'
 
 export const audioPluginMeta = {
   name: '音频交互处理插件',
@@ -8,11 +9,11 @@ export const audioPluginMeta = {
 }
 
 export const audioOverviewStats = {
-  totalTasks: 1860,
-  todayProcessed: 48,
-  totalTranscriptHours: '326h',
-  accuracyRate: 96.2,
-  apiCalls: 12800,
+  totalTasks: randomInt(1400, 2600),
+  todayProcessed: randomInt(20, 90),
+  totalTranscriptHours: `${randomInt(240, 480)}h`,
+  accuracyRate: randomInt(94, 99),
+  apiCalls: randomInt(8000, 20000),
 }
 
 export const audioScenarios = [
@@ -23,12 +24,30 @@ export const audioScenarios = [
   { title: '个人笔记', description: '个人录音转写，整理关键信息便于归档', items: ['快速转写', '关键词', 'TXT 导出'] },
 ]
 
+/** 进度与任务状态保持一致：已完成固定 100，进行中随机 30-98，排队中固定 0 */
+const taskProgress = (status: AudioTask['status']): number => {
+  switch (status) {
+    case 'completed':
+      return 100
+    case 'running':
+      return randomInt(30, 98)
+    case 'queued':
+      return 0
+    default:
+      return randomInt(5, 90)
+  }
+}
+
+/** 随机生成 mm:ss 格式的时长 */
+const randomDuration = (): string =>
+  `${String(randomInt(3, 150)).padStart(2, '0')}:${String(randomInt(0, 59)).padStart(2, '0')}`
+
 export const audioTasks: AudioTask[] = [
-  { id: 'a1', taskId: 'AU202608280001', name: '产品发布会会议纪要', audioFile: 'launch_meeting_2026.wav', processType: '语音转文字+提取', duration: '45:32', format: 'WAV', fileSize: '86 MB', status: 'completed', progress: 100, clipCount: 3, createdAt: '2026-08-28 09:15', updatedAt: '2026-08-28 09:45' },
-  { id: 'a2', taskId: 'AU202608280002', name: '客服通话录音分析', audioFile: 'call_batch_08.mp3', processType: '语音转文字', duration: '128:15', format: 'MP3', fileSize: '52 MB', status: 'running', progress: 68, clipCount: 12, createdAt: '2026-08-28 08:30', updatedAt: '2026-08-28 10:00' },
-  { id: 'a3', taskId: 'AU202608280003', name: '科研人员访谈提炼', audioFile: 'research_interview.mp3', processType: '关键信息提取', duration: '62:08', format: 'MP3', fileSize: '38 MB', status: 'completed', progress: 100, clipCount: 5, createdAt: '2026-08-27 17:00', updatedAt: '2026-08-27 17:30' },
-  { id: 'a4', taskId: 'AU202608270004', name: '培训课程重点提取', audioFile: 'training_course_03.wav', processType: '语音转文字', duration: '90:00', format: 'WAV', fileSize: '120 MB', status: 'running', progress: 42, clipCount: 8, createdAt: '2026-08-27 14:00', updatedAt: '2026-08-28 08:00' },
-  { id: 'a5', taskId: 'AU202608270005', name: '个人学习笔记整理', audioFile: 'study_notes.mp3', processType: '语音转文字', duration: '15:20', format: 'MP3', fileSize: '8 MB', status: 'queued', progress: 0, clipCount: 1, createdAt: '2026-08-27 11:00', updatedAt: '2026-08-27 11:00' },
+  { id: 'a1', taskId: 'AU202608280001', name: '产品发布会会议纪要', audioFile: 'launch_meeting_2026.wav', processType: '语音转文字+提取', duration: randomDuration(), format: 'WAV', fileSize: `${randomInt(20, 160)} MB`, status: 'completed', progress: 100, clipCount: randomInt(2, 8), createdAt: '2026-08-28 09:15', updatedAt: '2026-08-28 09:45' },
+  { id: 'a2', taskId: 'AU202608280002', name: '客服通话录音分析', audioFile: 'call_batch_08.mp3', processType: '语音转文字', duration: randomDuration(), format: 'MP3', fileSize: `${randomInt(20, 90)} MB`, status: 'running', progress: taskProgress('running'), clipCount: randomInt(4, 20), createdAt: '2026-08-28 08:30', updatedAt: '2026-08-28 10:00' },
+  { id: 'a3', taskId: 'AU202608280003', name: '科研人员访谈提炼', audioFile: 'research_interview.mp3', processType: '关键信息提取', duration: randomDuration(), format: 'MP3', fileSize: `${randomInt(15, 70)} MB`, status: 'completed', progress: 100, clipCount: randomInt(2, 8), createdAt: '2026-08-27 17:00', updatedAt: '2026-08-27 17:30' },
+  { id: 'a4', taskId: 'AU202608270004', name: '培训课程重点提取', audioFile: 'training_course_03.wav', processType: '语音转文字', duration: randomDuration(), format: 'WAV', fileSize: `${randomInt(60, 180)} MB`, status: 'running', progress: taskProgress('running'), clipCount: randomInt(3, 12), createdAt: '2026-08-27 14:00', updatedAt: '2026-08-28 08:00' },
+  { id: 'a5', taskId: 'AU202608270005', name: '个人学习笔记整理', audioFile: 'study_notes.mp3', processType: '语音转文字', duration: randomDuration(), format: 'MP3', fileSize: `${randomInt(3, 20)} MB`, status: 'queued', progress: 0, clipCount: 1, createdAt: '2026-08-27 11:00', updatedAt: '2026-08-27 11:00' },
 ]
 
 export const transcriptMock: TranscriptSegment[] = [

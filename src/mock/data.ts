@@ -8,6 +8,7 @@ import type {
   SystemUser,
   AiAnalysisResult,
 } from '@/types'
+import { formatCount, jitter, randomFloat, randomInt } from '@/utils/mockApi'
 
 export const dataPluginMeta = {
   name: '数据处理插件',
@@ -16,96 +17,120 @@ export const dataPluginMeta = {
 }
 
 export const dataOverviewStats = {
-  sourceCount: 28,
-  todayVolume: '2.4 TB',
-  taskCount: 156,
-  qualityScore: 96.8,
-  abnormalCount: 842,
-  apiCalls: 32400,
+  sourceCount: randomInt(18, 40),
+  todayVolume: `${randomFloat(1.2, 4.2, 1)} TB`,
+  taskCount: randomInt(100, 240),
+  qualityScore: randomFloat(93, 99, 1),
+  abnormalCount: randomInt(500, 1400),
+  apiCalls: randomInt(20000, 48000),
 }
 
 export const dataTrend = {
   dates: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
-  ingest: [820, 960, 880, 1120, 1050, 1180, 1240],
-  process: [780, 920, 850, 1080, 1020, 1150, 1200],
+  ingest: [820, 960, 880, 1120, 1050, 1180, 1240].map((v) => jitter(v, 0.2)),
+  process: [780, 920, 850, 1080, 1020, 1150, 1200].map((v) => jitter(v, 0.2)),
 }
 
 export const dataSourceDistribution = [
-  { name: 'MySQL', value: 8200 },
-  { name: 'PostgreSQL', value: 5600 },
-  { name: 'Excel', value: 3200 },
-  { name: 'CSV', value: 2800 },
-  { name: 'API', value: 4500 },
-  { name: 'MQTT', value: 1200 },
-  { name: '文件', value: 2100 },
+  { name: 'MySQL', value: jitter(8200, 0.2) },
+  { name: 'PostgreSQL', value: jitter(5600, 0.2) },
+  { name: 'Excel', value: jitter(3200, 0.25) },
+  { name: 'CSV', value: jitter(2800, 0.25) },
+  { name: 'API', value: jitter(4500, 0.2) },
+  { name: 'MQTT', value: jitter(1200, 0.3) },
+  { name: '文件', value: jitter(2100, 0.25) },
 ]
 
 export const qualityOverview = {
-  completeness: 96.8,
-  accuracy: 94.2,
-  consistency: 97.5,
-  uniqueness: 98.1,
+  completeness: randomFloat(94, 99, 1),
+  accuracy: randomFloat(91, 98, 1),
+  consistency: randomFloat(94, 99, 1),
+  uniqueness: randomFloat(95, 99.5, 1),
 }
 
 export const dataSources: DataSourceItem[] = [
-  { id: 'ds1', name: 'CRM 客户数据库', type: 'MySQL', address: '192.168.1.101:3306/crm', dataVolume: '128,500 条', accessMethod: 'JDBC', status: 'normal', lastSync: '2026-08-28 10:30' },
-  { id: 'ds2', name: 'ERP 销售系统', type: 'PostgreSQL', address: '192.168.1.102:5432/erp', dataVolume: '56,200 条', accessMethod: 'JDBC', status: 'normal', lastSync: '2026-08-28 10:15' },
-  { id: 'ds3', name: '用户行为日志', type: 'API', address: 'https://api.example.com/logs', dataVolume: '2,340,000 条', accessMethod: 'REST API', status: 'normal', lastSync: '2026-08-28 10:00' },
-  { id: 'ds4', name: '供应链 Excel 导入', type: 'Excel', address: '/data/import/supply_chain.xlsx', dataVolume: '12,800 条', accessMethod: '文件上传', status: 'normal', lastSync: '2026-08-27 18:00' },
-  { id: 'ds5', name: 'IoT 设备数据', type: 'MQTT', address: 'mqtt://broker.example.com:1883', dataVolume: '890,000 条', accessMethod: '消息订阅', status: 'abnormal', lastSync: '2026-08-27 14:30' },
-  { id: 'ds6', name: '历史归档库', type: 'Oracle', address: '192.168.1.105:1521/archive', dataVolume: '5,600,000 条', accessMethod: 'JDBC', status: 'disabled', lastSync: '2026-08-20 09:00' },
-  { id: 'ds7', name: '外部行业 API', type: 'JSON', address: 'https://api.industry.com/v2/data', dataVolume: '89,600 条', accessMethod: 'REST API', status: 'normal', lastSync: '2026-08-28 08:45' },
-  { id: 'ds8', name: '对象存储备份', type: 'OSS', address: 'oss://data-backup/example', dataVolume: '1.2 TB', accessMethod: 'OSS SDK', status: 'normal', lastSync: '2026-08-28 06:00' },
+  { id: 'ds1', name: 'CRM 客户数据库', type: 'MySQL', address: '192.168.1.101:3306/crm', dataVolume: `${formatCount(randomInt(90000, 170000))} 条`, accessMethod: 'JDBC', status: 'normal', lastSync: '2026-08-28 10:30' },
+  { id: 'ds2', name: 'ERP 销售系统', type: 'PostgreSQL', address: '192.168.1.102:5432/erp', dataVolume: `${formatCount(randomInt(40000, 80000))} 条`, accessMethod: 'JDBC', status: 'normal', lastSync: '2026-08-28 10:15' },
+  { id: 'ds3', name: '用户行为日志', type: 'API', address: 'https://api.example.com/logs', dataVolume: `${formatCount(randomInt(1800000, 3000000))} 条`, accessMethod: 'REST API', status: 'normal', lastSync: '2026-08-28 10:00' },
+  { id: 'ds4', name: '供应链 Excel 导入', type: 'Excel', address: '/data/import/supply_chain.xlsx', dataVolume: `${formatCount(randomInt(8000, 20000))} 条`, accessMethod: '文件上传', status: 'normal', lastSync: '2026-08-27 18:00' },
+  { id: 'ds5', name: 'IoT 设备数据', type: 'MQTT', address: 'mqtt://broker.example.com:1883', dataVolume: `${formatCount(randomInt(500000, 1400000))} 条`, accessMethod: '消息订阅', status: 'abnormal', lastSync: '2026-08-27 14:30' },
+  { id: 'ds6', name: '历史归档库', type: 'Oracle', address: '192.168.1.105:1521/archive', dataVolume: `${formatCount(randomInt(4000000, 7500000))} 条`, accessMethod: 'JDBC', status: 'disabled', lastSync: '2026-08-20 09:00' },
+  { id: 'ds7', name: '外部行业 API', type: 'JSON', address: 'https://api.industry.com/v2/data', dataVolume: `${formatCount(randomInt(60000, 130000))} 条`, accessMethod: 'REST API', status: 'normal', lastSync: '2026-08-28 08:45' },
+  { id: 'ds8', name: '对象存储备份', type: 'OSS', address: 'oss://data-backup/example', dataVolume: `${randomFloat(0.8, 2.2, 1)} TB`, accessMethod: 'OSS SDK', status: 'normal', lastSync: '2026-08-28 06:00' },
 ]
+
+/** 进度与治理任务状态保持一致 */
+const governanceProgress = (status: GovernanceTask['status']): number => {
+  switch (status) {
+    case 'completed':
+      return 100
+    case 'running':
+      return randomInt(25, 95)
+    case 'failed':
+      return randomInt(10, 70)
+    default:
+      return 0
+  }
+}
 
 export const governanceTasks: GovernanceTask[] = [
-  { id: 'g1', name: 'CRM 客户数据治理', dataSource: 'CRM 客户数据库', dataVolume: '128,420 条', cleanRules: '缺失值+去重+异常检测', abnormalCount: 842, qualityScore: 96.8, status: 'completed', progress: 100, createdAt: '2026-08-28 10:18' },
-  { id: 'g2', name: '销售数据标准化', dataSource: 'ERP 销售系统', dataVolume: '56,200 条', cleanRules: '格式标准化+类型转换', abnormalCount: 320, qualityScore: 94.5, status: 'running', progress: 72, createdAt: '2026-08-28 09:30' },
-  { id: 'g3', name: '用户行为数据清洗', dataSource: '用户行为日志', dataVolume: '2,340,000 条', cleanRules: '异常值检测+去重', abnormalCount: 12500, qualityScore: 92.1, status: 'running', progress: 35, createdAt: '2026-08-28 08:00' },
-  { id: 'g4', name: '供应链数据整合', dataSource: '供应链 Excel 导入', dataVolume: '12,800 条', cleanRules: '缺失值+格式标准化', abnormalCount: 156, qualityScore: 97.2, status: 'completed', createdAt: '2026-08-27 16:00', progress: 100 },
-  { id: 'g5', name: 'IoT 数据质量校验', dataSource: 'IoT 设备数据', dataVolume: '890,000 条', cleanRules: '异常检测+时间戳校验', abnormalCount: 8900, qualityScore: 88.5, status: 'failed', progress: 45, createdAt: '2026-08-27 14:00' },
+  { id: 'g1', name: 'CRM 客户数据治理', dataSource: 'CRM 客户数据库', dataVolume: `${formatCount(randomInt(90000, 170000))} 条`, cleanRules: '缺失值+去重+异常检测', abnormalCount: randomInt(500, 1300), qualityScore: randomFloat(93, 99, 1), status: 'completed', progress: 100, createdAt: '2026-08-28 10:18' },
+  { id: 'g2', name: '销售数据标准化', dataSource: 'ERP 销售系统', dataVolume: `${formatCount(randomInt(40000, 80000))} 条`, cleanRules: '格式标准化+类型转换', abnormalCount: randomInt(150, 600), qualityScore: randomFloat(91, 98, 1), status: 'running', progress: governanceProgress('running'), createdAt: '2026-08-28 09:30' },
+  { id: 'g3', name: '用户行为数据清洗', dataSource: '用户行为日志', dataVolume: `${formatCount(randomInt(1800000, 3000000))} 条`, cleanRules: '异常值检测+去重', abnormalCount: randomInt(8000, 18000), qualityScore: randomFloat(88, 96, 1), status: 'running', progress: governanceProgress('running'), createdAt: '2026-08-28 08:00' },
+  { id: 'g4', name: '供应链数据整合', dataSource: '供应链 Excel 导入', dataVolume: `${formatCount(randomInt(8000, 20000))} 条`, cleanRules: '缺失值+格式标准化', abnormalCount: randomInt(80, 300), qualityScore: randomFloat(94, 99.5, 1), status: 'completed', createdAt: '2026-08-27 16:00', progress: 100 },
+  { id: 'g5', name: 'IoT 数据质量校验', dataSource: 'IoT 设备数据', dataVolume: `${formatCount(randomInt(500000, 1400000))} 条`, cleanRules: '异常检测+时间戳校验', abnormalCount: randomInt(6000, 13000), qualityScore: randomFloat(84, 93, 1), status: 'failed', progress: governanceProgress('failed'), createdAt: '2026-08-27 14:00' },
 ]
 
+// 治理结果各项数量相互关联：清洗量 = 重复 + 异常 + 缺失，有效量 = 总量 - 清洗量
+const original = randomInt(90000, 170000)
+const duplicate = randomInt(600, 2200)
+const abnormal = randomInt(300, 1600)
+const missing = randomInt(700, 2600)
+const cleaned = duplicate + abnormal + missing
+const valid = original - cleaned
+
 export const governanceResult = {
-  original: 128420,
-  valid: 124861,
-  cleaned: 3559,
-  duplicate: 1203,
-  abnormal: 842,
-  missing: 1514,
-  qualityScore: 96.8,
+  original,
+  valid,
+  cleaned,
+  duplicate,
+  abnormal,
+  missing,
+  qualityScore: randomFloat(92, 99, 1),
   beforeAfter: {
     dimensions: ['完整性', '准确性', '一致性', '唯一性'],
-    before: [92.1, 89.5, 91.2, 94.8],
-    after: [96.8, 94.2, 97.5, 98.1],
+    before: [randomFloat(86, 93, 1), randomFloat(84, 92, 1), randomFloat(86, 94, 1), randomFloat(90, 96, 1)],
+    after: [randomFloat(94, 99, 1), randomFloat(92, 98, 1), randomFloat(94, 99, 1), randomFloat(96, 99.5, 1)],
   },
   issueDistribution: [
-    { name: '缺失值', value: 1514 },
-    { name: '重复数据', value: 1203 },
-    { name: '异常值', value: 842 },
-    { name: '格式错误', value: 520 },
+    { name: '缺失值', value: missing },
+    { name: '重复数据', value: duplicate },
+    { name: '异常值', value: abnormal },
+    { name: '格式错误', value: randomInt(200, 900) },
   ],
 }
 
+const analysisTotal = jitter(128420, 0.2)
+
 export const analysisStats = {
-  total: 128420,
-  avg: 8562.5,
-  max: 98200,
-  min: 120,
-  median: 4200,
-  stdDev: 1256.8,
+  total: analysisTotal,
+  avg: Math.round(analysisTotal / 15),
+  max: randomInt(60000, 120000),
+  min: randomInt(80, 400),
+  median: randomInt(3000, 6500),
+  stdDev: randomFloat(800, 1800, 1),
 }
 
 export const salesTrend = {
   months: ['3月', '4月', '5月', '6月', '7月', '8月'],
-  values: [8200, 9100, 8800, 7600, 7200, 6800],
+  values: [8200, 9100, 8800, 7600, 7200, 6800].map((v) => jitter(v, 0.15)),
 }
 
 export const regionCompare = [
-  { name: '华东', value: 3200 },
-  { name: '华南', value: 2800 },
-  { name: '华北', value: 2100 },
-  { name: '西南', value: 1600 },
+  { name: '华东', value: jitter(3200, 0.2) },
+  { name: '华南', value: jitter(2800, 0.2) },
+  { name: '华北', value: jitter(2100, 0.2) },
+  { name: '西南', value: jitter(1600, 0.25) },
 ]
 
 export const correlationData = Array.from({ length: 30 }, (_, i) => [6000 + i * 120 + Math.random() * 800, 400 + i * 8 + Math.random() * 100])
@@ -146,19 +171,19 @@ export const reports: ReportItem[] = [
 ]
 
 export const reportDashboard = {
-  sales: 6800000,
-  users: 128600,
-  orders: 45600,
-  conversion: 3.54,
+  sales: randomInt(5200000, 8600000),
+  users: randomInt(90000, 170000),
+  orders: randomInt(32000, 62000),
+  conversion: randomFloat(2.5, 4.8, 2),
 }
 
 export const qualityMetrics = {
-  overall: 96.8,
-  completeness: 97.2,
-  accuracy: 95.6,
-  consistency: 98.1,
-  uniqueness: 99.2,
-  timeliness: 96.5,
+  overall: randomFloat(93, 99, 1),
+  completeness: randomFloat(94, 99.5, 1),
+  accuracy: randomFloat(92, 98.5, 1),
+  consistency: randomFloat(94, 99.5, 1),
+  uniqueness: randomFloat(95, 99.8, 1),
+  timeliness: randomFloat(93, 99, 1),
 }
 
 export const qualityTrend = {
@@ -167,19 +192,19 @@ export const qualityTrend = {
 }
 
 export const qualityAlerts: QualityAlert[] = [
-  { id: 'qa1', time: '2026-08-28 10:15', dataSource: 'IoT 设备数据', alertType: '连接超时', count: 128, severity: 'critical', status: 'running' },
-  { id: 'qa2', time: '2026-08-28 09:30', dataSource: '用户行为日志', alertType: '缺失值超标', count: 520, severity: 'moderate', status: 'running' },
-  { id: 'qa3', time: '2026-08-28 08:00', dataSource: 'CRM 客户数据库', alertType: '重复数据', count: 86, severity: 'hint', status: 'completed' },
-  { id: 'qa4', time: '2026-08-27 16:45', dataSource: '外部行业 API', alertType: '格式错误', count: 42, severity: 'moderate', status: 'completed' },
-  { id: 'qa5', time: '2026-08-27 14:00', dataSource: 'ERP 销售系统', alertType: '数据延迟', count: 15, severity: 'hint', status: 'completed' },
+  { id: 'qa1', time: '2026-08-28 10:15', dataSource: 'IoT 设备数据', alertType: '连接超时', count: randomInt(60, 220), severity: 'critical', status: 'running' },
+  { id: 'qa2', time: '2026-08-28 09:30', dataSource: '用户行为日志', alertType: '缺失值超标', count: randomInt(300, 800), severity: 'moderate', status: 'running' },
+  { id: 'qa3', time: '2026-08-28 08:00', dataSource: 'CRM 客户数据库', alertType: '重复数据', count: randomInt(40, 160), severity: 'hint', status: 'completed' },
+  { id: 'qa4', time: '2026-08-27 16:45', dataSource: '外部行业 API', alertType: '格式错误', count: randomInt(15, 90), severity: 'moderate', status: 'completed' },
+  { id: 'qa5', time: '2026-08-27 14:00', dataSource: 'ERP 销售系统', alertType: '数据延迟', count: randomInt(5, 40), severity: 'hint', status: 'completed' },
 ]
 
 export const syncTasks: SyncTaskItem[] = [
-  { id: 's1', name: '销售数据同步', source: 'MySQL', target: '灵悉智能体平台', syncMode: '增量同步', dataVolume: '56,200 条/次', frequency: '每小时', status: 'running', lastSync: '2026-08-28 10:00' },
-  { id: 's2', name: 'CRM 客户同步', source: 'PostgreSQL', target: '灵悉智能体平台', syncMode: '全量同步', dataVolume: '128,500 条', frequency: '每天', status: 'completed', lastSync: '2026-08-28 06:00' },
-  { id: 's3', name: '行为日志同步', source: 'API', target: '数据仓库', syncMode: '增量同步', dataVolume: '2,340,000 条/天', frequency: '实时', status: 'running', lastSync: '2026-08-28 10:30' },
-  { id: 's4', name: 'IoT 数据同步', source: 'MQTT', target: '时序数据库', syncMode: '增量同步', dataVolume: '890,000 条/天', frequency: '每15分钟', status: 'failed', lastSync: '2026-08-27 14:30' },
-  { id: 's5', name: '报表数据同步', source: 'Excel', target: 'BI 平台', syncMode: '手动同步', dataVolume: '12,800 条', frequency: '每周', status: 'queued', lastSync: '2026-08-25 10:00' },
+  { id: 's1', name: '销售数据同步', source: 'MySQL', target: '灵悉智能体平台', syncMode: '增量同步', dataVolume: `${formatCount(randomInt(40000, 80000))} 条/次`, frequency: '每小时', status: 'running', lastSync: '2026-08-28 10:00' },
+  { id: 's2', name: 'CRM 客户同步', source: 'PostgreSQL', target: '灵悉智能体平台', syncMode: '全量同步', dataVolume: `${formatCount(randomInt(90000, 170000))} 条`, frequency: '每天', status: 'completed', lastSync: '2026-08-28 06:00' },
+  { id: 's3', name: '行为日志同步', source: 'API', target: '数据仓库', syncMode: '增量同步', dataVolume: `${formatCount(randomInt(1800000, 3000000))} 条/天`, frequency: '实时', status: 'running', lastSync: '2026-08-28 10:30' },
+  { id: 's4', name: 'IoT 数据同步', source: 'MQTT', target: '时序数据库', syncMode: '增量同步', dataVolume: `${formatCount(randomInt(500000, 1400000))} 条/天`, frequency: '每15分钟', status: 'failed', lastSync: '2026-08-27 14:30' },
+  { id: 's5', name: '报表数据同步', source: 'Excel', target: 'BI 平台', syncMode: '手动同步', dataVolume: `${formatCount(randomInt(8000, 20000))} 条`, frequency: '每周', status: 'queued', lastSync: '2026-08-25 10:00' },
 ]
 
 export const systemUsers: SystemUser[] = [
@@ -201,12 +226,24 @@ export const permissionTree = [
   ]},
 ]
 
+/** 进度与数据处理任务状态保持一致 */
+const dataTaskProgress = (status: DataTask['status']): number => {
+  switch (status) {
+    case 'completed':
+      return 100
+    case 'running':
+      return randomInt(25, 95)
+    default:
+      return 0
+  }
+}
+
 export const dataTasks: DataTask[] = [
-  { id: 'd1', name: 'CRM 客户数据治理', dataSource: 'CRM 客户数据库', dataVolume: '128,500 条', processType: '数据治理', progress: 100, status: 'completed', createdAt: '2026-08-28 10:18', updatedAt: '2026-08-28 10:45' },
-  { id: 'd2', name: '销售数据分析', dataSource: 'ERP 销售系统', dataVolume: '56,200 条', processType: '数据分析', progress: 72, status: 'running', createdAt: '2026-08-28 09:30', updatedAt: '2026-08-28 10:20' },
-  { id: 'd3', name: '用户行为数据处理', dataSource: '用户行为日志', dataVolume: '2,340,000 条', processType: '数据同步', progress: 35, status: 'running', createdAt: '2026-08-28 08:00', updatedAt: '2026-08-28 09:50' },
-  { id: 'd4', name: '行业数据标准化', dataSource: '外部行业 API', dataVolume: '89,600 条', processType: '数据治理', progress: 100, status: 'completed', createdAt: '2026-08-27 14:20', updatedAt: '2026-08-27 16:00' },
-  { id: 'd5', name: '供应链数据整合', dataSource: '供应链 Excel 导入', dataVolume: '456,800 条', processType: '数据接入', progress: 0, status: 'queued', createdAt: '2026-08-27 11:00', updatedAt: '2026-08-27 11:00' },
+  { id: 'd1', name: 'CRM 客户数据治理', dataSource: 'CRM 客户数据库', dataVolume: `${formatCount(randomInt(90000, 170000))} 条`, processType: '数据治理', progress: 100, status: 'completed', createdAt: '2026-08-28 10:18', updatedAt: '2026-08-28 10:45' },
+  { id: 'd2', name: '销售数据分析', dataSource: 'ERP 销售系统', dataVolume: `${formatCount(randomInt(40000, 80000))} 条`, processType: '数据分析', progress: dataTaskProgress('running'), status: 'running', createdAt: '2026-08-28 09:30', updatedAt: '2026-08-28 10:20' },
+  { id: 'd3', name: '用户行为数据处理', dataSource: '用户行为日志', dataVolume: `${formatCount(randomInt(1800000, 3000000))} 条`, processType: '数据同步', progress: dataTaskProgress('running'), status: 'running', createdAt: '2026-08-28 08:00', updatedAt: '2026-08-28 09:50' },
+  { id: 'd4', name: '行业数据标准化', dataSource: '外部行业 API', dataVolume: `${formatCount(randomInt(60000, 130000))} 条`, processType: '数据治理', progress: 100, status: 'completed', createdAt: '2026-08-27 14:20', updatedAt: '2026-08-27 16:00' },
+  { id: 'd5', name: '供应链数据整合', dataSource: '供应链 Excel 导入', dataVolume: `${formatCount(randomInt(300000, 600000))} 条`, processType: '数据接入', progress: 0, status: 'queued', createdAt: '2026-08-27 11:00', updatedAt: '2026-08-27 11:00' },
 ]
 
 export const getDataTask = (id: string): DataTask | undefined =>

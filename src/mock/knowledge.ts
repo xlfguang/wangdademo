@@ -2,6 +2,7 @@ import type {
   KnowledgeBase, KnowledgeDoc, QAPair, SyncTask,
   ValidationRecord, SearchHit,
 } from '@/types'
+import { jitter, randomInt } from '@/utils/mockApi'
 
 export const knowledgePluginMeta = {
   name: '知识库管理服务',
@@ -11,11 +12,11 @@ export const knowledgePluginMeta = {
 }
 
 export const knowledgeOverviewStats = {
-  totalBases: 5,
-  totalDocs: 8742,
-  totalVectors: 68960,
-  todaySearches: 1286,
-  syncTaskCount: 8,
+  totalBases: randomInt(4, 9),
+  totalDocs: randomInt(6200, 12000),
+  totalVectors: randomInt(52000, 92000),
+  todaySearches: randomInt(800, 1900),
+  syncTaskCount: randomInt(4, 14),
 }
 
 export const knowledgeScenarios = [
@@ -26,15 +27,23 @@ export const knowledgeScenarios = [
   { title: '政务知识服务', description: '权威文档审核发布，合规检索与智能问答服务', items: ['审核流程', '权威信源', '合规检索', '问答服务'] },
 ]
 
+/** 向量数/切片数与文档数保持合理比例，并做轻微随机 */
+const buildBaseCounts = (docCount: number): { docCount: number; vectorCount: number; fragmentCount: number } => {
+  const n = jitter(docCount, 0.2)
+  return {
+    docCount: n,
+    vectorCount: Math.round(n * 8 * (0.9 + Math.random() * 0.2)),
+    fragmentCount: Math.round(n * 6.4 * (0.9 + Math.random() * 0.2)),
+  }
+}
+
 export const knowledgeBases: KnowledgeBase[] = [
   {
     id: 'kb1',
     name: '企业知识库',
     description: '公司内部制度、战略与文化文档',
     category: '企业内部',
-    docCount: 2382,
-    vectorCount: 18920,
-    fragmentCount: 15136,
+    ...buildBaseCounts(2382),
     storage: '1.8 GB',
     embeddingModel: 'text-embedding-v3',
     status: 'running',
@@ -46,9 +55,7 @@ export const knowledgeBases: KnowledgeBase[] = [
     name: '产品知识库',
     description: '产品白皮书、功能说明与 API 文档',
     category: '产品文档',
-    docCount: 856,
-    vectorCount: 6840,
-    fragmentCount: 5472,
+    ...buildBaseCounts(856),
     storage: '620 MB',
     embeddingModel: 'text-embedding-v3',
     status: 'completed',
@@ -60,9 +67,7 @@ export const knowledgeBases: KnowledgeBase[] = [
     name: '客服知识库',
     description: 'FAQ、话术模板与常见问题解答',
     category: '客服支持',
-    docCount: 1520,
-    vectorCount: 12160,
-    fragmentCount: 9728,
+    ...buildBaseCounts(1520),
     storage: '980 MB',
     embeddingModel: 'text-embedding-v3',
     status: 'running',
@@ -74,9 +79,7 @@ export const knowledgeBases: KnowledgeBase[] = [
     name: '行业知识库',
     description: '行业报告、政策解读与市场分析',
     category: '行业情报',
-    docCount: 3200,
-    vectorCount: 25600,
-    fragmentCount: 20480,
+    ...buildBaseCounts(3200),
     storage: '2.4 GB',
     embeddingModel: 'text-embedding-v3',
     status: 'completed',
@@ -88,9 +91,7 @@ export const knowledgeBases: KnowledgeBase[] = [
     name: '项目资料库',
     description: '交付项目文档、方案与验收材料',
     category: '项目管理',
-    docCount: 680,
-    vectorCount: 5440,
-    fragmentCount: 4352,
+    ...buildBaseCounts(680),
     storage: '450 MB',
     embeddingModel: 'text-embedding-v3',
     status: 'completed',
@@ -143,12 +144,12 @@ export const validationRecords: ValidationRecord[] = [
 ]
 
 export const syncTasks: SyncTask[] = [
-  { id: 's1', name: '行业报告每日同步', kbId: 'kb4', kbName: '行业知识库', source: '行业数据库 API', target: '向量库', cron: '0 2 * * *', frequency: '每天 02:00', docCount: 45, status: 'completed', lastSync: '2026-08-28 02:00', nextSync: '2026-08-29 02:00' },
-  { id: 's2', name: '客服 FAQ 增量同步', kbId: 'kb3', kbName: '客服知识库', source: 'CRM 系统', target: '向量库', cron: '0 */4 * * *', frequency: '每 4 小时', docCount: 12, status: 'running', lastSync: '2026-08-28 08:00', nextSync: '2026-08-28 12:00' },
-  { id: 's3', name: '企业制度文档同步', kbId: 'kb1', kbName: '企业知识库', source: 'OA 文档库', target: '向量库', cron: '0 1 * * 1', frequency: '每周一 01:00', docCount: 8, status: 'completed', lastSync: '2026-08-25 01:00', nextSync: '2026-09-01 01:00' },
-  { id: 's4', name: '产品文档版本同步', kbId: 'kb2', kbName: '产品知识库', source: 'Git 文档仓库', target: '向量库', cron: '0 3 * * *', frequency: '每天 03:00', docCount: 6, status: 'waiting', lastSync: '2026-08-27 03:00', nextSync: '2026-08-28 03:00' },
-  { id: 's5', name: '项目交付文档同步', kbId: 'kb5', kbName: '项目资料库', source: '项目管理系统', target: '向量库', cron: '0 0 * * 5', frequency: '每周五 00:00', docCount: 15, status: 'completed', lastSync: '2026-08-22 00:00', nextSync: '2026-08-29 00:00' },
-  { id: 's6', name: '政策法规采集同步', kbId: 'kb4', kbName: '行业知识库', source: '搜索爬虫插件', target: '向量库', cron: '0 6 * * *', frequency: '每天 06:00', docCount: 28, status: 'running', lastSync: '2026-08-28 06:00', nextSync: '2026-08-29 06:00' },
+  { id: 's1', name: '行业报告每日同步', kbId: 'kb4', kbName: '行业知识库', source: '行业数据库 API', target: '向量库', cron: '0 2 * * *', frequency: '每天 02:00', docCount: randomInt(28, 68), status: 'completed', lastSync: '2026-08-28 02:00', nextSync: '2026-08-29 02:00' },
+  { id: 's2', name: '客服 FAQ 增量同步', kbId: 'kb3', kbName: '客服知识库', source: 'CRM 系统', target: '向量库', cron: '0 */4 * * *', frequency: '每 4 小时', docCount: randomInt(6, 24), status: 'running', lastSync: '2026-08-28 08:00', nextSync: '2026-08-28 12:00' },
+  { id: 's3', name: '企业制度文档同步', kbId: 'kb1', kbName: '企业知识库', source: 'OA 文档库', target: '向量库', cron: '0 1 * * 1', frequency: '每周一 01:00', docCount: randomInt(4, 16), status: 'completed', lastSync: '2026-08-25 01:00', nextSync: '2026-09-01 01:00' },
+  { id: 's4', name: '产品文档版本同步', kbId: 'kb2', kbName: '产品知识库', source: 'Git 文档仓库', target: '向量库', cron: '0 3 * * *', frequency: '每天 03:00', docCount: randomInt(2, 12), status: 'waiting', lastSync: '2026-08-27 03:00', nextSync: '2026-08-28 03:00' },
+  { id: 's5', name: '项目交付文档同步', kbId: 'kb5', kbName: '项目资料库', source: '项目管理系统', target: '向量库', cron: '0 0 * * 5', frequency: '每周五 00:00', docCount: randomInt(8, 26), status: 'completed', lastSync: '2026-08-22 00:00', nextSync: '2026-08-29 00:00' },
+  { id: 's6', name: '政策法规采集同步', kbId: 'kb4', kbName: '行业知识库', source: '搜索爬虫插件', target: '向量库', cron: '0 6 * * *', frequency: '每天 06:00', docCount: randomInt(15, 45), status: 'running', lastSync: '2026-08-28 06:00', nextSync: '2026-08-29 06:00' },
 ]
 
 export const searchHitsMock: SearchHit[] = [

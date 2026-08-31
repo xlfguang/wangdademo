@@ -2,6 +2,7 @@ import type {
   CrawlerTask, CrawlerDataRecord, CrawlerDataSource, TrustedSource,
   OpinionHotspot, AlertRecord, CrawlerSearchLog,
 } from '@/types'
+import { jitter, randomFloat, randomInt } from '@/utils/mockApi'
 
 export const crawlerPluginMeta = {
   name: '搜索爬虫插件',
@@ -11,11 +12,11 @@ export const crawlerPluginMeta = {
 }
 
 export const crawlerOverviewStats = {
-  totalTasks: 3240,
-  todayCollected: 18600,
-  hotspotCount: 28,
-  alertCount: 156,
-  apiCalls: 45800,
+  totalTasks: randomInt(2400, 4600),
+  todayCollected: randomInt(12000, 26000),
+  hotspotCount: randomInt(18, 42),
+  alertCount: randomInt(90, 260),
+  apiCalls: randomInt(32000, 62000),
 }
 
 export const crawlerScenarios = [
@@ -27,17 +28,41 @@ export const crawlerScenarios = [
 ]
 
 export const keywordGroups = [
-  { id: 'g1', name: '品牌舆情监控组', keywords: '品牌名 OR 产品名 NOT 广告', count: 12 },
-  { id: 'g2', name: '行业趋势调研组', keywords: '人工智能 AND 政策动态', count: 8 },
-  { id: 'g3', name: '竞品监控组', keywords: '竞品A OR 竞品B AND 定价', count: 6 },
+  { id: 'g1', name: '品牌舆情监控组', keywords: '品牌名 OR 产品名 NOT 广告', count: randomInt(8, 18) },
+  { id: 'g2', name: '行业趋势调研组', keywords: '人工智能 AND 政策动态', count: randomInt(5, 12) },
+  { id: 'g3', name: '竞品监控组', keywords: '竞品A OR 竞品B AND 定价', count: randomInt(4, 10) },
 ]
 
+/** 采集数量与进度保持一致：已完成=100%，进行中按进度折算已采集数，排队中=0 */
+const buildCrawlerProgress = (
+  status: CrawlerTask['status'],
+  baseCollect: number,
+): { collectCount: number; collectedCount: number; progress: number } => {
+  const collectCount = jitter(baseCollect, 0.25)
+  switch (status) {
+    case 'completed':
+      return { collectCount, collectedCount: collectCount, progress: 100 }
+    case 'running': {
+      const progress = randomInt(30, 96)
+      return {
+        collectCount,
+        collectedCount: Math.round((collectCount * progress) / 100),
+        progress,
+      }
+    }
+    case 'queued':
+      return { collectCount, collectedCount: 0, progress: 0 }
+    default:
+      return { collectCount, collectedCount: Math.round(collectCount * 0.5), progress: randomInt(20, 80) }
+  }
+}
+
 export const crawlerTasks: CrawlerTask[] = [
-  { id: 'c1', taskId: 'CR202608280001', name: '新能源汽车政策检索', keyword: '新能源汽车 政策', keywords: ['新能源汽车', '政策'], logic: 'and', source: '百度', dataSource: '百度', collectCount: 1000, collectedCount: 1000, progress: 100, status: 'completed', scheduleType: 'instant', timeRange: '近7天', dedupeRate: 12, createdAt: '2026-08-28 09:52', updatedAt: '2026-08-28 10:30' },
-  { id: 'c2', taskId: 'CR202608280002', name: 'AI 行业资讯采集', keyword: '大模型 应用', keywords: ['大模型', '应用'], logic: 'and', source: '搜狗', dataSource: '搜狗', collectCount: 500, collectedCount: 320, progress: 64, status: 'running', scheduleType: 'scheduled', scheduleFreq: '每天 02:00', timeRange: '近3天', dedupeRate: 8, createdAt: '2026-08-28 09:00', updatedAt: '2026-08-28 10:15' },
-  { id: 'c3', taskId: 'CR202608270003', name: '品牌舆情监控', keyword: '某品牌 投诉', keywords: ['某品牌', '投诉'], logic: 'and', source: '微博+知乎', dataSource: '多渠道', collectCount: 2000, collectedCount: 2000, progress: 100, status: 'completed', scheduleType: 'scheduled', scheduleFreq: '每小时', timeRange: '近24小时', dedupeRate: 22, createdAt: '2026-08-27 16:00', updatedAt: '2026-08-27 18:30' },
-  { id: 'c4', taskId: 'CR202608270004', name: '大模型论文采集', keyword: 'LLM RAG', source: '学术数据库', dataSource: '行业数据库', collectCount: 300, collectedCount: 180, progress: 60, status: 'running', scheduleType: 'instant', timeRange: '近30天', createdAt: '2026-08-27 14:00', updatedAt: '2026-08-28 08:00' },
-  { id: 'c5', taskId: 'CR202608270005', name: '竞品定价监控', keyword: 'SaaS 定价', source: '竞品官网', dataSource: '自定义', collectCount: 100, collectedCount: 0, progress: 0, status: 'queued', scheduleType: 'scheduled', scheduleFreq: '每周一', createdAt: '2026-08-27 10:00', updatedAt: '2026-08-27 10:00' },
+  { id: 'c1', taskId: 'CR202608280001', name: '新能源汽车政策检索', keyword: '新能源汽车 政策', keywords: ['新能源汽车', '政策'], logic: 'and', source: '百度', dataSource: '百度', ...buildCrawlerProgress('completed', 1000), status: 'completed', scheduleType: 'instant', timeRange: '近7天', dedupeRate: randomInt(5, 25), createdAt: '2026-08-28 09:52', updatedAt: '2026-08-28 10:30' },
+  { id: 'c2', taskId: 'CR202608280002', name: 'AI 行业资讯采集', keyword: '大模型 应用', keywords: ['大模型', '应用'], logic: 'and', source: '搜狗', dataSource: '搜狗', ...buildCrawlerProgress('running', 500), status: 'running', scheduleType: 'scheduled', scheduleFreq: '每天 02:00', timeRange: '近3天', dedupeRate: randomInt(4, 18), createdAt: '2026-08-28 09:00', updatedAt: '2026-08-28 10:15' },
+  { id: 'c3', taskId: 'CR202608270003', name: '品牌舆情监控', keyword: '某品牌 投诉', keywords: ['某品牌', '投诉'], logic: 'and', source: '微博+知乎', dataSource: '多渠道', ...buildCrawlerProgress('completed', 2000), status: 'completed', scheduleType: 'scheduled', scheduleFreq: '每小时', timeRange: '近24小时', dedupeRate: randomInt(12, 34), createdAt: '2026-08-27 16:00', updatedAt: '2026-08-27 18:30' },
+  { id: 'c4', taskId: 'CR202608270004', name: '大模型论文采集', keyword: 'LLM RAG', source: '学术数据库', dataSource: '行业数据库', ...buildCrawlerProgress('running', 300), status: 'running', scheduleType: 'instant', timeRange: '近30天', createdAt: '2026-08-27 14:00', updatedAt: '2026-08-28 08:00' },
+  { id: 'c5', taskId: 'CR202608270005', name: '竞品定价监控', keyword: 'SaaS 定价', source: '竞品官网', dataSource: '自定义', ...buildCrawlerProgress('queued', 100), status: 'queued', scheduleType: 'scheduled', scheduleFreq: '每周一', createdAt: '2026-08-27 10:00', updatedAt: '2026-08-27 10:00' },
 ]
 
 export const dataSources: CrawlerDataSource[] = [
@@ -58,12 +83,12 @@ export const trustedSources: TrustedSource[] = [
 ]
 
 export const searchResultsMock: CrawlerDataRecord[] = [
-  { id: 'r1', title: '2026年新能源汽车补贴政策最新解读', content: '工信部发布最新新能源汽车补贴政策...', publishTime: '2026-08-28 08:30', source: '新华社', author: '财经组', url: 'https://example.com/1', dataType: '新闻报道', sentiment: 'neutral', sourceLevel: '一级', readCount: 12500 },
-  { id: 'r2', title: '大模型在智能体平台中的应用实践', content: '随着 AI Agent 快速发展...', publishTime: '2026-08-27 16:20', source: '36氪', author: '科技频道', url: 'https://example.com/2', dataType: '行业报告', sentiment: 'positive', sourceLevel: '二级', readCount: 8900 },
-  { id: 'r3', title: '某品牌产品质量问题引发网友讨论', content: '多位用户在社交平台反映...', publishTime: '2026-08-28 07:15', source: '微博', url: 'https://example.com/3', dataType: '微博内容', sentiment: 'negative', sourceLevel: '三级', readCount: 52000, isDuplicate: false },
-  { id: 'r4', title: 'RAG 技术在企业知识库中的落地指南', content: '检索增强生成（RAG）已成为...', publishTime: '2026-08-26 11:00', source: '知乎', author: 'AI从业者', url: 'https://example.com/4', dataType: '论坛帖子', sentiment: 'positive', sourceLevel: '三级', readCount: 3200 },
+  { id: 'r1', title: '2026年新能源汽车补贴政策最新解读', content: '工信部发布最新新能源汽车补贴政策...', publishTime: '2026-08-28 08:30', source: '新华社', author: '财经组', url: 'https://example.com/1', dataType: '新闻报道', sentiment: 'neutral', sourceLevel: '一级', readCount: randomInt(6000, 22000) },
+  { id: 'r2', title: '大模型在智能体平台中的应用实践', content: '随着 AI Agent 快速发展...', publishTime: '2026-08-27 16:20', source: '36氪', author: '科技频道', url: 'https://example.com/2', dataType: '行业报告', sentiment: 'positive', sourceLevel: '二级', readCount: randomInt(4000, 16000) },
+  { id: 'r3', title: '某品牌产品质量问题引发网友讨论', content: '多位用户在社交平台反映...', publishTime: '2026-08-28 07:15', source: '微博', url: 'https://example.com/3', dataType: '微博内容', sentiment: 'negative', sourceLevel: '三级', readCount: randomInt(30000, 80000), isDuplicate: false },
+  { id: 'r4', title: 'RAG 技术在企业知识库中的落地指南', content: '检索增强生成（RAG）已成为...', publishTime: '2026-08-26 11:00', source: '知乎', author: 'AI从业者', url: 'https://example.com/4', dataType: '论坛帖子', sentiment: 'positive', sourceLevel: '三级', readCount: randomInt(1500, 6000) },
   { id: 'r5', title: '2026年新能源汽车补贴政策最新解读', content: '工信部发布最新新能源汽车补贴政策...', publishTime: '2026-08-28 08:35', source: '网易新闻', url: 'https://example.com/5', dataType: '新闻报道', sentiment: 'neutral', sourceLevel: '二级', isDuplicate: true },
-  { id: 'r6', title: '国务院印发数字经济发展规划', content: '国务院近日印发关于加快...', publishTime: '2026-08-25 09:00', source: '中国政府网', url: 'https://example.com/6', dataType: 'PDF文档', sentiment: 'neutral', sourceLevel: '一级', readCount: 8900 },
+  { id: 'r6', title: '国务院印发数字经济发展规划', content: '国务院近日印发关于加快...', publishTime: '2026-08-25 09:00', source: '中国政府网', url: 'https://example.com/6', dataType: 'PDF文档', sentiment: 'neutral', sourceLevel: '一级', readCount: randomInt(4000, 16000) },
 ]
 
 export const searchLogsMock: CrawlerSearchLog[] = [
@@ -74,10 +99,10 @@ export const searchLogsMock: CrawlerSearchLog[] = [
 ]
 
 export const opinionHotspots: OpinionHotspot[] = [
-  { id: 'o1', title: '某品牌产品质量投诉集中爆发', summary: '多位用户在微博、知乎反映产品质量问题，负面评论快速传播', level: 'urgent', monitorTarget: '某品牌', platforms: ['微博', '知乎', '今日头条'], publishCount: 128, interactionCount: 52000, negativeRatio: 85, sentiment: '负面为主', firstSeen: '2026-08-28 06:30', spreadSpeed: '极快', status: '处理中' },
-  { id: 'o2', title: 'AI 大模型监管政策讨论升温', summary: '新版 AI 监管征求意见稿引发行业广泛讨论', level: 'important', monitorTarget: 'AI监管', platforms: ['新华社', '36氪', '知乎'], publishCount: 56, interactionCount: 12000, negativeRatio: 35, sentiment: '中性偏正', firstSeen: '2026-08-27 14:00', spreadSpeed: '较快', status: '未处理' },
-  { id: 'o3', title: '新能源汽车销量数据发布', summary: '8月新能源汽车销量同比增长35%，获正面报道', level: 'normal', monitorTarget: '新能源汽车', platforms: ['新华社', '新浪新闻'], publishCount: 23, interactionCount: 4500, negativeRatio: 5, sentiment: '正面', firstSeen: '2026-08-28 08:00', spreadSpeed: '平稳', status: '已处理' },
-  { id: 'o4', title: '竞品发布新品引发关注', summary: '竞品发布新一代 SaaS 产品，定价策略受关注', level: 'normal', monitorTarget: '竞品A', platforms: ['36氪', '今日头条'], publishCount: 18, interactionCount: 3200, negativeRatio: 10, sentiment: '中性', firstSeen: '2026-08-27 10:00', spreadSpeed: '平稳', status: '已处理' },
+  { id: 'o1', title: '某品牌产品质量投诉集中爆发', summary: '多位用户在微博、知乎反映产品质量问题，负面评论快速传播', level: 'urgent', monitorTarget: '某品牌', platforms: ['微博', '知乎', '今日头条'], publishCount: randomInt(80, 220), interactionCount: randomInt(30000, 80000), negativeRatio: randomInt(70, 95), sentiment: '负面为主', firstSeen: '2026-08-28 06:30', spreadSpeed: '极快', status: '处理中' },
+  { id: 'o2', title: 'AI 大模型监管政策讨论升温', summary: '新版 AI 监管征求意见稿引发行业广泛讨论', level: 'important', monitorTarget: 'AI监管', platforms: ['新华社', '36氪', '知乎'], publishCount: randomInt(30, 90), interactionCount: randomInt(6000, 20000), negativeRatio: randomInt(25, 50), sentiment: '中性偏正', firstSeen: '2026-08-27 14:00', spreadSpeed: '较快', status: '未处理' },
+  { id: 'o3', title: '新能源汽车销量数据发布', summary: '8月新能源汽车销量同比增长35%，获正面报道', level: 'normal', monitorTarget: '新能源汽车', platforms: ['新华社', '新浪新闻'], publishCount: randomInt(12, 40), interactionCount: randomInt(2000, 8000), negativeRatio: randomInt(0, 12), sentiment: '正面', firstSeen: '2026-08-28 08:00', spreadSpeed: '平稳', status: '已处理' },
+  { id: 'o4', title: '竞品发布新品引发关注', summary: '竞品发布新一代 SaaS 产品，定价策略受关注', level: 'normal', monitorTarget: '竞品A', platforms: ['36氪', '今日头条'], publishCount: randomInt(10, 35), interactionCount: randomInt(1500, 5500), negativeRatio: randomInt(5, 18), sentiment: '中性', firstSeen: '2026-08-27 10:00', spreadSpeed: '平稳', status: '已处理' },
 ]
 
 export const alertRecords: AlertRecord[] = [
@@ -109,9 +134,9 @@ export const crawlerSettingsDefault = {
 }
 
 export const storageStats = {
-  localUsed: '2.8 GB',
+  localUsed: `${randomFloat(1.5, 4.5, 1)} GB`,
   localTotal: '10 GB',
-  cloudUsed: '15.2 GB',
+  cloudUsed: `${randomFloat(10, 22, 1)} GB`,
   cloudTotal: '50 GB',
   categories: [
     { name: '抓取原始数据', size: '1.2 GB' },
