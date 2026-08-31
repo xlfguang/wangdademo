@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Row, Col, Card, Progress, Table, Button, Tag, message } from 'antd'
+import { Row, Col, Card, Progress, Table, Button, Tag, message, Drawer } from 'antd'
 import DataCleanSubNav from './components/DataCleanSubNav'
-import { qualityReport, qualityCheckItems as initialItems } from '@/mock/dataClean'
+import { qualityReport, qualityCheckItems as initialItems, cleanCompareSamples } from '@/mock/dataClean'
 import type { QualityCheckItem } from '@/types'
 import styles from './index.module.css'
 
@@ -19,10 +19,20 @@ const severityColor: Record<string, string> = {
 
 export default function Quality() {
   const [items, setItems] = useState<QualityCheckItem[]>(initialItems)
+  const [compareOpen, setCompareOpen] = useState(false)
+  const [compareItem, setCompareItem] = useState(cleanCompareSamples[0])
 
   const handleReview = (id: string) => {
     setItems((prev) => prev.map((item) => item.id === id ? { ...item, status: 'passed' as const } : item))
     message.success('复核通过')
+  }
+
+  const openCompare = (item: QualityCheckItem) => {
+    const sample = cleanCompareSamples.find((s) => s.document === item.document)
+      ?? cleanCompareSamples.find((s) => s.category === item.category)
+      ?? cleanCompareSamples[0]
+    setCompareItem(sample)
+    setCompareOpen(true)
   }
 
   const scores = [
@@ -60,11 +70,14 @@ export default function Quality() {
       },
     },
     {
-      title: '操作', key: 'action', width: 100,
+      title: '操作', key: 'action', width: 160,
       render: (_: unknown, r: QualityCheckItem) => (
-        r.status === 'pending'
-          ? <Button type="link" size="small" onClick={() => handleReview(r.id)}>复核通过</Button>
-          : '—'
+        <>
+          <Button type="link" size="small" onClick={() => openCompare(r)}>对比</Button>
+          {r.status === 'pending' && (
+            <Button type="link" size="small" onClick={() => handleReview(r.id)}>复核通过</Button>
+          )}
+        </>
       ),
     },
   ]
@@ -95,6 +108,23 @@ export default function Quality() {
       <Card title="低置信项清单" bordered={false} style={{ boxShadow: 'var(--shadow-card)' }} extra={<Tag color="warning">{items.filter((i) => i.status === 'pending').length} 项待复核</Tag>}>
         <Table columns={columns} dataSource={items} rowKey="id" pagination={{ pageSize: 10 }} />
       </Card>
+      <Drawer title="清洗前后对比" open={compareOpen} onClose={() => setCompareOpen(false)} width={720}>
+        <p style={{ marginBottom: 16, color: 'var(--color-text-secondary)' }}>
+          文档：{compareItem.document} · 字段：{compareItem.field}
+        </p>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Card title="清洗前（原文）" size="small" style={{ background: '#fef2f2' }}>
+              <pre style={{ whiteSpace: 'pre-wrap', margin: 0, fontSize: 13 }}>{compareItem.before}</pre>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card title="清洗后（结果）" size="small" style={{ background: '#f0fdf4' }}>
+              <pre style={{ whiteSpace: 'pre-wrap', margin: 0, fontSize: 13 }}>{compareItem.after}</pre>
+            </Card>
+          </Col>
+        </Row>
+      </Drawer>
     </div>
   )
 }

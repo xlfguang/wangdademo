@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 const tabItems = [
   { key: '/video/overview', label: '能力概览' },
+  { key: '/video/workspace', label: '视频工作台' },
   { key: '/video/tasks', label: '视频处理任务' },
   { key: '/video/analysis', label: '视频分析' },
   { key: '/video/api-debug', label: '接口调试' },

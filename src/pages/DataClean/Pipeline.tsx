@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react'
-import { Card, Button, Progress, Tag, message } from 'antd'
+import { Card, Button, Progress, Tag, message, Select } from 'antd'
 import { PlayCircleOutlined, CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import DataCleanSubNav from './components/DataCleanSubNav'
-import { pipelineLayers as initialLayers } from '@/mock/dataClean'
+import { pipelineLayers as initialLayers, cleanBatches } from '@/mock/dataClean'
 import type { PipelineStep } from '@/types'
 import styles from './index.module.css'
 
@@ -28,9 +28,12 @@ const statusLabel: Record<string, string> = {
 }
 
 export default function Pipeline() {
+  const [selectedBatch, setSelectedBatch] = useState(cleanBatches[0].id)
   const [steps, setSteps] = useState<PipelineStep[]>(initialLayers.map((s) => ({ ...s })))
   const [executing, setExecuting] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const batch = cleanBatches.find((b) => b.id === selectedBatch) ?? cleanBatches[0]
 
   const overallProgress = Math.round(steps.reduce((sum, s) => sum + s.progress, 0) / steps.length)
 
@@ -75,19 +78,37 @@ export default function Pipeline() {
     setSteps(initialLayers.map((s) => ({ ...s })))
   }
 
+  const handleBatchChange = (batchId: string) => {
+    if (executing) return
+    setSelectedBatch(batchId)
+    handleReset()
+    message.info(`已切换至批次：${cleanBatches.find((b) => b.id === batchId)?.name}`)
+  }
+
   return (
     <div>
       <DataCleanSubNav />
       <Card bordered={false} style={{ marginBottom: 16, boxShadow: 'var(--shadow-card)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: 4 }}>整体进度</div>
-            <Progress percent={overallProgress} style={{ width: 400 }} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontWeight: 500 }}>绑定批次</span>
+            <Select
+              value={selectedBatch}
+              onChange={handleBatchChange}
+              style={{ width: 280 }}
+              options={cleanBatches.map((b) => ({ label: `${b.name} (${b.batchNo})`, value: b.id }))}
+              disabled={executing}
+            />
+            <Tag color="blue">{batch.status === 'running' ? '运行中' : batch.status === 'completed' ? '已完成' : '排队中'}</Tag>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <Button icon={<PlayCircleOutlined />} type="primary" loading={executing} onClick={handleExecute}>执行流水线</Button>
             <Button onClick={handleReset} disabled={executing}>重置</Button>
           </div>
+        </div>
+        <div>
+          <div style={{ fontWeight: 600, marginBottom: 4 }}>整体进度 — {batch.name}</div>
+          <Progress percent={overallProgress} style={{ width: '100%', maxWidth: 400 }} />
         </div>
       </Card>
       {steps.map((step) => (

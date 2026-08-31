@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const tabItems = [
   { key: '/audio/overview', label: '能力概览' },
   { key: '/audio/workspace', label: '音频工作台' },
+  { key: '/audio/synthesis', label: '语音合成' },
   { key: '/audio/transcription', label: '语音转文字' },
   { key: '/audio/extraction', label: '关键信息提取' },
   { key: '/audio/history', label: '历史记录' },

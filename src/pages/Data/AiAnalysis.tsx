@@ -3,6 +3,7 @@ import { Card, Input, Button, Steps, Tag, Spin, Row } from 'antd'
 import { ThunderboltOutlined } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import DataSubNav from './components/DataSubNav'
+import ExportReportButton from '@/components/ExportReportButton'
 import { aiAnalysisPairs, salesTrend } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
 import type { AiAnalysisResult } from '@/types'
@@ -42,6 +43,12 @@ export default function AiAnalysis() {
   return (
     <div>
       <DataSubNav />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+        <ExportReportButton
+          filename="data-ai-analysis"
+          data={result ? { question: result.question, conclusion: result.conclusion, findings: result.findings, suggestion: result.suggestion } : { status: '未分析' }}
+        />
+      </div>
       <div className={styles.aiPanel}>
         <div className={styles.aiTitle}><ThunderboltOutlined /> AI 数据分析助手</div>
         <TextArea rows={3} placeholder="输入你想分析的问题，例如：分析近6个月销售额下降的原因" value={question} onChange={(e) => setQuestion(e.target.value)} style={{ marginBottom: 12 }} />

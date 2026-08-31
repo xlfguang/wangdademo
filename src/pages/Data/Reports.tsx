@@ -1,7 +1,8 @@
-import { Table, Button, Tag, Popconfirm, message } from 'antd'
+import { Table, Button, Tag, Popconfirm, message, Space } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
+import ExportReportButton from '@/components/ExportReportButton'
 import DataSubNav from './components/DataSubNav'
 import { reports } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
@@ -36,7 +37,16 @@ export default function Reports() {
   return (
     <div>
       <DataSubNav />
-      <PageHeader title="报表中心" description="企业数据可视化报表" extra={<Button type="primary" icon={<PlusOutlined />} onClick={() => message.info('创建报表')}>创建报表</Button>} />
+      <PageHeader
+        title="报表中心"
+        description="企业数据可视化报表"
+        extra={
+          <Space>
+            <ExportReportButton filename="data-reports" data={reports as unknown as Record<string, unknown>[]} />
+            <Button type="primary" icon={<PlusOutlined />} onClick={() => message.info('创建报表')}>创建报表</Button>
+          </Space>
+        }
+      />
       <div style={{ marginBottom: 16 }}>
         {['销售日报', '库存分析', '运营周报', '用户分析'].map((t) => (
           <Tag key={t} style={{ cursor: 'pointer', marginRight: 8, padding: '4px 12px' }} onClick={() => navigate('/data/reports/r1')}>{t}</Tag>

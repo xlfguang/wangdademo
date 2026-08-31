@@ -400,3 +400,19 @@ export const generateTaskId = (): string => {
   const seq = String(taskStore.length + 1).padStart(4, '0')
   return `VP${dateStr}${seq}`
 }
+
+export const workspaceAssets = [
+  { id: 'wa1', name: 'enterprise_promo.mp4', duration: '05:32', size: '856 MB' },
+  { id: 'wa2', name: 'product_launch_clip.mov', duration: '02:18', size: '412 MB' },
+  { id: 'wa3', name: 'training_recording.mp4', duration: '12:45', size: '1.2 GB' },
+  { id: 'wa4', name: 'customer_testimonial.webm', duration: '01:52', size: '186 MB' },
+]
+
+export const workspaceTimelineClips = [
+  { id: 'c1', track: 'video' as const, label: '片头', start: 0, end: 8, color: '#1677ff' },
+  { id: 'c2', track: 'video' as const, label: '主内容', start: 8, end: 72, color: '#4096ff' },
+  { id: 'c3', track: 'video' as const, label: '片尾', start: 72, end: 85, color: '#69b1ff' },
+  { id: 'c4', track: 'audio' as const, label: '旁白', start: 0, end: 85, color: '#7c5cfc' },
+  { id: 'c5', track: 'audio' as const, label: 'BGM', start: 5, end: 80, color: '#9254de' },
+]
+

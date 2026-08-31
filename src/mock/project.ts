@@ -59,3 +59,20 @@ export const projectLogs = [
   { time: '2026-08-27 14:00', user: '赵强', action: '创建了智能客服模型微调任务' },
   { time: '2026-08-26 11:30', user: '陈伟', action: '上传了测试报告 v2.0' },
 ]
+
+export const projectMilestones = [
+  { id: 'm1', title: '需求调研与方案设计', date: '2026-03-15', status: 'completed' as const },
+  { id: 'm2', title: '知识库文档导入', date: '2026-05-20', status: 'completed' as const },
+  { id: 'm3', title: '视频处理插件部署', date: '2026-08-30', status: 'running' as const },
+  { id: 'm4', title: '数据清洗流程配置', date: '2026-09-05', status: 'waiting' as const },
+  { id: 'm5', title: '系统联调与验收', date: '2026-09-30', status: 'waiting' as const },
+]
+
+export const projectMembers = [
+  { id: 'pm1', name: '张明', role: '项目经理', department: '交付部', email: 'zhangming@example.com' },
+  { id: 'pm2', name: '李华', role: '技术负责人', department: '研发部', email: 'lihua@example.com' },
+  { id: 'pm3', name: '王芳', role: '数据工程师', department: '数据部', email: 'wangfang@example.com' },
+  { id: 'pm4', name: '赵强', role: 'AI 算法工程师', department: '算法部', email: 'zhaoqiang@example.com' },
+  { id: 'pm5', name: '陈伟', role: '测试工程师', department: '质量部', email: 'chenwei@example.com' },
+]
+

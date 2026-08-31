@@ -19,6 +19,7 @@ interface KnowledgeContextValue {
   validationRecords: ValidationRecord[]
   updateValidation: (id: string, updates: Partial<ValidationRecord>) => void
   syncTasks: SyncTask[]
+  addSyncTask: (task: SyncTask) => void
   updateSyncTask: (id: string, updates: Partial<SyncTask>) => void
   removeSyncTask: (id: string) => void
   searchHits: SearchHit[]
@@ -58,6 +59,10 @@ export function KnowledgeProvider({ children }: { children: ReactNode }) {
     setSyncTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
   }, [])
 
+  const addSyncTask = useCallback((task: SyncTask) => {
+    setSyncTasks((prev) => [task, ...prev])
+  }, [])
+
   const removeSyncTask = useCallback((id: string) => {
     setSyncTasks((prev) => prev.filter((t) => t.id !== id))
   }, [])
@@ -67,7 +72,7 @@ export function KnowledgeProvider({ children }: { children: ReactNode }) {
       bases, addBase, removeBase, getBase,
       docs, addDoc, getDocs,
       validationRecords, updateValidation,
-      syncTasks, updateSyncTask, removeSyncTask,
+      syncTasks, addSyncTask, updateSyncTask, removeSyncTask,
       searchHits, setSearchHits,
     }}>
       {children}

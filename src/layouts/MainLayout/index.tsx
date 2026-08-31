@@ -101,6 +101,10 @@ function getBreadcrumbTitle(part: string, parts: string[]): string {
   if (part === 'task' && root === 'task') return '任务详情'
   if (part === 'search' && root === 'knowledge') return '知识检索'
   if (part === 'search' && root === 'crawler') return '检索工作台'
+  if (part === 'workspace' && root === 'video') return '视频工作台'
+  if (part === 'workspace' && root === 'audio') return '音频工作台'
+  if (part === 'synthesis') return '语音合成'
+  if (part === 'schedules') return '定时任务'
   return breadcrumbMap[part] ?? part
 }
 

@@ -1,9 +1,16 @@
-import { Row, Col, Card, Table, Button } from 'antd'
+import type { ReactNode } from 'react'
+import { Row, Col, Card, Table, Button, Tag, List } from 'antd'
 import {
   ThunderboltOutlined,
   PlayCircleOutlined,
   DatabaseOutlined,
   AppstoreOutlined,
+  VideoCameraOutlined,
+  SoundOutlined,
+  SearchOutlined,
+  BookOutlined,
+  ClearOutlined,
+  BarChartOutlined,
 } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import { useNavigate } from 'react-router-dom'
@@ -17,8 +24,25 @@ import {
   pluginUsageData,
   taskStatusData,
   recentTasks,
+  pendingTodos,
+  dashboardQuickActions,
 } from '@/mock/dashboard'
 import styles from './index.module.css'
+
+const quickActionIcons: Record<string, ReactNode> = {
+  video: <VideoCameraOutlined />,
+  audio: <SoundOutlined />,
+  data: <BarChartOutlined />,
+  crawler: <SearchOutlined />,
+  knowledge: <BookOutlined />,
+  clean: <ClearOutlined />,
+}
+
+const priorityColor: Record<string, string> = {
+  high: 'red',
+  medium: 'orange',
+  low: 'default',
+}
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -97,6 +121,46 @@ export default function Dashboard() {
           <span>知识库文档 <strong>{formatNumber(dashboardStats.knowledgeDocs)}</strong></span>
         </div>
       </div>
+
+      <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
+        <Col xs={24} lg={14}>
+          <Card title="待办聚合" bordered={false} className={styles.recentCard}>
+            <List
+              dataSource={pendingTodos}
+              renderItem={(item) => (
+                <List.Item
+                  actions={[<Button key="go" type="link" size="small" onClick={() => navigate(item.route)}>处理</Button>]}
+                >
+                  <List.Item.Meta
+                    title={
+                      <span>
+                        <Tag color={priorityColor[item.priority]} style={{ marginRight: 8 }}>{item.category}</Tag>
+                        {item.title}
+                      </span>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} lg={10}>
+          <Card title="插件快捷操作" bordered={false} className={styles.recentCard}>
+            <div className={styles.quickActions}>
+              {dashboardQuickActions.map((action) => (
+                <Button
+                  key={action.label}
+                  icon={quickActionIcons[action.icon]}
+                  onClick={() => navigate(action.route)}
+                  className={styles.quickActionBtn}
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          </Card>
+        </Col>
+      </Row>
 
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} lg={6}>

@@ -1,19 +1,22 @@
 import { useState } from 'react'
 import { Row, Col, Card, Form, Input, Select, Radio, Button, Table, Tag, Spin, message } from 'antd'
-import { SendOutlined, RobotOutlined, UserOutlined } from '@ant-design/icons'
+import { SendOutlined, RobotOutlined, UserOutlined, LinkOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import KnowledgeSubNav from './components/KnowledgeSubNav'
 import { useKnowledgeContext, searchHitsMock } from './KnowledgeContext'
-import { qaPairs } from '@/mock/knowledge'
+import { qaPairs, ragSources } from '@/mock/knowledge'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
 interface ChatMessage {
   role: 'user' | 'ai'
   content: string
+  sources?: typeof ragSources
 }
 
 export default function SearchPage() {
+  const navigate = useNavigate()
   const { bases, searchHits, setSearchHits } = useKnowledgeContext()
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
@@ -49,7 +52,7 @@ export default function SearchPage() {
     await delay(800)
     const match = qaPairs.find((q) => q.question.includes(question) || question.includes(q.question.slice(0, 4)))
     const answer = match?.answer ?? '根据当前知识库内容，暂未找到与您问题完全匹配的信息。建议您查阅相关文档或联系管理员获取更多信息。'
-    setMessages((prev) => [...prev, { role: 'ai', content: answer }])
+    setMessages((prev) => [...prev, { role: 'ai', content: answer, sources: ragSources.slice(0, 3) }])
     setChatLoading(false)
   }
 
@@ -122,9 +125,33 @@ export default function SearchPage() {
                 </div>
               )}
               {messages.map((msg, i) => (
-                <div key={i} className={msg.role === 'user' ? styles.userMsg : styles.aiMsg}>
-                  {msg.role === 'user' ? <UserOutlined className={styles.msgIcon} /> : <RobotOutlined className={styles.msgIcon} />}
-                  <div className={styles.msgBubble}>{msg.content}</div>
+                <div key={i}>
+                  <div className={msg.role === 'user' ? styles.userMsg : styles.aiMsg}>
+                    {msg.role === 'user' ? <UserOutlined className={styles.msgIcon} /> : <RobotOutlined className={styles.msgIcon} />}
+                    <div className={styles.msgBubble}>{msg.content}</div>
+                  </div>
+                  {msg.role === 'ai' && msg.sources && (
+                    <div className={styles.ragSources}>
+                      <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginBottom: 8 }}>
+                        <LinkOutlined /> RAG 引用溯源
+                      </div>
+                      {msg.sources.map((src) => (
+                        <Card
+                          key={src.id}
+                          size="small"
+                          style={{ marginBottom: 8, cursor: 'pointer' }}
+                          onClick={() => navigate(`/knowledge/base/${src.kbId}`)}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                            <Tag color="blue">{src.kbName}</Tag>
+                            <Tag color="green">置信度 {(src.score * 100).toFixed(0)}%</Tag>
+                          </div>
+                          <div style={{ fontWeight: 500, fontSize: 13 }}>{src.docName}</div>
+                          <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>{src.snippet}</div>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
               {chatLoading && <div className={styles.loadingWrap}><Spin size="small" /> AI 正在思考...</div>}

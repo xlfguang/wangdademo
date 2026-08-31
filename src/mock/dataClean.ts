@@ -78,6 +78,34 @@ export const qualityCheckItems: QualityCheckItem[] = [
   { id: 'q6', field: '责任主体', document: '合同扫描件_008.jpg', issue: '印章遮挡导致字段抽取失败', confidence: randomInt(45, 66), category: 'structure', severity: 'high', status: 'pending' },
 ]
 
+export const cleanCompareSamples = [
+  {
+    id: 'cmp1',
+    document: '行业监管政策汇编.pdf',
+    field: '生效日期',
+    before: '2026年8月（OCR 模糊）',
+    after: '2026-08-01',
+    category: 'structure',
+  },
+  {
+    id: 'cmp2',
+    document: '供应链参数表.xlsx',
+    field: '计量单位',
+    before: '重量：120 千克 / 85 公斤',
+    after: '重量：120 kg / 85 kg',
+    category: 'format',
+  },
+  {
+    id: 'cmp3',
+    document: '制度文件_v1.pdf',
+    field: '—',
+    before: '与 v3 版本重复段落 3 处',
+    after: '已标注同源历史，保留 v3 最新版本',
+    category: 'dedupe',
+  },
+]
+
+
 export const cleanDocuments: CleanDocument[] = [
   { id: 'doc1', name: '产品说明书_v3.docx', fileType: 'Word', category: 'office', docType: 'office', pages: 32, fileSize: '2.4 MB', status: 'completed', confidence: randomInt(88, 99), batchId: 'b1' },
   { id: 'doc2', name: '行业监管政策汇编.pdf', fileType: 'PDF', category: 'office', docType: 'office', pages: 48, fileSize: '8.1 MB', status: 'running', confidence: randomInt(60, 92), batchId: 'b1' },

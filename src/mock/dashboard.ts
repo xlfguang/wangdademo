@@ -104,3 +104,35 @@ export const recentTasks: DashboardTask[] = shuffle([
     route: '/knowledge/base/kb3',
   },
 ])
+
+export interface PendingTodo {
+  id: string
+  title: string
+  category: string
+  priority: 'high' | 'medium' | 'low'
+  route: string
+}
+
+export const pendingTodos: PendingTodo[] = [
+  { id: 't1', title: '视频处理插件验收待确认', category: '待验收任务', priority: 'high', route: '/video/task/v1' },
+  { id: 't2', title: '2026年度战略规划.pptx 待审核', category: '待审核文档', priority: 'high', route: '/knowledge/validation' },
+  { id: 't3', title: '某品牌产品质量投诉集中爆发', category: '舆情预警', priority: 'high', route: '/crawler/opinion' },
+  { id: 't4', title: '产品资料库清洗批次运行中', category: '清洗批次', priority: 'medium', route: '/data-clean/batches' },
+  { id: 't5', title: '智能客服知识库更新等待中', category: '待验收任务', priority: 'medium', route: '/knowledge/base/kb3' },
+]
+
+export interface QuickAction {
+  label: string
+  route: string
+  icon: string
+}
+
+export const dashboardQuickActions: QuickAction[] = [
+  { label: '进入视频工作台', route: '/video/workspace', icon: 'video' },
+  { label: '语音合成', route: '/audio/synthesis', icon: 'audio' },
+  { label: '创建治理任务', route: '/data/governance?action=create', icon: 'data' },
+  { label: '新建定时采集', route: '/crawler/schedules', icon: 'crawler' },
+  { label: '知识检索', route: '/knowledge/search', icon: 'knowledge' },
+  { label: '上传清洗批次', route: '/data-clean/upload', icon: 'clean' },
+]
+

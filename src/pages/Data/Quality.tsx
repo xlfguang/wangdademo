@@ -2,6 +2,7 @@ import { Row, Col, Card, Progress, Table, Button } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import StatusTag from '@/components/StatusTag'
 import DataSubNav from './components/DataSubNav'
+import ExportReportButton from '@/components/ExportReportButton'
 import { qualityMetrics, qualityTrend, qualityAlerts } from '@/mock/data'
 
 export default function Quality() {
@@ -33,6 +34,17 @@ export default function Quality() {
   return (
     <div>
       <DataSubNav />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+        <ExportReportButton
+          filename="data-quality"
+          data={[
+            { metric: '整体评分', value: qualityMetrics.overall },
+            { metric: '完整性', value: qualityMetrics.completeness },
+            { metric: '准确性', value: qualityMetrics.accuracy },
+            ...qualityAlerts.map((a) => ({ ...a })),
+          ]}
+        />
+      </div>
       <Card bordered={false} style={{ marginBottom: 16, boxShadow: 'var(--shadow-card)' }}>
         <Row gutter={16} align="middle">
           <Col span={4} style={{ textAlign: 'center' }}>

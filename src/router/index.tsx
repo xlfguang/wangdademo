@@ -7,6 +7,7 @@ import Dashboard from '@/pages/Dashboard'
 import Video from '@/pages/Video'
 import VideoLayout from '@/pages/Video/layout'
 import VideoOverview from '@/pages/Video/Overview'
+import VideoWorkspace from '@/pages/Video/Workspace'
 import VideoTasks from '@/pages/Video/Tasks'
 import VideoAnalysis from '@/pages/Video/Analysis'
 import VideoApiDebug from '@/pages/Video/ApiDebug'
@@ -30,6 +31,7 @@ import Audio from '@/pages/Audio'
 import AudioLayout from '@/pages/Audio/layout'
 import AudioOverview from '@/pages/Audio/Overview'
 import AudioWorkspace from '@/pages/Audio/Workspace'
+import AudioSynthesis from '@/pages/Audio/Synthesis'
 import AudioTranscription from '@/pages/Audio/Transcription'
 import AudioExtraction from '@/pages/Audio/Extraction'
 import AudioHistory from '@/pages/Audio/History'
@@ -39,6 +41,7 @@ import Crawler from '@/pages/Crawler'
 import CrawlerLayout from '@/pages/Crawler/layout'
 import CrawlerOverview from '@/pages/Crawler/Overview'
 import CrawlerSearch from '@/pages/Crawler/Search'
+import CrawlerSchedules from '@/pages/Crawler/Schedules'
 import CrawlerSources from '@/pages/Crawler/Sources'
 import CrawlerOpinion from '@/pages/Crawler/Opinion'
 import CrawlerDataManage from '@/pages/Crawler/DataManage'
@@ -106,6 +109,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Video /> },
           { path: 'overview', element: <VideoOverview /> },
+          { path: 'workspace', element: <VideoWorkspace /> },
           { path: 'tasks', element: <VideoTasks /> },
           { path: 'analysis', element: <VideoAnalysis /> },
           { path: 'api-debug', element: <VideoApiDebug /> },
@@ -139,6 +143,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Audio /> },
           { path: 'overview', element: <AudioOverview /> },
           { path: 'workspace', element: <AudioWorkspace /> },
+          { path: 'synthesis', element: <AudioSynthesis /> },
           { path: 'transcription', element: <AudioTranscription /> },
           { path: 'extraction', element: <AudioExtraction /> },
           { path: 'history', element: <AudioHistory /> },
@@ -153,6 +158,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Crawler /> },
           { path: 'overview', element: <CrawlerOverview /> },
           { path: 'search', element: <CrawlerSearch /> },
+          { path: 'schedules', element: <CrawlerSchedules /> },
           { path: 'sources', element: <CrawlerSources /> },
           { path: 'opinion', element: <CrawlerOpinion /> },
           { path: 'data', element: <CrawlerDataManage /> },

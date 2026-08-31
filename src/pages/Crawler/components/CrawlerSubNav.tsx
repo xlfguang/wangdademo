@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const tabItems = [
   { key: '/crawler/overview', label: '能力概览' },
   { key: '/crawler/search', label: '检索工作台' },
+  { key: '/crawler/schedules', label: '定时任务' },
   { key: '/crawler/sources', label: '数据源与信源' },
   { key: '/crawler/opinion', label: '舆情监控' },
   { key: '/crawler/data', label: '数据管理' },

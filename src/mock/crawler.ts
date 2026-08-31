@@ -155,3 +155,25 @@ export const levelStrategy: Record<string, string> = {
 
 export const getCrawlerTask = (id: string): CrawlerTask | undefined =>
   crawlerTasks.find((t) => t.id === id)
+
+export interface CrawlerSchedule {
+  id: string
+  name: string
+  keyword: string
+  cron: string
+  frequency: string
+  dataSource: string
+  enabled: boolean
+  lastRun: string
+  nextRun: string
+  status: 'completed' | 'running' | 'waiting' | 'failed'
+}
+
+export const crawlerSchedules: CrawlerSchedule[] = [
+  { id: 'sch1', name: 'AI 行业资讯每日采集', keyword: '大模型 应用', cron: '0 2 * * *', frequency: '每天 02:00', dataSource: '搜狗', enabled: true, lastRun: '2026-08-28 02:00', nextRun: '2026-08-29 02:00', status: 'completed' },
+  { id: 'sch2', name: '品牌舆情小时监控', keyword: '某品牌 投诉', cron: '0 */1 * * *', frequency: '每小时', dataSource: '微博+知乎', enabled: true, lastRun: '2026-08-28 10:00', nextRun: '2026-08-28 11:00', status: 'running' },
+  { id: 'sch3', name: '竞品定价周报', keyword: 'SaaS 定价', cron: '0 8 * * 1', frequency: '每周一 08:00', dataSource: '竞品官网', enabled: false, lastRun: '2026-08-25 08:00', nextRun: '2026-09-01 08:00', status: 'waiting' },
+  { id: 'sch4', name: '政策法规每日同步', keyword: 'AI 监管 政策', cron: '0 6 * * *', frequency: '每天 06:00', dataSource: '中国政府网', enabled: true, lastRun: '2026-08-28 06:00', nextRun: '2026-08-29 06:00', status: 'completed' },
+  { id: 'sch5', name: '学术论文增量抓取', keyword: 'LLM RAG', cron: '0 3 * * 5', frequency: '每周五 03:00', dataSource: '学术数据库', enabled: true, lastRun: '2026-08-22 03:00', nextRun: '2026-08-29 03:00', status: 'completed' },
+]
+

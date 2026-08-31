@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Row, Col, Card, Form, Select, DatePicker, Button, Statistic, Segmented, message } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import DataSubNav from './components/DataSubNav'
+import ExportReportButton from '@/components/ExportReportButton'
 import { analysisStats, salesTrend, regionCompare, correlationData } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
 
@@ -41,6 +42,16 @@ export default function Analysis() {
   return (
     <div>
       <DataSubNav />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
+        <ExportReportButton
+          filename="data-analysis"
+          data={[
+            { metric: '数据总量', value: analysisStats.total },
+            { metric: '平均值', value: analysisStats.avg },
+            ...salesTrend.months.map((m, i) => ({ month: m, sales: salesTrend.values[i] })),
+          ]}
+        />
+      </div>
       <Card bordered={false} style={{ marginBottom: 16, boxShadow: 'var(--shadow-card)' }}>
         <Form layout="inline">
           <Form.Item label="选择数据集"><Select defaultValue="sales" style={{ width: 160 }} options={[{ label: '销售数据集', value: 'sales' }, { label: '用户行为数据集', value: 'behavior' }]} /></Form.Item>

@@ -105,3 +105,28 @@ export const audioSettingsDefault = {
 
 export const getAudioTask = (id: string): AudioTask | undefined =>
   audioTasks.find((t) => t.id === id)
+
+export const voiceProfiles = [
+  { id: 'v1', name: '标准女声', desc: '清晰自然，适合通用场景', tag: '推荐' },
+  { id: 'v2', name: '标准男声', desc: '沉稳专业，适合播报场景', tag: '' },
+  { id: 'v3', name: '商务女声', desc: '亲和力强，适合客服与会议', tag: '热门' },
+  { id: 'v4', name: '专属定制音色', desc: '上传 10s 样本克隆专属音色', tag: '定制' },
+]
+
+export const synthesisScenarios: Record<string, { title: string; template: string }> = {
+  meeting: {
+    title: '会议纪要生成',
+    template: '各位同事大家好，本次会议主要讨论了 Q3 产品路线图与 AI 能力插件交付计划。会议决议：下周完成音频插件验收，责任人张三，截止 2026-08-30。',
+  },
+  reply: {
+    title: '语音交互回复',
+    template: '您好，已收到您的咨询。根据知识库内容，平台目前支持视频处理、数据处理、音频交互等模块化 AI 能力。如需进一步帮助，请随时联系在线客服。',
+  },
+}
+
+export const synthesisHistory = [
+  { id: 'sh1', text: '会议纪要 — Q3 产品路线图讨论', voice: '商务女声', duration: '00:28', createdAt: '2026-08-28 10:15' },
+  { id: 'sh2', text: '客服话术 — 账号重置指引', voice: '标准女声', duration: '00:15', createdAt: '2026-08-28 09:40' },
+  { id: 'sh3', text: '产品发布旁白', voice: '标准男声', duration: '00:42', createdAt: '2026-08-27 16:20' },
+]
+

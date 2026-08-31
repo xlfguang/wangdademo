@@ -184,6 +184,13 @@ export const qaPairs: QAPair[] = [
   },
 ]
 
+export const ragSources = [
+  { id: 'rs1', kbId: 'kb1', kbName: '企业知识库', docName: '公司介绍与发展历程.pdf', snippet: '公司专注于基于大模型的垂直行业 AI 应用交付及持续运营服务，核心业务包括 AI 能力插件化封装...', score: 0.96 },
+  { id: 'rs2', kbId: 'kb2', kbName: '产品知识库', docName: 'AI 平台产品白皮书.pdf', snippet: '平台目前支持视频处理、数据处理、音频交互、搜索爬虫、社群管理、数据清洗、知识库管理等模块化 AI 能力...', score: 0.93 },
+  { id: 'rs3', kbId: 'kb1', kbName: '企业知识库', docName: '企业文化手册.pdf', snippet: '知识库构建流程为：文档上传 → 文本解析 → 内容切片 → Embedding 向量化 → 向量入库...', score: 0.91 },
+  { id: 'rs4', kbId: 'kb4', kbName: '行业知识库', docName: '2026 AI 行业趋势报告.pdf', snippet: '检索增强生成（RAG）已成为企业级 AI 应用的核心架构，通过向量检索 + 大模型生成实现精准问答...', score: 0.88 },
+]
+
 export const knowledgeSettingsDefault = {
   embeddingModel: 'text-embedding-v3',
   chunkSize: 512,

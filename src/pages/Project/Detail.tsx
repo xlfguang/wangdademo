@@ -1,13 +1,30 @@
-import { Card, Progress, Tabs, Descriptions, Table, Button, Result, Row, Col, Statistic } from 'antd'
+import { useState } from 'react'
+import { Card, Progress, Tabs, Descriptions, Table, Button, Result, Row, Col, Statistic, Timeline, Modal, Form, Input, Select, Tag, message } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
-import { getProject, projectTasks, projectPlugins, projectDocs, projectLogs } from '@/mock/project'
+import { getProject, projectTasks, projectPlugins, projectDocs, projectLogs, projectMilestones, projectMembers } from '@/mock/project'
+
+const milestoneColor: Record<string, string> = {
+  completed: 'green',
+  running: 'blue',
+  waiting: 'gray',
+}
+
+const milestoneLabel: Record<string, string> = {
+  completed: '已完成',
+  running: '进行中',
+  waiting: '待开始',
+}
 
 export default function ProjectDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const project = getProject(id ?? '')
+  const [members, setMembers] = useState(projectMembers)
+  const [memberModalOpen, setMemberModalOpen] = useState(false)
+  const [form] = Form.useForm()
 
   if (!project) {
     return <Result status="404" title="项目不存在" extra={<Button type="primary" onClick={() => navigate('/project')}>返回列表</Button>} />
@@ -20,20 +37,58 @@ export default function ProjectDetail() {
     series: [{ data: [10, 22, 35, 48, 55, 62, 70, project.progress], type: 'line', smooth: true, areaStyle: { color: 'rgba(22,119,255,0.1)' }, lineStyle: { color: '#1677ff' } }],
   }
 
+  const handleAddMember = async () => {
+    const values = await form.validateFields()
+    setMembers((prev) => [...prev, { id: `pm${prev.length + 1}`, ...values }])
+    setMemberModalOpen(false)
+    form.resetFields()
+    message.success('成员已添加')
+  }
+
   const tabItems = [
     {
       key: 'overview',
       label: '项目概览',
       children: (
-        <Descriptions column={2} bordered size="small">
-          <Descriptions.Item label="项目名称">{project.name}</Descriptions.Item>
-          <Descriptions.Item label="所属行业">{project.industry}</Descriptions.Item>
-          <Descriptions.Item label="项目负责人">{project.manager}</Descriptions.Item>
-          <Descriptions.Item label="项目状态"><StatusTag status={project.status} /></Descriptions.Item>
-          <Descriptions.Item label="开始时间">{project.startDate}</Descriptions.Item>
-          <Descriptions.Item label="结束时间">{project.endDate}</Descriptions.Item>
-          <Descriptions.Item label="项目描述" span={2}>{project.description}</Descriptions.Item>
-        </Descriptions>
+        <>
+          <Descriptions column={2} bordered size="small" style={{ marginBottom: 24 }}>
+            <Descriptions.Item label="项目名称">{project.name}</Descriptions.Item>
+            <Descriptions.Item label="所属行业">{project.industry}</Descriptions.Item>
+            <Descriptions.Item label="项目负责人">{project.manager}</Descriptions.Item>
+            <Descriptions.Item label="项目状态"><StatusTag status={project.status} /></Descriptions.Item>
+            <Descriptions.Item label="开始时间">{project.startDate}</Descriptions.Item>
+            <Descriptions.Item label="结束时间">{project.endDate}</Descriptions.Item>
+            <Descriptions.Item label="项目描述" span={2}>{project.description}</Descriptions.Item>
+          </Descriptions>
+          <Card title="项目里程碑" bordered={false} style={{ marginBottom: 24, boxShadow: 'var(--shadow-card)' }}>
+            <Timeline
+              items={projectMilestones.map((m) => ({
+                color: milestoneColor[m.status],
+                children: (
+                  <div>
+                    <div style={{ fontWeight: 500 }}>{m.title}</div>
+                    <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                      {m.date} · <Tag color={milestoneColor[m.status]}>{milestoneLabel[m.status]}</Tag>
+                    </div>
+                  </div>
+                ),
+              }))}
+            />
+          </Card>
+          <Card
+            title="项目成员"
+            bordered={false}
+            style={{ boxShadow: 'var(--shadow-card)' }}
+            extra={<Button type="primary" size="small" icon={<PlusOutlined />} onClick={() => setMemberModalOpen(true)}>添加成员</Button>}
+          >
+            <Table size="small" rowKey="id" dataSource={members} pagination={false} columns={[
+              { title: '姓名', dataIndex: 'name' },
+              { title: '角色', dataIndex: 'role' },
+              { title: '部门', dataIndex: 'department' },
+              { title: '邮箱', dataIndex: 'email' },
+            ]} />
+          </Card>
+        </>
       ),
     },
     {
@@ -114,6 +169,16 @@ export default function ProjectDetail() {
         </div>
       </Card>
       <Card bordered={false}><Tabs items={tabItems} /></Card>
+      <Modal title="添加成员" open={memberModalOpen} onCancel={() => setMemberModalOpen(false)} onOk={handleAddMember}>
+        <Form form={form} layout="vertical">
+          <Form.Item name="name" label="姓名" rules={[{ required: true }]}><Input /></Form.Item>
+          <Form.Item name="role" label="角色" rules={[{ required: true }]}>
+            <Select options={['项目经理', '技术负责人', '数据工程师', 'AI 算法工程师', '测试工程师'].map((v) => ({ label: v, value: v }))} />
+          </Form.Item>
+          <Form.Item name="department" label="部门" rules={[{ required: true }]}><Input /></Form.Item>
+          <Form.Item name="email" label="邮箱" rules={[{ required: true, type: 'email' }]}><Input /></Form.Item>
+        </Form>
+      </Modal>
     </div>
   )
 }

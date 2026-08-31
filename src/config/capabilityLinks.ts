@@ -6,7 +6,7 @@ export interface CapabilityLink {
 }
 
 export const videoCapabilityLinks: Record<string, CapabilityLink> = {
-  '视频剪辑': { path: '/video/tasks', params: { action: 'create', processType: '视频剪辑' } },
+  '视频剪辑': { path: '/video/workspace' },
   '视频转码': { path: '/video/tasks', params: { action: 'create', processType: '视频转码' } },
   '视频压缩': { path: '/video/tasks', params: { action: 'create', processType: '视频压缩' } },
   '关键帧提取': { path: '/video/tasks', params: { action: 'create', processType: '关键帧提取' } },
@@ -15,7 +15,7 @@ export const videoCapabilityLinks: Record<string, CapabilityLink> = {
 }
 
 export const audioScenarioLinks: Record<string, CapabilityLink> = {
-  '会议纪要': { path: '/audio/workspace', params: { action: 'upload', next: 'transcription' } },
+  '会议纪要': { path: '/audio/synthesis', params: { scenario: 'meeting' } },
   '访谈提炼': { path: '/audio/workspace', params: { action: 'upload', next: 'extraction' } },
   '课程讲座': { path: '/audio/transcription' },
   '客服录音': { path: '/audio/extraction' },
@@ -25,7 +25,7 @@ export const audioScenarioLinks: Record<string, CapabilityLink> = {
 export const crawlerScenarioLinks: Record<string, CapabilityLink> = {
   '行业趋势调研': { path: '/crawler/search', params: { action: 'focus', keyword: '人工智能 政策动态' } },
   '品牌舆情监控': { path: '/crawler/opinion', params: { action: 'detail' } },
-  '竞品动态追踪': { path: '/crawler/search', params: { action: 'focus', keyword: '竞品 定价', scheduleType: 'scheduled' } },
+  '竞品动态追踪': { path: '/crawler/schedules' },
   '政策法规采集': { path: '/crawler/sources', params: { action: 'test' } },
   '学术情报收集': { path: '/crawler/sources' },
 }

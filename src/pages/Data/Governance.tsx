@@ -3,6 +3,7 @@ import { Card, Table, Button, Steps, Progress, Drawer, Form, Select, Checkbox, R
 import { PlusOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
+import ExportReportButton from '@/components/ExportReportButton'
 import StatusTag from '@/components/StatusTag'
 import DataSubNav from './components/DataSubNav'
 import { useDataContext } from './DataContext'
@@ -65,7 +66,16 @@ export default function Governance() {
   return (
     <div>
       <DataSubNav />
-      <PageHeader title="数据治理" description="数据接入 → 清洗 → 标准化 → 异常检测 → 质量校验 → 输出" extra={<Button type="primary" icon={<PlusOutlined />} onClick={() => setDrawerOpen(true)}>创建治理任务</Button>} />
+      <PageHeader
+        title="数据治理"
+        description="数据接入 → 清洗 → 标准化 → 异常检测 → 质量校验 → 输出"
+        extra={
+          <Space>
+            <ExportReportButton filename="data-governance" data={governanceTasks as unknown as Record<string, unknown>[]} />
+            <Button type="primary" icon={<PlusOutlined />} onClick={() => setDrawerOpen(true)}>创建治理任务</Button>
+          </Space>
+        }
+      />
       <Card bordered={false} style={{ marginBottom: 24, boxShadow: 'var(--shadow-card)' }}>
         <Steps current={2} size="small" items={['数据接入', '数据清洗', '数据标准化', '异常检测', '质量校验', '输出'].map((t) => ({ title: t }))} />
       </Card>
