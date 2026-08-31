@@ -84,6 +84,13 @@ import TaskDocs from '@/pages/Task/Docs'
 import TaskCollab from '@/pages/Task/Collab'
 import TaskClosure from '@/pages/Task/Closure'
 import TaskDetail from '@/pages/Task/TaskDetail'
+import Model from '@/pages/Model'
+import ModelLayout from '@/pages/Model/layout'
+import ModelOverview from '@/pages/Model/Overview'
+import ModelManage from '@/pages/Model/Manage'
+import ModelAssignment from '@/pages/Model/Assignment'
+import ModelTest from '@/pages/Model/Test'
+import ModelSettings from '@/pages/Model/Settings'
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
 
@@ -210,6 +217,18 @@ export const router = createBrowserRouter([
       },
       { path: 'project', element: <Project /> },
       { path: 'project/:id', element: <ProjectDetail /> },
+      {
+        path: 'model',
+        element: <ModelLayout />,
+        children: [
+          { index: true, element: <Model /> },
+          { path: 'overview', element: <ModelOverview /> },
+          { path: 'manage', element: <ModelManage /> },
+          { path: 'assignment', element: <ModelAssignment /> },
+          { path: 'test', element: <ModelTest /> },
+          { path: 'settings', element: <ModelSettings /> },
+        ],
+      },
       {
         path: 'task',
         element: <TaskLayout />,

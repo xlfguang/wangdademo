@@ -16,6 +16,7 @@ const statusConfig: Record<string, { color: string; label: string; pulse?: boole
   normal: { color: 'success', label: '正常' },
   abnormal: { color: 'error', label: '异常' },
   disabled: { color: 'default', label: '已停用' },
+  enabled: { color: 'success', label: '启用中' },
   hint: { color: 'default', label: '提示' },
   moderate: { color: 'warning', label: '一般' },
   critical: { color: 'error', label: '严重' },

@@ -10,6 +10,7 @@ import {
   BookOutlined,
   CheckSquareOutlined,
   ProjectOutlined,
+  RobotOutlined,
   BellOutlined,
   SettingOutlined,
   UserOutlined,
@@ -32,6 +33,7 @@ const menuItems = [
   { key: '/data-clean/overview', icon: <ClearOutlined />, label: '数据清洗服务' },
   { key: '/knowledge/overview', icon: <BookOutlined />, label: '知识库管理' },
   { key: '/task/overview', icon: <CheckSquareOutlined />, label: '任务协作助手' },
+  { key: '/model/overview', icon: <RobotOutlined />, label: '模型管理' },
   { key: '/project', icon: <ProjectOutlined />, label: '项目管理' },
 ]
 
@@ -76,6 +78,10 @@ const breadcrumbMap: Record<string, string> = {
   docs: '文档协作',
   collab: '跨岗联动',
   closure: '成果闭环',
+  model: '模型管理',
+  manage: '模型管理',
+  assignment: '插件分配',
+  test: '模型测试',
   groups: '社群列表',
   channels: '渠道管理',
   messages: '消息推送',
@@ -84,6 +90,7 @@ const breadcrumbMap: Record<string, string> = {
 function getBreadcrumbTitle(part: string, parts: string[]): string {
   const root = parts[0]
   if (part === 'overview') return '能力概览'
+  if (part === 'settings' && root === 'model') return '系统设置'
   if (part === 'settings') return '插件设置'
   if (part === 'data' && root === 'crawler') return '数据管理'
   if (part === 'data' && root === 'data') return '数据处理插件'
@@ -124,6 +131,7 @@ export default function MainLayout() {
     : firstSegment === 'knowledge' ? '/knowledge/overview'
     : firstSegment === 'project' ? '/project'
     : firstSegment === 'task' ? '/task/overview'
+    : firstSegment === 'model' ? '/model/overview'
     : `/${firstSegment}`
 
   const pathParts = location.pathname.split('/').filter(Boolean)
