@@ -1,4 +1,5 @@
-import { Row, Col, Card, Table, Button, Steps, Tag } from 'antd'
+import { Row, Col, Card, Table, Button, Tag } from 'antd'
+import { useEffect, useState } from 'react'
 import {
   AppstoreOutlined,
   CheckCircleOutlined,
@@ -14,16 +15,17 @@ import StatCard from '@/components/StatCard'
 import ChartCard from '@/components/ChartCard'
 import StatusTag from '@/components/StatusTag'
 import ModelSubNav from './components/ModelSubNav'
+import ModelCallRankList from './components/ModelCallRankList'
+import { getModelCallTop5 } from '@/api/model'
 import { useModelContext } from './ModelContext'
 import {
   modelPluginMeta,
   modelOverviewStats,
   modelCallTrend,
-  modelProcessSteps,
   modelTypeLabels,
   modelTypeColors,
 } from '@/mock/model'
-import type { AiModel } from '@/mock/model'
+import type { AiModel, ModelCallRankItem } from '@/mock/model'
 import { formatNumber } from '@/utils/format'
 import styles from './index.module.css'
 
@@ -31,6 +33,11 @@ export default function Overview() {
   const navigate = useNavigate()
   const { models } = useModelContext()
   const recentModels = models.slice(0, 6)
+  const [callTop5, setCallTop5] = useState<ModelCallRankItem[]>([])
+
+  useEffect(() => {
+    getModelCallTop5().then((res) => setCallTop5(res.items))
+  }, [])
 
   const barOption = {
     tooltip: { trigger: 'axis' },
@@ -127,12 +134,8 @@ export default function Overview() {
           </ChartCard>
         </Col>
         <Col span={10}>
-          <Card title="核心处理流程" bordered={false} style={{ boxShadow: 'var(--shadow-card)', height: '100%' }}>
-            <Steps
-              direction="vertical"
-              current={3}
-              items={modelProcessSteps.map((title) => ({ title }))}
-            />
+          <Card title="模型调用量 Top 5" bordered={false} style={{ boxShadow: 'var(--shadow-card)', height: '100%' }}>
+            <ModelCallRankList items={callTop5} />
           </Card>
         </Col>
       </Row>

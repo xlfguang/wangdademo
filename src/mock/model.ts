@@ -33,6 +33,19 @@ export interface ModelOperationLog {
   detail: string
 }
 
+export interface ModelCallRankItem {
+  rank: number
+  modelId: string
+  modelName: string
+  callCount: number
+  percentage: number
+}
+
+export interface ModelCallTop5Response {
+  totalCalls: number
+  items: ModelCallRankItem[]
+}
+
 export const modelTypeLabels: Record<ModelType, string> = {
   llm: '大语言模型',
   multimodal: '多模态',
@@ -77,6 +90,19 @@ export const modelCallTrend = {
   dates: ['08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
   values: [15800, 19200, 16500, 21000, 18600, 22400, 19800],
 }
+
+export const modelCallTop5: ModelCallTop5Response = {
+  totalCalls: 251219,
+  items: [
+    { rank: 1, modelId: 'm6', modelName: 'BGE-M3-Embedding', callCount: 78350, percentage: 30 },
+    { rank: 2, modelId: 'm1', modelName: 'Qwen2.5-72B-Instruct', callCount: 52341, percentage: 20 },
+    { rank: 3, modelId: 'm3', modelName: 'Qwen2.5-VL-72B', callCount: 31487, percentage: 12.1 },
+    { rank: 4, modelId: 'm2', modelName: 'FunASR-Online', callCount: 20130, percentage: 7.7 },
+    { rank: 5, modelId: 'm4', modelName: 'YOLOv8-Detect', callCount: 15420, percentage: 5.9 },
+  ],
+}
+
+export const modelCallRankColors = ['#1677ff', '#7c5cfc', '#22c55e', '#f59e0b', '#ef4444']
 
 export const modelProcessSteps = ['模型接入', '能力注册', '插件分配', '调用监控']
 

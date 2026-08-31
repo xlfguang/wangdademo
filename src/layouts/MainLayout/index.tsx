@@ -1,4 +1,4 @@
-import { Layout, Menu, Avatar, Badge, Dropdown, Breadcrumb } from 'antd'
+import { Layout, Menu, Avatar, Dropdown, Breadcrumb } from 'antd'
 import {
   DashboardOutlined,
   VideoCameraOutlined,
@@ -11,7 +11,6 @@ import {
   CheckSquareOutlined,
   ProjectOutlined,
   RobotOutlined,
-  BellOutlined,
   SettingOutlined,
   UserOutlined,
   LogoutOutlined,
@@ -177,10 +176,6 @@ export default function MainLayout() {
         <Header className={styles.header}>
           <Breadcrumb items={breadcrumbItems} />
           <div className={styles.headerRight}>
-            <Badge count={5} size="small">
-              <BellOutlined className={styles.headerIcon} />
-            </Badge>
-            <SettingOutlined className={styles.headerIcon} />
             <Dropdown menu={userMenu} placement="bottomRight">
               <div className={styles.userInfo}>
                 <Avatar size="small" icon={<UserOutlined />} style={{ background: '#1677ff' }} />
