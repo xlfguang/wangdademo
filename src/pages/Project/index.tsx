@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react'
-import { Table, Button, Modal, Form, Input, Select, InputNumber, Checkbox, Progress, message, Popconfirm, Space } from 'antd'
+import { Table, Button, Modal, Form, Input, Select, InputNumber, Checkbox, message, Popconfirm, Space, Typography } from 'antd'
 import { PlusOutlined, KeyOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import SearchForm from '@/components/SearchForm'
-import StatusTag from '@/components/StatusTag'
-import { projects as initialProjects, projectPluginOptions } from '@/mock/project'
+import { projectPluginOptions } from '@/mock/project'
+import { useProjectContext } from './ProjectContext'
 import { delay, generateId, filterBySearch, filterByStatus, paginate } from '@/utils/mockApi'
 import type { Project, SearchParams } from '@/types'
 
@@ -23,7 +23,7 @@ function createAppKey() {
 
 export default function ProjectPage() {
   const navigate = useNavigate()
-  const [projects, setProjects] = useState<Project[]>(initialProjects)
+  const { projects, addProject, removeProject } = useProjectContext()
   const [modalOpen, setModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState<SearchParams>({})
@@ -32,7 +32,7 @@ export default function ProjectPage() {
   const selectedPlugins: string[] = Form.useWatch('plugins', form) ?? []
 
   const filtered = useMemo(() => {
-    let result = filterBySearch(projects, search.keyword, ['name', 'industry', 'manager'])
+    let result = filterBySearch(projects, search.keyword, ['name', 'industry', 'manager', 'appKey'])
     result = filterByStatus(result, search.status)
     return result
   }, [projects, search])
@@ -67,7 +67,7 @@ export default function ProjectPage() {
       name,
       callQuota: values.callQuotas[name] as number,
     }))
-    setProjects([{
+    addProject({
       id: generateId(),
       name: values.name,
       industry: values.industry,
@@ -79,7 +79,7 @@ export default function ProjectPage() {
       description: values.description ?? '',
       appKey: values.appKey,
       pluginConfigs,
-    }, ...projects])
+    })
     setLoading(false)
     setModalOpen(false)
     form.resetFields()
@@ -90,17 +90,24 @@ export default function ProjectPage() {
     { title: '项目名称', dataIndex: 'name', key: 'name', ellipsis: true },
     { title: '所属行业', dataIndex: 'industry', key: 'industry' },
     { title: '项目负责人', dataIndex: 'manager', key: 'manager' },
-    { title: '项目状态', dataIndex: 'status', key: 'status', render: (s: string) => <StatusTag status={s} /> },
-    { title: '进度', dataIndex: 'progress', key: 'progress', render: (p: number) => <Progress percent={p} size="small" style={{ width: 100 }} /> },
     { title: '开始时间', dataIndex: 'startDate', key: 'startDate' },
+    {
+      title: 'AppKey',
+      dataIndex: 'appKey',
+      key: 'appKey',
+      width: 200,
+      ellipsis: true,
+      render: (key: string | undefined) =>
+        key ? <Typography.Text copyable={{ text: key }}>{key}</Typography.Text> : '-',
+    },
     { title: '结束时间', dataIndex: 'endDate', key: 'endDate' },
     {
       title: '操作',
       key: 'action',
       render: (_: unknown, record: Project) => (
         <>
-          <Button type="link" size="small" onClick={() => navigate(`/project/${record.id}`)}>查看</Button>
-          <Popconfirm title="确定删除该项目吗？" onConfirm={async () => { await delay(300); setProjects(projects.filter((p) => p.id !== record.id)); message.success('删除成功') }}>
+          <Button type="link" size="small" onClick={() => navigate(record.id)}>查看</Button>
+          <Popconfirm title="确定删除该项目吗？" onConfirm={async () => { await delay(300); removeProject(record.id); message.success('删除成功') }}>
             <Button type="link" size="small" danger>删除</Button>
           </Popconfirm>
         </>

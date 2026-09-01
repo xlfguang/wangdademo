@@ -72,6 +72,7 @@ import KnowledgeSearchPage from '@/pages/Knowledge/SearchPage'
 import KnowledgeSync from '@/pages/Knowledge/Sync'
 import KnowledgeDetail from '@/pages/Knowledge/Detail'
 import Project from '@/pages/Project'
+import ProjectLayout from '@/pages/Project/layout'
 import ProjectDetail from '@/pages/Project/Detail'
 import Task from '@/pages/Task'
 import TaskLayout from '@/pages/Task/layout'
@@ -211,8 +212,14 @@ export const router = createBrowserRouter([
           { path: ':id', element: <KnowledgeLegacyRedirect /> },
         ],
       },
-      { path: 'project', element: <Project /> },
-      { path: 'project/:id', element: <ProjectDetail /> },
+      {
+        path: 'project',
+        element: <ProjectLayout />,
+        children: [
+          { index: true, element: <Project /> },
+          { path: ':id', element: <ProjectDetail /> },
+        ],
+      },
       {
         path: 'model',
         element: <ModelLayout />,

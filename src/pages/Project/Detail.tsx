@@ -4,7 +4,8 @@ import { PlusOutlined } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
-import { getProject, projectTasks, projectPlugins, projectDocs, projectLogs, projectMilestones, projectMembers } from '@/mock/project'
+import { useProjectContext } from './ProjectContext'
+import { projectTasks, projectPlugins, projectDocs, projectLogs, projectMilestones, projectMembers } from '@/mock/project'
 
 const milestoneColor: Record<string, string> = {
   completed: 'green',
@@ -21,6 +22,7 @@ const milestoneLabel: Record<string, string> = {
 export default function ProjectDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { getProject } = useProjectContext()
   const project = getProject(id ?? '')
   const [members, setMembers] = useState(projectMembers)
   const [memberModalOpen, setMemberModalOpen] = useState(false)
