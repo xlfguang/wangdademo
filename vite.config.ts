@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://3x2157121c.qicp.vip:59924',
+        target: 'http://192.168.2.48:22301',
         changeOrigin: true,
       },
     },

@@ -30,6 +30,7 @@ jobs:
       - name: Build
         env:
           VITE_BASE_PATH: /wangdademo/
+          VITE_API_BASE_URL: http://192.168.2.48:22301
         run: npm run build
 
       - name: Prepare static assets
