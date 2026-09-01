@@ -1,0 +1,836 @@
+{
+  "aiAnalysisPairs": [
+    {
+      "question": "分析近6个月销售额下降的原因",
+      "conclusion": "近三个月销售额整体呈下降趋势，主要下降区域为华东地区。",
+      "findings": [
+        "销售额下降 12.4%",
+        "华东地区贡献 68% 的下降量",
+        "用户活跃度下降 8.7%",
+        "复购率下降 5.2%"
+      ],
+      "suggestion": "建议重点关注华东地区用户活跃度，并通过营销活动提升老用户复购率。"
+    },
+    {
+      "question": "分析最近销售趋势",
+      "conclusion": "近 30 天销售数据波动明显，周末峰值显著高于工作日。",
+      "findings": [
+        "周末日均订单量高出 34%",
+        "移动端占比提升至 62%",
+        "新客转化率稳定",
+        "客单价略有下滑"
+      ],
+      "suggestion": "建议在周末加大促销力度，同时优化移动端购物体验。"
+    },
+    {
+      "question": "查看异常数据",
+      "conclusion": "当前共检测到 842 条异常数据，集中在 IoT 设备数据与用户行为日志。",
+      "findings": [
+        "IoT 数据异常占比 52%",
+        "时间戳缺失 328 条",
+        "数值超范围 214 条",
+        "格式错误 156 条"
+      ],
+      "suggestion": "建议优先修复 IoT 数据源连接，并启用自动异常标记规则。"
+    },
+    {
+      "question": "预测下月销售情况",
+      "conclusion": "基于历史趋势预测，下月销售额约为 6,500 万，较本月略有回升。",
+      "findings": [
+        "预测增长 3.2%",
+        "华东区域仍为主要贡献",
+        "季节性因素利好",
+        "库存周转率改善"
+      ],
+      "suggestion": "建议提前备货华东区域热销 SKU，并关注供应链协同。"
+    }
+  ],
+  "analysisStats": {
+    "total": 111583,
+    "avg": 7439,
+    "max": 90034,
+    "min": 163,
+    "median": 3416,
+    "stdDev": 1192.3
+  },
+  "correlationData": [
+    [
+      6176.302562513405,
+      412.50483519503285
+    ],
+    [
+      6429.140441760765,
+      468.85418281848484
+    ],
+    [
+      6325.803116231069,
+      417.8242301460071
+    ],
+    [
+      6525.710369814107,
+      518.8059768927876
+    ],
+    [
+      6542.133582057763,
+      507.4903331436884
+    ],
+    [
+      7133.034846260833,
+      493.88969043969973
+    ],
+    [
+      7471.581461690597,
+      519.1108065908273
+    ],
+    [
+      7006.336293403263,
+      489.2586626560991
+    ],
+    [
+      7586.3948114302475,
+      514.4812611465343
+    ],
+    [
+      7415.464967065921,
+      571.7442255368195
+    ],
+    [
+      7958.322658635248,
+      496.8629545185257
+    ],
+    [
+      7354.373266804618,
+      555.820257520755
+    ],
+    [
+      7877.980763343907,
+      530.2974837150787
+    ],
+    [
+      7655.192315284083,
+      561.480142759799
+    ],
+    [
+      7774.554288338518,
+      566.3740037052019
+    ],
+    [
+      8125.432776404104,
+      547.429445328317
+    ],
+    [
+      8136.465131705078,
+      567.6569538383908
+    ],
+    [
+      8688.438161334137,
+      589.5189644913745
+    ],
+    [
+      8695.669033939661,
+      618.5283318979572
+    ],
+    [
+      8929.584184023886,
+      565.6962928822333
+    ],
+    [
+      8482.262703263294,
+      589.65291080395
+    ],
+    [
+      9202.873682396228,
+      619.5832195701558
+    ],
+    [
+      9267.485521980483,
+      657.1220587889752
+    ],
+    [
+      9150.252445461756,
+      653.5796132703821
+    ],
+    [
+      9258.57997114176,
+      651.9127557317497
+    ],
+    [
+      9133.60797720013,
+      630.1898240534086
+    ],
+    [
+      9480.562427681614,
+      659.964887752524
+    ],
+    [
+      9880.443346869995,
+      704.787980877277
+    ],
+    [
+      9892.164146739511,
+      652.0316598138633
+    ],
+    [
+      10008.113677153779,
+      728.7594873411124
+    ]
+  ],
+  "dataOverviewStats": {
+    "sourceCount": 22,
+    "todayVolume": "1.9 TB",
+    "taskCount": 234,
+    "qualityScore": 97.2,
+    "abnormalCount": 601,
+    "apiCalls": 44625
+  },
+  "dataPluginMeta": {
+    "name": "数据处理插件",
+    "description": "多源数据接入、数据治理、数据分析与 AI 智能洞察的企业级数据中台",
+    "version": "v3.2.0"
+  },
+  "dataSourceDistribution": [
+    {
+      "name": "MySQL",
+      "value": 7131
+    },
+    {
+      "name": "PostgreSQL",
+      "value": 5883
+    },
+    {
+      "name": "Excel",
+      "value": 2724
+    },
+    {
+      "name": "CSV",
+      "value": 3338
+    },
+    {
+      "name": "API",
+      "value": 4443
+    },
+    {
+      "name": "MQTT",
+      "value": 918
+    },
+    {
+      "name": "文件",
+      "value": 2559
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "ds1",
+      "name": "CRM 客户数据库",
+      "type": "MySQL",
+      "address": "192.168.1.101:3306/crm",
+      "dataVolume": "145,610 条",
+      "accessMethod": "JDBC",
+      "status": "normal",
+      "lastSync": "2026-08-28 10:30"
+    },
+    {
+      "id": "ds2",
+      "name": "ERP 销售系统",
+      "type": "PostgreSQL",
+      "address": "192.168.1.102:5432/erp",
+      "dataVolume": "45,751 条",
+      "accessMethod": "JDBC",
+      "status": "normal",
+      "lastSync": "2026-08-28 10:15"
+    },
+    {
+      "id": "ds3",
+      "name": "用户行为日志",
+      "type": "API",
+      "address": "https://api.example.com/logs",
+      "dataVolume": "2,348,748 条",
+      "accessMethod": "REST API",
+      "status": "normal",
+      "lastSync": "2026-08-28 10:00"
+    },
+    {
+      "id": "ds4",
+      "name": "供应链 Excel 导入",
+      "type": "Excel",
+      "address": "/data/import/supply_chain.xlsx",
+      "dataVolume": "12,125 条",
+      "accessMethod": "文件上传",
+      "status": "normal",
+      "lastSync": "2026-08-27 18:00"
+    },
+    {
+      "id": "ds5",
+      "name": "IoT 设备数据",
+      "type": "MQTT",
+      "address": "mqtt://broker.example.com:1883",
+      "dataVolume": "1,184,604 条",
+      "accessMethod": "消息订阅",
+      "status": "abnormal",
+      "lastSync": "2026-08-27 14:30"
+    },
+    {
+      "id": "ds6",
+      "name": "历史归档库",
+      "type": "Oracle",
+      "address": "192.168.1.105:1521/archive",
+      "dataVolume": "7,004,516 条",
+      "accessMethod": "JDBC",
+      "status": "disabled",
+      "lastSync": "2026-08-20 09:00"
+    },
+    {
+      "id": "ds7",
+      "name": "外部行业 API",
+      "type": "JSON",
+      "address": "https://api.industry.com/v2/data",
+      "dataVolume": "66,063 条",
+      "accessMethod": "REST API",
+      "status": "normal",
+      "lastSync": "2026-08-28 08:45"
+    },
+    {
+      "id": "ds8",
+      "name": "对象存储备份",
+      "type": "OSS",
+      "address": "oss://data-backup/example",
+      "dataVolume": "1.1 TB",
+      "accessMethod": "OSS SDK",
+      "status": "normal",
+      "lastSync": "2026-08-28 06:00"
+    }
+  ],
+  "dataTasks": [
+    {
+      "id": "d1",
+      "name": "CRM 客户数据治理",
+      "dataSource": "CRM 客户数据库",
+      "dataVolume": "100,917 条",
+      "processType": "数据治理",
+      "progress": 100,
+      "status": "completed",
+      "createdAt": "2026-08-28 10:18",
+      "updatedAt": "2026-08-28 10:45"
+    },
+    {
+      "id": "d2",
+      "name": "销售数据分析",
+      "dataSource": "ERP 销售系统",
+      "dataVolume": "47,941 条",
+      "processType": "数据分析",
+      "progress": 47,
+      "status": "running",
+      "createdAt": "2026-08-28 09:30",
+      "updatedAt": "2026-08-28 10:20"
+    },
+    {
+      "id": "d3",
+      "name": "用户行为数据处理",
+      "dataSource": "用户行为日志",
+      "dataVolume": "2,808,155 条",
+      "processType": "数据同步",
+      "progress": 39,
+      "status": "running",
+      "createdAt": "2026-08-28 08:00",
+      "updatedAt": "2026-08-28 09:50"
+    },
+    {
+      "id": "d4",
+      "name": "行业数据标准化",
+      "dataSource": "外部行业 API",
+      "dataVolume": "102,009 条",
+      "processType": "数据治理",
+      "progress": 100,
+      "status": "completed",
+      "createdAt": "2026-08-27 14:20",
+      "updatedAt": "2026-08-27 16:00"
+    },
+    {
+      "id": "d5",
+      "name": "供应链数据整合",
+      "dataSource": "供应链 Excel 导入",
+      "dataVolume": "406,791 条",
+      "processType": "数据接入",
+      "progress": 0,
+      "status": "queued",
+      "createdAt": "2026-08-27 11:00",
+      "updatedAt": "2026-08-27 11:00"
+    }
+  ],
+  "dataTrend": {
+    "dates": [
+      "08-22",
+      "08-23",
+      "08-24",
+      "08-25",
+      "08-26",
+      "08-27",
+      "08-28"
+    ],
+    "ingest": [
+      913,
+      926,
+      1047,
+      1118,
+      841,
+      1027,
+      1351
+    ],
+    "process": [
+      649,
+      1048,
+      814,
+      1013,
+      978,
+      923,
+      1329
+    ]
+  },
+  "governanceResult": {
+    "original": 92425,
+    "valid": 87690,
+    "cleaned": 4735,
+    "duplicate": 994,
+    "abnormal": 1238,
+    "missing": 2503,
+    "qualityScore": 98.1,
+    "beforeAfter": {
+      "dimensions": [
+        "完整性",
+        "准确性",
+        "一致性",
+        "唯一性"
+      ],
+      "before": [
+        86.4,
+        91.8,
+        93.7,
+        93.2
+      ],
+      "after": [
+        98.6,
+        94,
+        98.5,
+        98.5
+      ]
+    },
+    "issueDistribution": [
+      {
+        "name": "缺失值",
+        "value": 2503
+      },
+      {
+        "name": "重复数据",
+        "value": 994
+      },
+      {
+        "name": "异常值",
+        "value": 1238
+      },
+      {
+        "name": "格式错误",
+        "value": 426
+      }
+    ]
+  },
+  "governanceTasks": [
+    {
+      "id": "g1",
+      "name": "CRM 客户数据治理",
+      "dataSource": "CRM 客户数据库",
+      "dataVolume": "150,609 条",
+      "cleanRules": "缺失值+去重+异常检测",
+      "abnormalCount": 997,
+      "qualityScore": 94.4,
+      "status": "completed",
+      "progress": 100,
+      "createdAt": "2026-08-28 10:18"
+    },
+    {
+      "id": "g2",
+      "name": "销售数据标准化",
+      "dataSource": "ERP 销售系统",
+      "dataVolume": "72,031 条",
+      "cleanRules": "格式标准化+类型转换",
+      "abnormalCount": 408,
+      "qualityScore": 91.2,
+      "status": "running",
+      "progress": 93,
+      "createdAt": "2026-08-28 09:30"
+    },
+    {
+      "id": "g3",
+      "name": "用户行为数据清洗",
+      "dataSource": "用户行为日志",
+      "dataVolume": "2,054,456 条",
+      "cleanRules": "异常值检测+去重",
+      "abnormalCount": 10790,
+      "qualityScore": 89.9,
+      "status": "running",
+      "progress": 50,
+      "createdAt": "2026-08-28 08:00"
+    },
+    {
+      "id": "g4",
+      "name": "供应链数据整合",
+      "dataSource": "供应链 Excel 导入",
+      "dataVolume": "14,038 条",
+      "cleanRules": "缺失值+格式标准化",
+      "abnormalCount": 264,
+      "qualityScore": 98.6,
+      "status": "completed",
+      "createdAt": "2026-08-27 16:00",
+      "progress": 100
+    },
+    {
+      "id": "g5",
+      "name": "IoT 数据质量校验",
+      "dataSource": "IoT 设备数据",
+      "dataVolume": "1,349,464 条",
+      "cleanRules": "异常检测+时间戳校验",
+      "abnormalCount": 7535,
+      "qualityScore": 85.5,
+      "status": "failed",
+      "progress": 66,
+      "createdAt": "2026-08-27 14:00"
+    }
+  ],
+  "permissionTree": [
+    {
+      "title": "数据处理插件",
+      "key": "root",
+      "children": [
+        {
+          "title": "数据源管理",
+          "key": "sources"
+        },
+        {
+          "title": "数据治理",
+          "key": "governance"
+        },
+        {
+          "title": "数据分析",
+          "key": "analysis"
+        },
+        {
+          "title": "报表管理",
+          "key": "reports"
+        },
+        {
+          "title": "数据质量",
+          "key": "quality"
+        }
+      ]
+    }
+  ],
+  "qualityAlerts": [
+    {
+      "id": "qa1",
+      "time": "2026-08-28 10:15",
+      "dataSource": "IoT 设备数据",
+      "alertType": "连接超时",
+      "count": 176,
+      "severity": "critical",
+      "status": "running"
+    },
+    {
+      "id": "qa2",
+      "time": "2026-08-28 09:30",
+      "dataSource": "用户行为日志",
+      "alertType": "缺失值超标",
+      "count": 577,
+      "severity": "moderate",
+      "status": "running"
+    },
+    {
+      "id": "qa3",
+      "time": "2026-08-28 08:00",
+      "dataSource": "CRM 客户数据库",
+      "alertType": "重复数据",
+      "count": 82,
+      "severity": "hint",
+      "status": "completed"
+    },
+    {
+      "id": "qa4",
+      "time": "2026-08-27 16:45",
+      "dataSource": "外部行业 API",
+      "alertType": "格式错误",
+      "count": 79,
+      "severity": "moderate",
+      "status": "completed"
+    },
+    {
+      "id": "qa5",
+      "time": "2026-08-27 14:00",
+      "dataSource": "ERP 销售系统",
+      "alertType": "数据延迟",
+      "count": 22,
+      "severity": "hint",
+      "status": "completed"
+    }
+  ],
+  "qualityMetrics": {
+    "overall": 93.9,
+    "completeness": 95.7,
+    "accuracy": 95.3,
+    "consistency": 94.1,
+    "uniqueness": 95.3,
+    "timeliness": 95.4
+  },
+  "qualityOverview": {
+    "completeness": 98.1,
+    "accuracy": 93,
+    "consistency": 96.4,
+    "uniqueness": 95.8
+  },
+  "qualityTrend": {
+    "dates": [
+      "08-01",
+      "08-02",
+      "08-03",
+      "08-04",
+      "08-05",
+      "08-06",
+      "08-07",
+      "08-08",
+      "08-09",
+      "08-10",
+      "08-11",
+      "08-12",
+      "08-13",
+      "08-14",
+      "08-15",
+      "08-16",
+      "08-17",
+      "08-18",
+      "08-19",
+      "08-20",
+      "08-21",
+      "08-22",
+      "08-23",
+      "08-24",
+      "08-25",
+      "08-26",
+      "08-27",
+      "08-28",
+      "08-29",
+      "08-30"
+    ],
+    "values": [
+      96.95226090297079,
+      94.99807115524911,
+      95.76097772202161,
+      97.43145302834058,
+      95.6441177168625,
+      95.44087168308533,
+      97.07675978896256,
+      94.63837894801608,
+      96.36414980047898,
+      96.71897557673869,
+      94.91466093765014,
+      96.53339634586234,
+      97.93121690154405,
+      97.54309116950051,
+      97.49302042804375,
+      97.86442460513359,
+      95.61025443639218,
+      96.26435709133241,
+      94.17488860493513,
+      95.16261712032774,
+      94.81206200017175,
+      94.44755573050132,
+      96.06751998338027,
+      96.09069829661678,
+      94.83958969294264,
+      95.45847889247106,
+      96.8774432256201,
+      95.12642368191568,
+      96.10494826460729,
+      94.9924678525775
+    ]
+  },
+  "regionCompare": [
+    {
+      "name": "华东",
+      "value": 3451
+    },
+    {
+      "name": "华南",
+      "value": 2566
+    },
+    {
+      "name": "华北",
+      "value": 2417
+    },
+    {
+      "name": "西南",
+      "value": 1611
+    }
+  ],
+  "reportDashboard": {
+    "sales": 6334736,
+    "users": 148489,
+    "orders": 38816,
+    "conversion": 4.05
+  },
+  "reports": [
+    {
+      "id": "r1",
+      "name": "销售日报",
+      "dataSource": "ERP 销售系统",
+      "reportType": "日报",
+      "updatedAt": "2026-08-28 08:00",
+      "creator": "张明",
+      "autoGenerate": true
+    },
+    {
+      "id": "r2",
+      "name": "库存分析",
+      "dataSource": "ERP 销售系统",
+      "reportType": "分析报表",
+      "updatedAt": "2026-08-27 18:00",
+      "creator": "李华",
+      "autoGenerate": true
+    },
+    {
+      "id": "r3",
+      "name": "运营周报",
+      "dataSource": "用户行为日志",
+      "reportType": "周报",
+      "updatedAt": "2026-08-27 09:00",
+      "creator": "王芳",
+      "autoGenerate": true
+    },
+    {
+      "id": "r4",
+      "name": "用户分析",
+      "dataSource": "CRM 客户数据库",
+      "reportType": "专题分析",
+      "updatedAt": "2026-08-26 16:30",
+      "creator": "赵强",
+      "autoGenerate": false
+    },
+    {
+      "id": "r5",
+      "name": "数据质量月报",
+      "dataSource": "多源数据",
+      "reportType": "月报",
+      "updatedAt": "2026-08-25 10:00",
+      "creator": "陈伟",
+      "autoGenerate": true
+    }
+  ],
+  "salesTrend": {
+    "months": [
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月"
+    ],
+    "values": [
+      7819,
+      8338,
+      8815,
+      8451,
+      7905,
+      7117
+    ]
+  },
+  "syncTasks": [
+    {
+      "id": "s1",
+      "name": "销售数据同步",
+      "source": "MySQL",
+      "target": "灵悉智能体平台",
+      "syncMode": "增量同步",
+      "dataVolume": "69,844 条/次",
+      "frequency": "每小时",
+      "status": "running",
+      "lastSync": "2026-08-28 10:00"
+    },
+    {
+      "id": "s2",
+      "name": "CRM 客户同步",
+      "source": "PostgreSQL",
+      "target": "灵悉智能体平台",
+      "syncMode": "全量同步",
+      "dataVolume": "105,947 条",
+      "frequency": "每天",
+      "status": "completed",
+      "lastSync": "2026-08-28 06:00"
+    },
+    {
+      "id": "s3",
+      "name": "行为日志同步",
+      "source": "API",
+      "target": "数据仓库",
+      "syncMode": "增量同步",
+      "dataVolume": "2,840,736 条/天",
+      "frequency": "实时",
+      "status": "running",
+      "lastSync": "2026-08-28 10:30"
+    },
+    {
+      "id": "s4",
+      "name": "IoT 数据同步",
+      "source": "MQTT",
+      "target": "时序数据库",
+      "syncMode": "增量同步",
+      "dataVolume": "555,484 条/天",
+      "frequency": "每15分钟",
+      "status": "failed",
+      "lastSync": "2026-08-27 14:30"
+    },
+    {
+      "id": "s5",
+      "name": "报表数据同步",
+      "source": "Excel",
+      "target": "BI 平台",
+      "syncMode": "手动同步",
+      "dataVolume": "11,258 条",
+      "frequency": "每周",
+      "status": "queued",
+      "lastSync": "2026-08-25 10:00"
+    }
+  ],
+  "systemUsers": [
+    {
+      "id": "u1",
+      "username": "admin",
+      "role": "管理员",
+      "status": "completed",
+      "lastLogin": "2026-08-28 10:00"
+    },
+    {
+      "id": "u2",
+      "username": "zhangming",
+      "role": "数据工程师",
+      "status": "completed",
+      "lastLogin": "2026-08-28 09:30"
+    },
+    {
+      "id": "u3",
+      "username": "lihua",
+      "role": "分析师",
+      "status": "completed",
+      "lastLogin": "2026-08-27 18:00"
+    },
+    {
+      "id": "u4",
+      "username": "wangfang",
+      "role": "分析师",
+      "status": "running",
+      "lastLogin": "2026-08-28 08:15"
+    },
+    {
+      "id": "u5",
+      "username": "tester",
+      "role": "测试人员",
+      "status": "waiting",
+      "lastLogin": "2026-08-26 14:00"
+    }
+  ]
+}

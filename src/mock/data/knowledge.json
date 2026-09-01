@@ -1,0 +1,576 @@
+{
+  "docProcessSteps": [
+    "上传",
+    "文本解析",
+    "内容切片",
+    "Embedding",
+    "向量入库",
+    "完成"
+  ],
+  "knowledgeBases": [
+    {
+      "id": "kb1",
+      "name": "企业知识库",
+      "description": "公司内部制度、战略与文化文档",
+      "category": "企业内部",
+      "docCount": 2279,
+      "vectorCount": 19632,
+      "fragmentCount": 13619,
+      "storage": "1.8 GB",
+      "embeddingModel": "text-embedding-v3",
+      "status": "running",
+      "createdAt": "2026-01-15 10:00",
+      "updatedAt": "2026-08-28 10:00"
+    },
+    {
+      "id": "kb2",
+      "name": "产品知识库",
+      "description": "产品白皮书、功能说明与 API 文档",
+      "category": "产品文档",
+      "docCount": 945,
+      "vectorCount": 7832,
+      "fragmentCount": 6422,
+      "storage": "620 MB",
+      "embeddingModel": "text-embedding-v3",
+      "status": "completed",
+      "createdAt": "2026-03-20 14:00",
+      "updatedAt": "2026-08-27 16:30"
+    },
+    {
+      "id": "kb3",
+      "name": "客服知识库",
+      "description": "FAQ、话术模板与常见问题解答",
+      "category": "客服支持",
+      "docCount": 1508,
+      "vectorCount": 11013,
+      "fragmentCount": 10278,
+      "storage": "980 MB",
+      "embeddingModel": "text-embedding-v3",
+      "status": "running",
+      "createdAt": "2026-02-10 09:00",
+      "updatedAt": "2026-08-28 09:30"
+    },
+    {
+      "id": "kb4",
+      "name": "行业知识库",
+      "description": "行业报告、政策解读与市场分析",
+      "category": "行业情报",
+      "docCount": 3321,
+      "vectorCount": 28016,
+      "fragmentCount": 19342,
+      "storage": "2.4 GB",
+      "embeddingModel": "text-embedding-v3",
+      "status": "completed",
+      "createdAt": "2026-04-01 08:00",
+      "updatedAt": "2026-08-27 14:00"
+    },
+    {
+      "id": "kb5",
+      "name": "项目资料库",
+      "description": "交付项目文档、方案与验收材料",
+      "category": "项目管理",
+      "docCount": 595,
+      "vectorCount": 5121,
+      "fragmentCount": 4134,
+      "storage": "450 MB",
+      "embeddingModel": "text-embedding-v3",
+      "status": "completed",
+      "createdAt": "2026-05-15 11:00",
+      "updatedAt": "2026-08-26 18:00"
+    }
+  ],
+  "knowledgeDocs": {
+    "kb1": [
+      {
+        "id": "doc1",
+        "kbId": "kb1",
+        "name": "公司介绍与发展历程.pdf",
+        "fileType": "PDF",
+        "size": "12.5 MB",
+        "sliceCount": 48,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-28 09:00"
+      },
+      {
+        "id": "doc2",
+        "kbId": "kb1",
+        "name": "组织架构与管理制度.docx",
+        "fileType": "DOCX",
+        "size": "3.2 MB",
+        "sliceCount": 24,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-27 16:00"
+      },
+      {
+        "id": "doc3",
+        "kbId": "kb1",
+        "name": "2026年度战略规划.pptx",
+        "fileType": "PPTX",
+        "size": "28.6 MB",
+        "sliceCount": 86,
+        "status": "running",
+        "processStep": 3,
+        "updatedAt": "2026-08-28 10:00"
+      },
+      {
+        "id": "doc4",
+        "kbId": "kb1",
+        "name": "企业文化手册.pdf",
+        "fileType": "PDF",
+        "size": "8.1 MB",
+        "sliceCount": 32,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-26 14:00"
+      },
+      {
+        "id": "doc5",
+        "kbId": "kb1",
+        "name": "合作伙伴名录.xlsx",
+        "fileType": "XLSX",
+        "size": "1.5 MB",
+        "sliceCount": 12,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-25 10:00"
+      }
+    ],
+    "kb2": [
+      {
+        "id": "doc6",
+        "kbId": "kb2",
+        "name": "AI 平台产品白皮书.pdf",
+        "fileType": "PDF",
+        "size": "15.8 MB",
+        "sliceCount": 62,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-27 14:00"
+      },
+      {
+        "id": "doc7",
+        "kbId": "kb2",
+        "name": "产品功能说明书.docx",
+        "fileType": "DOCX",
+        "size": "5.6 MB",
+        "sliceCount": 38,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-26 10:00"
+      }
+    ],
+    "kb3": [
+      {
+        "id": "doc8",
+        "kbId": "kb3",
+        "name": "常见问题解答 FAQ.md",
+        "fileType": "MD",
+        "size": "256 KB",
+        "sliceCount": 120,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-28 08:00"
+      },
+      {
+        "id": "doc9",
+        "kbId": "kb3",
+        "name": "客服话术模板.docx",
+        "fileType": "DOCX",
+        "size": "2.1 MB",
+        "sliceCount": 45,
+        "status": "running",
+        "processStep": 2,
+        "updatedAt": "2026-08-28 09:30"
+      }
+    ],
+    "kb4": [
+      {
+        "id": "doc10",
+        "kbId": "kb4",
+        "name": "2026 AI 行业趋势报告.pdf",
+        "fileType": "PDF",
+        "size": "22.3 MB",
+        "sliceCount": 95,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-27 12:00"
+      },
+      {
+        "id": "doc11",
+        "kbId": "kb4",
+        "name": "制造业数字化转型白皮书.pdf",
+        "fileType": "PDF",
+        "size": "18.7 MB",
+        "sliceCount": 78,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-26 16:00"
+      }
+    ],
+    "kb5": [
+      {
+        "id": "doc12",
+        "kbId": "kb5",
+        "name": "某制造企业 AI 项目方案.docx",
+        "fileType": "DOCX",
+        "size": "6.8 MB",
+        "sliceCount": 42,
+        "status": "completed",
+        "processStep": 5,
+        "updatedAt": "2026-08-25 15:00"
+      }
+    ]
+  },
+  "knowledgeOverviewStats": {
+    "totalBases": 4,
+    "totalDocs": 7802,
+    "totalVectors": 90621,
+    "todaySearches": 830,
+    "syncTaskCount": 10
+  },
+  "knowledgePluginMeta": {
+    "name": "知识库管理服务",
+    "description": "企业级 AI 知识库 / RAG 数据管理平台，支持文档结构化、向量检索与 AI 问答",
+    "status": "running",
+    "version": "v1.8.0"
+  },
+  "knowledgeScenarios": [
+    {
+      "title": "企业知识库构建",
+      "description": "多格式文档上传，智能切片向量化，构建企业级 RAG 能力",
+      "items": [
+        "文档上传",
+        "智能切片",
+        "向量入库",
+        "权限管理"
+      ]
+    },
+    {
+      "title": "产品文档管理",
+      "description": "产品手册、白皮书、FAQ 结构化入库，支持精准检索",
+      "items": [
+        "版本管理",
+        "分类标签",
+        "全文检索",
+        "引用溯源"
+      ]
+    },
+    {
+      "title": "客服知识赋能",
+      "description": "话术模板审核入库，语义检索辅助客服快速应答",
+      "items": [
+        "内容审核",
+        "语义检索",
+        "AI 问答",
+        "命中率统计"
+      ]
+    },
+    {
+      "title": "行业情报沉淀",
+      "description": "行业报告定时同步入库，持续更新知识图谱",
+      "items": [
+        "定时同步",
+        "去重合并",
+        "摘要提取",
+        "变更通知"
+      ]
+    },
+    {
+      "title": "政务知识服务",
+      "description": "权威文档审核发布，合规检索与智能问答服务",
+      "items": [
+        "审核流程",
+        "权威信源",
+        "合规检索",
+        "问答服务"
+      ]
+    }
+  ],
+  "knowledgeSettingsDefault": {
+    "embeddingModel": "text-embedding-v3",
+    "chunkSize": 512,
+    "chunkOverlap": 64,
+    "topK": 5,
+    "scoreThreshold": 0.7,
+    "autoSync": true,
+    "auditRequired": true,
+    "agentEnabled": true
+  },
+  "qaPairs": [
+    {
+      "question": "公司的核心业务是什么？",
+      "answer": "根据当前知识库内容，公司专注于基于大模型的垂直行业 AI 应用交付及持续运营服务。核心业务包括：AI 能力插件化封装、企业知识库构建、数据智能治理、多渠道消息触达以及行业解决方案交付。"
+    },
+    {
+      "question": "平台支持哪些 AI 能力？",
+      "answer": "平台目前支持以下 AI 能力插件：视频处理（解析、转码、AI 字幕、智能摘要）、数据处理（导入、转换、分析、去重）、音频交互（语音识别、合成、情绪分析）、搜索爬虫（行业数据采集）、社群管理及多渠道消息推送、数据清洗服务以及知识库管理（RAG）。"
+    },
+    {
+      "question": "目前有哪些行业解决方案？",
+      "answer": "目前已交付或正在实施的行业解决方案包括：某大型制造企业 AI 智能化项目、某政务知识库项目、某金融行业智能客服项目、某零售企业数据治理项目，覆盖制造、政务、金融、零售等多个垂直行业。"
+    },
+    {
+      "question": "公司的产品有哪些？",
+      "answer": "根据当前知识库内容，公司目前主要提供网达智能体调度平台，包含视频处理插件、数据处理插件、音频交互插件、搜索爬虫插件、社群管理插件、数据清洗服务、知识库管理服务等模块化 AI 能力组件。"
+    },
+    {
+      "question": "知识库是如何构建的？",
+      "answer": "知识库构建流程为：文档上传 → 文本解析 → 内容切片 → Embedding 向量化 → 向量入库。系统支持 PDF、Word、Excel、Markdown 等多种文档格式，自动进行智能切片和向量化处理，构建企业级 RAG 检索增强生成能力。"
+    }
+  ],
+  "ragSources": [
+    {
+      "id": "rs1",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "docName": "公司介绍与发展历程.pdf",
+      "snippet": "公司专注于基于大模型的垂直行业 AI 应用交付及持续运营服务，核心业务包括 AI 能力插件化封装...",
+      "score": 0.96
+    },
+    {
+      "id": "rs2",
+      "kbId": "kb2",
+      "kbName": "产品知识库",
+      "docName": "AI 平台产品白皮书.pdf",
+      "snippet": "平台目前支持视频处理、数据处理、音频交互、搜索爬虫、社群管理、数据清洗、知识库管理等模块化 AI 能力...",
+      "score": 0.93
+    },
+    {
+      "id": "rs3",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "docName": "企业文化手册.pdf",
+      "snippet": "知识库构建流程为：文档上传 → 文本解析 → 内容切片 → Embedding 向量化 → 向量入库...",
+      "score": 0.91
+    },
+    {
+      "id": "rs4",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "docName": "2026 AI 行业趋势报告.pdf",
+      "snippet": "检索增强生成（RAG）已成为企业级 AI 应用的核心架构，通过向量检索 + 大模型生成实现精准问答...",
+      "score": 0.88
+    }
+  ],
+  "searchHitsMock": [
+    {
+      "id": "h1",
+      "title": "公司核心业务介绍",
+      "snippet": "公司专注于基于大模型的垂直行业 AI 应用交付及持续运营服务，核心业务包括 AI 能力插件化封装、企业知识库构建...",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "docName": "公司介绍与发展历程.pdf",
+      "score": 0.96,
+      "searchType": "semantic"
+    },
+    {
+      "id": "h2",
+      "title": "AI 平台产品能力清单",
+      "snippet": "平台目前支持视频处理、数据处理、音频交互、搜索爬虫、社群管理、数据清洗、知识库管理等模块化 AI 能力组件...",
+      "kbId": "kb2",
+      "kbName": "产品知识库",
+      "docName": "AI 平台产品白皮书.pdf",
+      "score": 0.93,
+      "searchType": "semantic"
+    },
+    {
+      "id": "h3",
+      "title": "知识库构建流程说明",
+      "snippet": "知识库构建流程为：文档上传 → 文本解析 → 内容切片 → Embedding 向量化 → 向量入库，支持 PDF、Word、Excel 等多种格式...",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "docName": "企业文化手册.pdf",
+      "score": 0.91,
+      "searchType": "keyword"
+    },
+    {
+      "id": "h4",
+      "title": "行业解决方案案例",
+      "snippet": "目前已交付制造业 AI 智能化项目、政务知识库项目、金融智能客服项目、零售数据治理项目等多个行业解决方案...",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "docName": "2026 AI 行业趋势报告.pdf",
+      "score": 0.88,
+      "searchType": "semantic"
+    },
+    {
+      "id": "h5",
+      "title": "RAG 检索增强生成",
+      "snippet": "检索增强生成（RAG）已成为企业级 AI 应用的核心架构，通过向量检索 + 大模型生成实现精准问答...",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "docName": "2026 AI 行业趋势报告.pdf",
+      "score": 0.85,
+      "searchType": "keyword"
+    },
+    {
+      "id": "h6",
+      "title": "客服常见问题 - 账号问题",
+      "snippet": "Q: 如何重置账号密码？A: 请联系管理员或通过自助服务门户提交重置申请，通常 1 个工作日内处理...",
+      "kbId": "kb3",
+      "kbName": "客服知识库",
+      "docName": "常见问题解答 FAQ.md",
+      "score": 0.82,
+      "searchType": "keyword"
+    }
+  ],
+  "syncTasks": [
+    {
+      "id": "s1",
+      "name": "行业报告每日同步",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "source": "行业数据库 API",
+      "target": "向量库",
+      "cron": "0 2 * * *",
+      "frequency": "每天 02:00",
+      "docCount": 51,
+      "status": "completed",
+      "lastSync": "2026-08-28 02:00",
+      "nextSync": "2026-08-29 02:00"
+    },
+    {
+      "id": "s2",
+      "name": "客服 FAQ 增量同步",
+      "kbId": "kb3",
+      "kbName": "客服知识库",
+      "source": "CRM 系统",
+      "target": "向量库",
+      "cron": "0 */4 * * *",
+      "frequency": "每 4 小时",
+      "docCount": 20,
+      "status": "running",
+      "lastSync": "2026-08-28 08:00",
+      "nextSync": "2026-08-28 12:00"
+    },
+    {
+      "id": "s3",
+      "name": "企业制度文档同步",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "source": "OA 文档库",
+      "target": "向量库",
+      "cron": "0 1 * * 1",
+      "frequency": "每周一 01:00",
+      "docCount": 15,
+      "status": "completed",
+      "lastSync": "2026-08-25 01:00",
+      "nextSync": "2026-09-01 01:00"
+    },
+    {
+      "id": "s4",
+      "name": "产品文档版本同步",
+      "kbId": "kb2",
+      "kbName": "产品知识库",
+      "source": "Git 文档仓库",
+      "target": "向量库",
+      "cron": "0 3 * * *",
+      "frequency": "每天 03:00",
+      "docCount": 2,
+      "status": "waiting",
+      "lastSync": "2026-08-27 03:00",
+      "nextSync": "2026-08-28 03:00"
+    },
+    {
+      "id": "s5",
+      "name": "项目交付文档同步",
+      "kbId": "kb5",
+      "kbName": "项目资料库",
+      "source": "项目管理系统",
+      "target": "向量库",
+      "cron": "0 0 * * 5",
+      "frequency": "每周五 00:00",
+      "docCount": 16,
+      "status": "completed",
+      "lastSync": "2026-08-22 00:00",
+      "nextSync": "2026-08-29 00:00"
+    },
+    {
+      "id": "s6",
+      "name": "政策法规采集同步",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "source": "搜索爬虫插件",
+      "target": "向量库",
+      "cron": "0 6 * * *",
+      "frequency": "每天 06:00",
+      "docCount": 24,
+      "status": "running",
+      "lastSync": "2026-08-28 06:00",
+      "nextSync": "2026-08-29 06:00"
+    }
+  ],
+  "validationRecords": [
+    {
+      "id": "v1",
+      "docName": "2026年度战略规划.pptx",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "submitter": "张明",
+      "submitTime": "2026-08-28 09:45",
+      "content": "包含公司2026年度战略目标、业务布局与资源配置方案",
+      "status": "pending"
+    },
+    {
+      "id": "v2",
+      "docName": "客服话术模板.docx",
+      "kbId": "kb3",
+      "kbName": "客服知识库",
+      "submitter": "李芳",
+      "submitTime": "2026-08-28 09:20",
+      "content": "新版客服标准话术，含投诉处理、产品咨询等场景",
+      "status": "pending"
+    },
+    {
+      "id": "v3",
+      "docName": "AI 监管政策解读.pdf",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "submitter": "王磊",
+      "submitTime": "2026-08-27 17:30",
+      "content": "2026年AI监管新政要点解读与合规建议",
+      "status": "pending"
+    },
+    {
+      "id": "v4",
+      "docName": "企业文化手册.pdf",
+      "kbId": "kb1",
+      "kbName": "企业知识库",
+      "submitter": "陈静",
+      "submitTime": "2026-08-26 14:00",
+      "content": "企业文化价值观、行为准则与员工关怀政策",
+      "status": "approved",
+      "reviewer": "赵总",
+      "reviewTime": "2026-08-26 16:30",
+      "comment": "内容准确，准予发布"
+    },
+    {
+      "id": "v5",
+      "docName": "竞品分析报告.docx",
+      "kbId": "kb4",
+      "kbName": "行业知识库",
+      "submitter": "刘洋",
+      "submitTime": "2026-08-25 11:00",
+      "content": "主要竞品功能对比与市场定位分析",
+      "status": "rejected",
+      "reviewer": "赵总",
+      "reviewTime": "2026-08-25 15:00",
+      "comment": "包含未公开竞品内部信息，需脱敏后重新提交"
+    },
+    {
+      "id": "v6",
+      "docName": "产品功能说明书.docx",
+      "kbId": "kb2",
+      "kbName": "产品知识库",
+      "submitter": "周婷",
+      "submitTime": "2026-08-26 10:00",
+      "content": "AI 平台全功能模块说明与操作指南",
+      "status": "approved",
+      "reviewer": "产品总监",
+      "reviewTime": "2026-08-26 11:30",
+      "comment": "已通过"
+    }
+  ]
+}

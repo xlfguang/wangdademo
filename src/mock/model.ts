@@ -1,3 +1,5 @@
+import { getLocalData } from './dataSource'
+
 export type ModelType = 'llm' | 'multimodal' | 'asr' | 'embedding' | 'vision' | 'ocr'
 export type ModelStatus = 'enabled' | 'disabled'
 export type DispatchStrategy = 'round_robin' | 'priority' | 'single'
@@ -46,228 +48,58 @@ export interface ModelCallTop5Response {
   items: ModelCallRankItem[]
 }
 
-export const modelTypeLabels: Record<ModelType, string> = {
-  llm: '大语言模型',
-  multimodal: '多模态',
-  asr: '语音识别',
-  embedding: '向量嵌入',
-  vision: '视觉检测',
-  ocr: '文字识别',
+interface ModelData {
+  modelTypeLabels: Record<ModelType, string>
+  modelTypeColors: Record<ModelType, string>
+  dispatchStrategyLabels: Record<DispatchStrategy, string>
+  modelPluginMeta: { name: string; description: string; status: 'running'; version: string }
+  modelOverviewStats: {
+    total: number
+    enabled: number
+    disabled: number
+    assignedPlugins: number
+    totalCalls: number
+    successRate: number
+  }
+  modelCallTrend: { dates: string[]; values: number[] }
+  modelCallTop5: ModelCallTop5Response
+  modelCallRankColors: string[]
+  modelProcessSteps: string[]
+  initialModels: AiModel[]
+  pluginAssignments: PluginAssignment[]
+  allocatablePlugins: string[]
+  modelSettingsDefault: {
+    defaultLlm: string
+    defaultEmbedding: string
+    timeout: number
+    maxRetries: number
+    qpsLimit: number
+    monitoringEnabled: boolean
+    logEnabled: boolean
+    auditEnabled: boolean
+  }
+  modelOperationLogs: ModelOperationLog[]
+  testScenarios: string[]
+  testScenarioPrompts: Record<string, string>
+  mockTestResponses: Record<string, string>
 }
 
-export const modelTypeColors: Record<ModelType, string> = {
-  llm: 'blue',
-  multimodal: 'cyan',
-  asr: 'geekblue',
-  embedding: 'purple',
-  vision: 'orange',
-  ocr: 'green',
-}
+const data = getLocalData<ModelData>('model')
 
-export const dispatchStrategyLabels: Record<DispatchStrategy, string> = {
-  round_robin: '轮询',
-  priority: '优先级',
-  single: '单模型',
-}
-
-export const modelPluginMeta = {
-  name: '模型管理组件',
-  description: '面向 AI Agent 提供模型统一接入、生命周期管理与插件能力分配',
-  status: 'running' as const,
-  version: 'v1.0.0',
-}
-
-export const modelOverviewStats = {
-  total: 16,
-  enabled: 12,
-  disabled: 4,
-  assignedPlugins: 8,
-  totalCalls: 251219,
-  successRate: 99.2,
-}
-
-export const modelCallTrend = {
-  dates: ['08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
-  values: [15800, 19200, 16500, 21000, 18600, 22400, 19800],
-}
-
-export const modelCallTop5: ModelCallTop5Response = {
-  totalCalls: 251219,
-  items: [
-    { rank: 1, modelId: 'm6', modelName: 'BGE-M3-Embedding', callCount: 78350, percentage: 30 },
-    { rank: 2, modelId: 'm1', modelName: 'Qwen2.5-72B-Instruct', callCount: 52341, percentage: 20 },
-    { rank: 3, modelId: 'm3', modelName: 'Qwen2.5-VL-72B', callCount: 31487, percentage: 12.1 },
-    { rank: 4, modelId: 'm2', modelName: 'FunASR-Online', callCount: 20130, percentage: 7.7 },
-    { rank: 5, modelId: 'm4', modelName: 'YOLOv8-Detect', callCount: 15420, percentage: 5.9 },
-  ],
-}
-
-export const modelCallRankColors = ['#1677ff', '#7c5cfc', '#22c55e', '#f59e0b', '#ef4444']
-
-export const modelProcessSteps = ['模型接入', '能力注册', '插件分配', '调用监控']
-
-export const initialModels: AiModel[] = [
-  {
-    id: 'm1',
-    name: 'Qwen2.5-72B-Instruct',
-    type: 'llm',
-    url: 'http://192.168.2.48:9001/v1/chat/completions',
-    apiKey: 'sk-qwen-xx******',
-    plugins: ['数据处理插件', '知识库管理', '任务协作助手'],
-    status: 'enabled',
-    createdAt: '2026-06-15 10:30',
-    lastCallAt: '2026-08-31 14:32',
-    callCount: 52341,
-    avgLatency: '约 200-800ms',
-  },
-  {
-    id: 'm2',
-    name: 'FunASR-Online',
-    type: 'asr',
-    url: 'http://192.168.2.48:9002/v1/audio/transcriptions',
-    apiKey: 'sk-asr-xx******',
-    plugins: ['音频交互处理'],
-    status: 'enabled',
-    createdAt: '2026-06-20 09:15',
-    lastCallAt: '2026-08-31 13:58',
-    callCount: 78350,
-    avgLatency: '约 100-300ms',
-  },
-  {
-    id: 'm3',
-    name: 'Qwen2.5-VL-72B',
-    type: 'multimodal',
-    url: 'http://192.168.2.48:9003/v1/chat/completions',
-    apiKey: 'sk-vl-xx******',
-    plugins: ['视频处理插件'],
-    status: 'enabled',
-    createdAt: '2026-07-01 14:20',
-    lastCallAt: '2026-08-31 12:45',
-    callCount: 12480,
-    avgLatency: '约 500-1200ms',
-  },
-  {
-    id: 'm4',
-    name: 'YOLOv8-Detect',
-    type: 'vision',
-    url: 'http://192.168.2.48:9004/v1/detect',
-    apiKey: 'sk-yolo-xx******',
-    plugins: ['视频处理插件'],
-    status: 'enabled',
-    createdAt: '2026-07-05 11:00',
-    lastCallAt: '2026-08-31 11:20',
-    callCount: 34520,
-    avgLatency: '约 50-150ms',
-  },
-  {
-    id: 'm5',
-    name: 'PaddleOCR-v4',
-    type: 'ocr',
-    url: 'http://192.168.2.48:9005/v1/ocr',
-    apiKey: 'sk-ocr-xx******',
-    plugins: ['搜索爬虫插件', '数据清洗服务'],
-    status: 'enabled',
-    createdAt: '2026-07-10 16:30',
-    lastCallAt: '2026-08-31 10:15',
-    callCount: 45670,
-    avgLatency: '约 80-200ms',
-  },
-  {
-    id: 'm6',
-    name: 'BGE-M3-Embedding',
-    type: 'embedding',
-    url: 'http://192.168.2.48:9006/v1/embeddings',
-    apiKey: 'sk-bge-xx******',
-    plugins: ['知识库管理'],
-    status: 'enabled',
-    createdAt: '2026-07-12 08:45',
-    lastCallAt: '2026-08-31 09:30',
-    callCount: 89200,
-    avgLatency: '约 30-100ms',
-  },
-  {
-    id: 'm7',
-    name: 'ChatGLM4-9B',
-    type: 'llm',
-    url: 'http://192.168.2.48:9007/v1/chat/completions',
-    apiKey: 'sk-glm-xx******',
-    plugins: ['社群管理'],
-    status: 'enabled',
-    createdAt: '2026-07-18 13:20',
-    lastCallAt: '2026-08-30 18:42',
-    callCount: 15680,
-    avgLatency: '约 150-400ms',
-  },
-  {
-    id: 'm8',
-    name: 'Whisper-Large-v3',
-    type: 'asr',
-    url: 'http://192.168.2.48:9008/v1/audio/transcriptions',
-    apiKey: 'sk-whisper-xx******',
-    plugins: [],
-    status: 'disabled',
-    createdAt: '2026-07-22 10:00',
-    lastCallAt: '2026-08-28 16:20',
-    callCount: 8920,
-    avgLatency: '约 200-500ms',
-  },
-]
-
-export const pluginAssignments: PluginAssignment[] = [
-  { id: 'pa1', plugin: '视频处理插件', icon: 'video', models: ['Qwen2.5-VL-72B', 'YOLOv8-Detect'], strategy: 'priority' },
-  { id: 'pa2', plugin: '数据处理插件', icon: 'data', models: ['Qwen2.5-72B-Instruct'], strategy: 'single' },
-  { id: 'pa3', plugin: '数据清洗服务', icon: 'clean', models: ['PaddleOCR-v4', 'Qwen2.5-72B-Instruct'], strategy: 'round_robin' },
-  { id: 'pa4', plugin: '音频交互处理', icon: 'audio', models: ['FunASR-Online'], strategy: 'single' },
-  { id: 'pa5', plugin: '搜索爬虫插件', icon: 'crawler', models: ['PaddleOCR-v4'], strategy: 'single' },
-  { id: 'pa6', plugin: '知识库管理', icon: 'knowledge', models: ['BGE-M3-Embedding', 'Qwen2.5-72B-Instruct'], strategy: 'priority' },
-  { id: 'pa7', plugin: '社群管理', icon: 'community', models: ['ChatGLM4-9B'], strategy: 'single' },
-  { id: 'pa8', plugin: '任务协作助手', icon: 'task', models: ['Qwen2.5-72B-Instruct'], strategy: 'single' },
-]
-
-export const allocatablePlugins = [
-  '视频处理插件', '数据处理插件', '数据清洗服务', '音频交互处理',
-  '搜索爬虫插件', '知识库管理', '社群管理', '任务协作助手',
-]
-
-export const modelSettingsDefault = {
-  defaultLlm: 'Qwen2.5-72B-Instruct',
-  defaultEmbedding: 'BGE-M3-Embedding',
-  timeout: 30,
-  maxRetries: 3,
-  qpsLimit: 100,
-  monitoringEnabled: true,
-  logEnabled: true,
-  auditEnabled: true,
-}
-
-export const modelOperationLogs: ModelOperationLog[] = [
-  { id: 'l1', time: '2026-08-31 14:30', operator: 'admin', action: '启用模型', target: 'Qwen2.5-72B-Instruct', detail: '模型已启用' },
-  { id: 'l2', time: '2026-08-31 11:20', operator: 'admin', action: '分配插件', target: 'PaddleOCR-v4', detail: '分配给 搜索爬虫插件' },
-  { id: 'l3', time: '2026-08-30 16:45', operator: 'admin', action: '新增模型', target: 'ChatGLM4-9B', detail: '接入 ChatGLM4-9B 大语言模型' },
-  { id: 'l4', time: '2026-08-30 09:10', operator: 'admin', action: '停用模型', target: 'Whisper-Large-v3', detail: '模型已停用' },
-  { id: 'l5', time: '2026-08-29 14:00', operator: 'admin', action: '修改配置', target: '系统设置', detail: '调用超时调整为 30 秒' },
-]
-
-export const testScenarios = [
-  '基础对话', '逻辑推理', '数学计算', '代码生成', '文本摘要', '翻译', '知识问答',
-]
-
-export const testScenarioPrompts: Record<string, string> = {
-  基础对话: '你好，请介绍一下你自己。',
-  逻辑推理: '如果所有的猫都是动物，所有的动物都需要食物，那么猫需要食物吗？请给出推理过程。',
-  数学计算: '一个水池有两个进水管和一个出水管，进水管 A 每小时注入 20 升，进水管 B 每小时注入 30 升，出水管每小时排出 25 升。水池初始为空，三个管同时打开，多少小时可以注满 200 升的水池？',
-  代码生成: '请用 Python 写一个快速排序算法，并添加详细注释。',
-  文本摘要: '请对以下文本进行摘要（不超过100字）：人工智能是计算机科学的一个分支，它企图了解智能的实质，并生产出一种新的能以人类智能相似的方式做出反应的智能机器。该领域的研究包括机器人、语言识别、图像识别、自然语言处理和专家系统等。',
-  翻译: '请将以下内容翻译为英文：模型管理组件提供了统一的 AI 模型接入与调度能力，支持多种模型类型的生命周期管理。',
-  知识问答: '什么是向量嵌入模型？它在 RAG 系统中扮演什么角色？',
-}
-
-export const mockTestResponses: Record<string, string> = {
-  基础对话: '你好！我是 Qwen2.5-72B-Instruct，一个由阿里云开发的大语言模型。我可以帮助你完成对话、推理、代码生成、文本摘要等多种任务。有什么我可以帮你的吗？',
-  逻辑推理: '是的，猫需要食物。推理过程如下：\n1. 前提：所有的猫都是动物\n2. 前提：所有的动物都需要食物\n3. 由前提1和2，根据三段论，可以得出：所有的猫都需要食物\n因此，猫需要食物。',
-  数学计算: '设 t 小时后水池注满 200 升：\n净注入速率 = 20 + 30 - 25 = 25 升/小时\n200 ÷ 25 = 8\n因此，8 小时后水池可以注满 200 升水。',
-  代码生成: '```python\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n```',
-  文本摘要: '人工智能是计算机科学分支，研究智能本质并开发类人智能机器，涵盖机器人、语音识别、图像识别、自然语言处理等领域。',
-  翻译: 'The Model Management Component provides unified AI model access and scheduling capabilities, supporting lifecycle management of various model types.',
-  知识问答: '向量嵌入模型（Embedding Model）是一种将文本、图像等非结构化数据转换为高维向量表示的模型。在 RAG（检索增强生成）系统中，向量嵌入模型负责将文档和用户查询编码为向量，通过向量相似度检索找到相关文档片段，再交由大语言模型生成答案，是连接检索与生成的关键桥梁。',
-}
+export const modelTypeLabels = data.modelTypeLabels
+export const modelTypeColors = data.modelTypeColors
+export const dispatchStrategyLabels = data.dispatchStrategyLabels
+export const modelPluginMeta = data.modelPluginMeta
+export const modelOverviewStats = data.modelOverviewStats
+export const modelCallTrend = data.modelCallTrend
+export const modelCallTop5: ModelCallTop5Response = data.modelCallTop5
+export const modelCallRankColors = data.modelCallRankColors
+export const modelProcessSteps = data.modelProcessSteps
+export const initialModels: AiModel[] = data.initialModels
+export const pluginAssignments: PluginAssignment[] = data.pluginAssignments
+export const allocatablePlugins = data.allocatablePlugins
+export const modelSettingsDefault = data.modelSettingsDefault
+export const modelOperationLogs: ModelOperationLog[] = data.modelOperationLogs
+export const testScenarios = data.testScenarios
+export const testScenarioPrompts = data.testScenarioPrompts
+export const mockTestResponses = data.mockTestResponses

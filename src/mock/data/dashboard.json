@@ -1,0 +1,206 @@
+{
+  "dashboardQuickActions": [
+    {
+      "label": "进入视频任务",
+      "route": "/video/tasks",
+      "icon": "video"
+    },
+    {
+      "label": "语音合成",
+      "route": "/audio/synthesis",
+      "icon": "audio"
+    },
+    {
+      "label": "创建治理任务",
+      "route": "/data/governance?action=create",
+      "icon": "data"
+    },
+    {
+      "label": "新建定时采集",
+      "route": "/crawler/schedules",
+      "icon": "crawler"
+    },
+    {
+      "label": "知识检索",
+      "route": "/knowledge/search",
+      "icon": "knowledge"
+    },
+    {
+      "label": "上传清洗批次",
+      "route": "/data-clean/upload",
+      "icon": "clean"
+    }
+  ],
+  "dashboardStats": {
+    "totalTasks": 13150,
+    "totalTasksChange": 18,
+    "runningTasks": 32,
+    "dataProcessed": "4.2 TB",
+    "serviceProjects": 39,
+    "aiCalls": 13150,
+    "knowledgeDocs": 14240
+  },
+  "pendingTodos": [
+    {
+      "id": "t1",
+      "title": "视频处理插件验收待确认",
+      "category": "待验收任务",
+      "priority": "high",
+      "route": "/video/task/v1"
+    },
+    {
+      "id": "t2",
+      "title": "2026年度战略规划.pptx 待审核",
+      "category": "待审核文档",
+      "priority": "high",
+      "route": "/knowledge/validation"
+    },
+    {
+      "id": "t3",
+      "title": "某品牌产品质量投诉集中爆发",
+      "category": "舆情预警",
+      "priority": "high",
+      "route": "/crawler/opinion"
+    },
+    {
+      "id": "t4",
+      "title": "产品资料库清洗批次运行中",
+      "category": "清洗批次",
+      "priority": "medium",
+      "route": "/data-clean/batches"
+    },
+    {
+      "id": "t5",
+      "title": "智能客服知识库更新等待中",
+      "category": "待验收任务",
+      "priority": "medium",
+      "route": "/knowledge/base/kb3"
+    }
+  ],
+  "pluginUsageData": [
+    {
+      "name": "视频处理",
+      "value": 3368
+    },
+    {
+      "name": "数据处理",
+      "value": 3426
+    },
+    {
+      "name": "音频处理",
+      "value": 1574
+    },
+    {
+      "name": "搜索爬虫",
+      "value": 1871
+    },
+    {
+      "name": "消息推送",
+      "value": 3075
+    }
+  ],
+  "recentTasks": [
+    {
+      "id": "8",
+      "name": "智能客服知识库更新",
+      "type": "知识库",
+      "status": "waiting",
+      "createdAt": "2026-08-28 08:00",
+      "route": "/knowledge/base/kb3"
+    },
+    {
+      "id": "2",
+      "name": "客户数据清洗",
+      "type": "数据处理",
+      "status": "completed",
+      "createdAt": "2026-08-28 10:18",
+      "route": "/data/task/d1"
+    },
+    {
+      "id": "7",
+      "name": "新能源汽车舆情推送",
+      "type": "消息推送",
+      "status": "completed",
+      "createdAt": "2026-08-28 08:30",
+      "route": "/community/messages"
+    },
+    {
+      "id": "5",
+      "name": "产品发布会语音转写",
+      "type": "音频处理",
+      "status": "completed",
+      "createdAt": "2026-08-28 09:15",
+      "route": "/audio/task/a1"
+    },
+    {
+      "id": "6",
+      "name": "制造业数据标准化",
+      "type": "数据清洗",
+      "status": "running",
+      "createdAt": "2026-08-28 08:50",
+      "route": "/data-clean/task/dc1"
+    },
+    {
+      "id": "3",
+      "name": "行业资料采集",
+      "type": "搜索爬虫",
+      "status": "completed",
+      "createdAt": "2026-08-28 09:52",
+      "route": "/crawler/task/c1"
+    },
+    {
+      "id": "4",
+      "name": "企业知识库构建",
+      "type": "知识库",
+      "status": "running",
+      "createdAt": "2026-08-28 09:41",
+      "route": "/knowledge/base/kb1"
+    },
+    {
+      "id": "1",
+      "name": "企业宣传视频生成",
+      "type": "视频处理",
+      "status": "running",
+      "createdAt": "2026-08-28 10:32",
+      "route": "/video/task/v1"
+    }
+  ],
+  "taskStatusData": [
+    {
+      "name": "运行中",
+      "value": 32
+    },
+    {
+      "name": "已完成",
+      "value": 12828
+    },
+    {
+      "name": "等待中",
+      "value": 272
+    },
+    {
+      "name": "失败",
+      "value": 18
+    }
+  ],
+  "taskTrendData": {
+    "dates": [
+      "08-22",
+      "08-23",
+      "08-24",
+      "08-25",
+      "08-26",
+      "08-27",
+      "08-28"
+    ],
+    "values": [
+      1599,
+      1555,
+      1780,
+      1532,
+      1729,
+      1601,
+      2580
+    ]
+  }
+}

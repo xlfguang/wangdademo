@@ -1,0 +1,434 @@
+{
+  "videoAnalysis": {
+    "summary": "本视频主要介绍企业级 AI 解决方案，围绕大模型、智能体和数据治理能力展开介绍。视频展示了平台的核心 AI 能力插件、知识库管理系统以及多个行业落地案例，重点强调了 AI Agent 如何通过 API 调用视频处理插件实现自动化内容分析。",
+    "keywords": [
+      "AI",
+      "大模型",
+      "智能体",
+      "数据治理",
+      "知识库",
+      "数字化"
+    ],
+    "scenes": [
+      {
+        "timeRange": "00:00 - 00:15",
+        "label": "产品介绍"
+      },
+      {
+        "timeRange": "00:15 - 00:42",
+        "label": "AI 能力展示"
+      },
+      {
+        "timeRange": "00:42 - 01:10",
+        "label": "知识库演示"
+      },
+      {
+        "timeRange": "01:10 - 01:45",
+        "label": "应用场景"
+      }
+    ],
+    "keyFrames": [
+      {
+        "id": "kf1",
+        "timestamp": "00:00:08",
+        "clarity": 87,
+        "similarity": 87
+      },
+      {
+        "id": "kf2",
+        "timestamp": "00:00:22",
+        "clarity": 84,
+        "similarity": 75
+      },
+      {
+        "id": "kf3",
+        "timestamp": "00:00:55",
+        "clarity": 92,
+        "similarity": 90
+      },
+      {
+        "id": "kf4",
+        "timestamp": "00:01:28",
+        "clarity": 88,
+        "similarity": 87
+      }
+    ],
+    "ocrSegments": [
+      {
+        "timestamp": "00:00:05",
+        "text": "网达智能体调度平台"
+      },
+      {
+        "timestamp": "00:00:18",
+        "text": "基于大模型的垂直行业智能化服务"
+      },
+      {
+        "timestamp": "00:00:35",
+        "text": "视频处理 · 数据分析 · 知识库管理"
+      },
+      {
+        "timestamp": "00:01:02",
+        "text": "AI Agent 能力调用接口"
+      },
+      {
+        "timestamp": "00:01:22",
+        "text": "制造业 · 政务 · 金融 · 零售"
+      }
+    ],
+    "speechSegments": [
+      {
+        "timestamp": "00:00:03",
+        "text": "大家好，欢迎来到我们的 AI 解决方案发布会。"
+      },
+      {
+        "timestamp": "00:00:20",
+        "text": "今天我将为大家展示企业级 AI 平台的核心能力。"
+      },
+      {
+        "timestamp": "00:00:48",
+        "text": "平台支持模块化 AI 插件，包括视频处理、数据分析等。"
+      },
+      {
+        "timestamp": "00:01:15",
+        "text": "通过知识库管理，企业可以快速构建 RAG 智能问答系统。"
+      },
+      {
+        "timestamp": "00:01:38",
+        "text": "目前我们已在制造、政务、金融等多个行业成功落地。"
+      }
+    ]
+  },
+  "videoApiEndpoints": [
+    {
+      "id": "process",
+      "name": "视频处理",
+      "method": "POST",
+      "path": "/video/process",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"process_type\": \"transcode\",\n  \"params\": {\n    \"format\": \"mp4\",\n    \"resolution\": \"1920x1080\"\n  }\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280001\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "transcode",
+      "name": "视频转码",
+      "method": "POST",
+      "path": "/video/transcode",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mov\",\n  \"target_format\": \"mp4\",\n  \"codec\": \"h265\",\n  \"resolution\": \"1920x1080\",\n  \"fps\": 30\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280002\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "compress",
+      "name": "视频压缩",
+      "method": "POST",
+      "path": "/video/compress",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"quality\": 80,\n  \"target_size_mb\": 100\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280003\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "keyframes",
+      "name": "关键帧提取",
+      "method": "POST",
+      "path": "/video/keyframes",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"mode\": \"scene_change\",\n  \"filter_blur\": true\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280004\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "ocr",
+      "name": "OCR 识别",
+      "method": "POST",
+      "path": "/video/ocr",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"language\": \"zh-CN\"\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280005\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "summary",
+      "name": "AI 摘要",
+      "method": "POST",
+      "path": "/video/summary",
+      "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"options\": {\n    \"keywords\": true,\n    \"scenes\": true\n  }\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280006\",\n  \"status\": \"processing\"\n}"
+    },
+    {
+      "id": "query",
+      "name": "任务查询",
+      "method": "GET",
+      "path": "/video/task/{task_id}",
+      "requestBody": "{\n  \"task_id\": \"VP202608280001\"\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"task_id\": \"VP202608280001\",\n    \"status\": \"completed\",\n    \"progress\": 100,\n    \"output_url\": \"https://cdn.example.com/output.mp4\"\n  }\n}"
+    },
+    {
+      "id": "cancel",
+      "name": "任务取消",
+      "method": "POST",
+      "path": "/video/task/{task_id}/cancel",
+      "requestBody": "{\n  \"task_id\": \"VP202608280001\"\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280001\",\n  \"status\": \"cancelled\"\n}"
+    }
+  ],
+  "videoCapabilities": [
+    {
+      "title": "视频剪辑",
+      "description": "灵活裁剪与拼接视频片段",
+      "items": [
+        "时间范围裁剪",
+        "多片段剪辑",
+        "视频拼接"
+      ]
+    },
+    {
+      "title": "视频转码",
+      "description": "多格式视频转码与编码优化",
+      "items": [
+        "MP4",
+        "MOV",
+        "WebM",
+        "AVI",
+        "H.264 / H.265"
+      ]
+    },
+    {
+      "title": "视频压缩",
+      "description": "智能压缩减小文件体积",
+      "items": [
+        "质量压缩",
+        "目标大小压缩",
+        "自定义码率"
+      ]
+    },
+    {
+      "title": "关键帧提取",
+      "description": "智能提取视频关键画面",
+      "items": [
+        "定时提取",
+        "场景切换提取",
+        "黑屏 / 模糊帧过滤"
+      ]
+    },
+    {
+      "title": "OCR / 语音识别",
+      "description": "视频文字与语音内容提取",
+      "items": [
+        "视频文字识别",
+        "语音转文字",
+        "时间戳定位"
+      ]
+    },
+    {
+      "title": "AI 视频分析",
+      "description": "大模型驱动的视频内容理解",
+      "items": [
+        "视频摘要",
+        "关键词提取",
+        "场景分析"
+      ]
+    }
+  ],
+  "videoOverviewStats": {
+    "totalTasks": 2498,
+    "runningTasks": 7,
+    "processedVolume": "2.3 TB",
+    "successRate": 98.2,
+    "apiCalls": 52191
+  },
+  "videoPluginConfig": {
+    "name": "视频处理插件",
+    "version": "v2.6.1",
+    "status": "running",
+    "appKey": "vp_app_key_20260828",
+    "appSecret": "vp_secret_************************",
+    "signMethod": "HMAC-SHA256",
+    "ipWhitelist": "192.168.1.0/24, 10.0.0.0/8",
+    "rateLimit": 1000,
+    "maxConcurrency": 50,
+    "callbackUrl": "https://agent.example.com/callback/video",
+    "successCallback": true,
+    "failCallback": true
+  },
+  "videoPluginMeta": {
+    "name": "视频处理插件",
+    "description": "面向 AI Agent 提供视频处理、内容提取及智能分析能力",
+    "status": "running",
+    "version": "v2.6.1"
+  },
+  "videoTasks": [
+    {
+      "id": "v1",
+      "taskId": "VP202608280001",
+      "name": "企业宣传视频 AI 全量分析",
+      "fileName": "enterprise_promo_2026.mp4",
+      "processType": "全量分析",
+      "progress": 38,
+      "status": "running",
+      "createdAt": "2026-08-28 10:32",
+      "updatedAt": "2026-08-28 10:45",
+      "originalSize": "2.1 GB",
+      "duration": "02:06",
+      "resolution": "1920x1080",
+      "fps": "30"
+    },
+    {
+      "id": "v2",
+      "taskId": "VP202608280002",
+      "name": "培训视频转码 H.265",
+      "fileName": "training_session_08.mov",
+      "processType": "视频转码",
+      "progress": 100,
+      "status": "completed",
+      "createdAt": "2026-08-28 09:20",
+      "updatedAt": "2026-08-28 09:35",
+      "originalSize": "2.6 GB",
+      "outputSize": "680 MB",
+      "duration": "01:14:52",
+      "resolution": "1920x1080",
+      "fps": "30",
+      "outputFormat": "MP4",
+      "outputUrl": "https://cdn.example.com/videos/training_session_08_h265.mp4"
+    },
+    {
+      "id": "v3",
+      "taskId": "VP202608280003",
+      "name": "发布会录像智能摘要",
+      "fileName": "launch_event_full.mp4",
+      "processType": "AI视频摘要",
+      "progress": 65,
+      "status": "running",
+      "createdAt": "2026-08-28 08:50",
+      "updatedAt": "2026-08-28 09:10",
+      "originalSize": "2.3 GB",
+      "duration": "01:47:48",
+      "resolution": "3840x2160",
+      "fps": "60"
+    },
+    {
+      "id": "v4",
+      "taskId": "VP202608280004",
+      "name": "产品演示视频剪辑",
+      "fileName": "product_intro_raw.mp4",
+      "processType": "视频剪辑",
+      "progress": 0,
+      "status": "queued",
+      "createdAt": "2026-08-28 08:15",
+      "updatedAt": "2026-08-28 08:15",
+      "originalSize": "1.6 GB",
+      "duration": "01:31:51",
+      "resolution": "1920x1080",
+      "fps": "30"
+    },
+    {
+      "id": "v5",
+      "taskId": "VP202608270005",
+      "name": "品牌宣传片 OCR 识别",
+      "fileName": "brand_video_final.webm",
+      "processType": "OCR识别",
+      "progress": 100,
+      "status": "completed",
+      "createdAt": "2026-08-27 16:40",
+      "updatedAt": "2026-08-27 17:20",
+      "originalSize": "230 MB",
+      "outputSize": "12 MB",
+      "duration": "35:39",
+      "resolution": "1920x1080",
+      "fps": "30",
+      "outputFormat": "JSON",
+      "outputUrl": "https://cdn.example.com/analysis/brand_video_ocr.json"
+    },
+    {
+      "id": "v6",
+      "taskId": "VP202608270006",
+      "name": "会议录像语音转写",
+      "fileName": "weekly_meeting.m4a",
+      "processType": "语音转文字",
+      "progress": 100,
+      "status": "completed",
+      "createdAt": "2026-08-27 14:00",
+      "updatedAt": "2026-08-27 14:30",
+      "originalSize": "3.6 GB",
+      "outputSize": "256 KB",
+      "duration": "55:59",
+      "outputFormat": "SRT",
+      "outputUrl": "https://cdn.example.com/transcripts/weekly_meeting.srt"
+    },
+    {
+      "id": "v7",
+      "taskId": "VP202608270007",
+      "name": "峰会录像关键帧提取",
+      "fileName": "summit_recording.avi",
+      "processType": "关键帧提取",
+      "progress": 47,
+      "status": "failed",
+      "createdAt": "2026-08-27 11:00",
+      "updatedAt": "2026-08-27 11:15",
+      "originalSize": "251 MB",
+      "duration": "02:34",
+      "resolution": "1920x1080",
+      "fps": "25"
+    }
+  ],
+  "workspaceAssets": [
+    {
+      "id": "wa1",
+      "name": "enterprise_promo.mp4",
+      "duration": "05:32",
+      "size": "856 MB"
+    },
+    {
+      "id": "wa2",
+      "name": "product_launch_clip.mov",
+      "duration": "02:18",
+      "size": "412 MB"
+    },
+    {
+      "id": "wa3",
+      "name": "training_recording.mp4",
+      "duration": "12:45",
+      "size": "1.2 GB"
+    },
+    {
+      "id": "wa4",
+      "name": "customer_testimonial.webm",
+      "duration": "01:52",
+      "size": "186 MB"
+    }
+  ],
+  "workspaceTimelineClips": [
+    {
+      "id": "c1",
+      "track": "video",
+      "label": "片头",
+      "start": 0,
+      "end": 8,
+      "color": "#1677ff"
+    },
+    {
+      "id": "c2",
+      "track": "video",
+      "label": "主内容",
+      "start": 8,
+      "end": 72,
+      "color": "#4096ff"
+    },
+    {
+      "id": "c3",
+      "track": "video",
+      "label": "片尾",
+      "start": 72,
+      "end": 85,
+      "color": "#69b1ff"
+    },
+    {
+      "id": "c4",
+      "track": "audio",
+      "label": "旁白",
+      "start": 0,
+      "end": 85,
+      "color": "#7c5cfc"
+    },
+    {
+      "id": "c5",
+      "track": "audio",
+      "label": "BGM",
+      "start": 5,
+      "end": 80,
+      "color": "#9254de"
+    }
+  ]
+}
