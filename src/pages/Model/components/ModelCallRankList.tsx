@@ -1,6 +1,6 @@
 import { Progress } from 'antd'
-import type { ModelCallRankItem } from '@/mock/model'
-import { modelCallRankColors } from '@/mock/model'
+import type { ModelCallRankItem, ModelData } from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
 import { formatNumber } from '@/utils/format'
 import styles from '../index.module.css'
 
@@ -9,6 +9,8 @@ interface ModelCallRankListProps {
 }
 
 export default function ModelCallRankList({ items }: ModelCallRankListProps) {
+  const { data } = useMenuData<ModelData>('model')
+  const modelCallRankColors = data.modelCallRankColors
   const maxCount = items[0]?.callCount ?? 1
 
   return (

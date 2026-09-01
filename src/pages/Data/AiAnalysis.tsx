@@ -4,7 +4,8 @@ import { ThunderboltOutlined } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import DataSubNav from './components/DataSubNav'
 import ExportReportButton from '@/components/ExportReportButton'
-import { aiAnalysisPairs, salesTrend } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
 import type { AiAnalysisResult } from '@/types'
 import styles from './index.module.css'
@@ -12,6 +13,8 @@ import styles from './index.module.css'
 const { TextArea } = Input
 
 export default function AiAnalysis() {
+  const { data } = useMenuData<DataMenuData>('data')
+  const { aiAnalysisPairs, salesTrend } = data
   const [question, setQuestion] = useState('')
   const [loading, setLoading] = useState(false)
   const [step, setStep] = useState(-1)

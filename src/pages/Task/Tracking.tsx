@@ -5,7 +5,8 @@ import PageHeader from '@/components/PageHeader'
 import TaskSubNav from './components/TaskSubNav'
 import TaskStatusTag, { PriorityTag } from './components/TaskStatusTag'
 import { useTaskContext } from './TaskContext'
-import { teamStats } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 import { useDeepLinkAction } from '@/utils/deepLink'
 import { generateId, delay } from '@/utils/mockApi'
 import type { CollabTask, CollabTaskStatus } from '@/types'
@@ -22,6 +23,8 @@ const kanbanColumns: { key: CollabTaskStatus; title: string }[] = [
 export default function Tracking() {
   const navigate = useNavigate()
   const { tasks, updateTask, addProgressLog } = useTaskContext()
+  const { data } = useMenuData<TaskData>('task')
+  const teamStats = data.teamStats
   const [view, setView] = useState<'kanban' | 'list'>('kanban')
   const [updateModal, setUpdateModal] = useState<CollabTask | null>(null)
   const [loading, setLoading] = useState(false)

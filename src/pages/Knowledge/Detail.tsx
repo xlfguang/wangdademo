@@ -4,7 +4,8 @@ import { SendOutlined, RobotOutlined, UserOutlined } from '@ant-design/icons'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
 import { useKnowledgeContext } from './KnowledgeContext'
-import { docProcessSteps, qaPairs } from '@/mock/knowledge'
+import { useMenuData } from '@/mock/useMenuData'
+import type { KnowledgeData } from '@/mock/knowledge'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -17,6 +18,8 @@ export default function KnowledgeDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { getBase, getDocs } = useKnowledgeContext()
+  const { data } = useMenuData<KnowledgeData>('knowledge')
+  const { docProcessSteps, qaPairs } = data
   const kb = getBase(id ?? '')
   const docs = getDocs(id ?? '')
 

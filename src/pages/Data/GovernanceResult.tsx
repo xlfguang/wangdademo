@@ -2,11 +2,13 @@ import { Row, Col, Card, Statistic, Button } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import { useNavigate } from 'react-router-dom'
 import DataSubNav from './components/DataSubNav'
-import { governanceResult } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 
 export default function GovernanceResult() {
   const navigate = useNavigate()
-  const r = governanceResult
+  const { data } = useMenuData<DataMenuData>('data')
+  const r = data.governanceResult
 
   const barOption = {
     tooltip: { trigger: 'axis' },

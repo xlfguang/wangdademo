@@ -6,7 +6,8 @@ import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import AudioSubNav from './components/AudioSubNav'
 import { useAudioContext } from './AudioContext'
-import { audioPluginMeta, audioOverviewStats, audioScenarios } from '@/mock/audio'
+import { useMenuData } from '@/mock/useMenuData'
+import type { AudioData } from '@/mock/audio'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { audioScenarioLinks } from '@/config/capabilityLinks'
@@ -17,6 +18,8 @@ const icons = [<AudioOutlined />, <AudioOutlined />, <AudioOutlined />, <AudioOu
 export default function Overview() {
   const navigate = useNavigate()
   const { tasks } = useAudioContext()
+  const { data } = useMenuData<AudioData>('audio')
+  const { audioPluginMeta, audioOverviewStats, audioScenarios } = data
 
   const columns = [
     { title: '任务名称', dataIndex: 'name', key: 'name', ellipsis: true },

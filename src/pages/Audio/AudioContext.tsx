@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import type { AudioClip, TranscriptSegment, ExtractedInfo, AudioFileMeta, AudioTask } from '@/types'
-import { audioTasks as initialTasks, transcriptMock, extractionMock } from '@/mock/audio'
+import { useMenuData } from '@/mock/useMenuData'
+import type { AudioData } from '@/mock/audio'
 
 interface AudioContextValue {
   tasks: AudioTask[]
@@ -22,12 +23,18 @@ interface AudioContextValue {
 const AudioContext = createContext<AudioContextValue | null>(null)
 
 export function AudioProvider({ children }: { children: ReactNode }) {
-  const [tasks] = useState<AudioTask[]>(initialTasks)
+  const { data } = useMenuData<AudioData>('audio')
+  const [tasks, setTasks] = useState<AudioTask[]>(data.audioTasks)
   const [clips, setClips] = useState<AudioClip[]>([])
   const [fileMeta, setFileMeta] = useState<AudioFileMeta | null>(null)
   const [transcript, setTranscript] = useState<TranscriptSegment[]>([])
   const [transcriptText, setTranscriptText] = useState('')
-  const [extraction, setExtraction] = useState<ExtractedInfo>(extractionMock)
+  const [extraction, setExtraction] = useState<ExtractedInfo>(data.extractionMock)
+
+  useEffect(() => {
+    setTasks(data.audioTasks)
+    setExtraction(data.extractionMock)
+  }, [data])
 
   const addClip = useCallback((clip: AudioClip) => {
     setClips((prev) => [...prev, clip])
@@ -58,5 +65,3 @@ export function useAudioContext(): AudioContextValue {
   if (!ctx) throw new Error('useAudioContext must be used within AudioProvider')
   return ctx
 }
-
-export { transcriptMock, extractionMock }

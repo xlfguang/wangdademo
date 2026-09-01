@@ -3,7 +3,9 @@ import { Card, Input, Button, Progress, Tag, Space, message } from 'antd'
 import { RobotOutlined, SendOutlined, UserSwitchOutlined, ThunderboltOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import CommunitySubNav from './components/CommunitySubNav'
-import { useCommunityContext, intentTop3Mock, autoReplyMock } from './CommunityContext'
+import { useCommunityContext } from './CommunityContext'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CommunityData } from '@/mock/community'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -19,6 +21,8 @@ export default function AiReply() {
     setAutoReply,
     updateMessageStatus,
   } = useCommunityContext()
+  const { data } = useMenuData<CommunityData>('community')
+  const { intentTop3Mock, autoReplyMock } = data
 
   const [inputText, setInputText] = useState('')
   const [loading, setLoading] = useState(false)

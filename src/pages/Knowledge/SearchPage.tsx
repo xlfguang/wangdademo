@@ -4,20 +4,23 @@ import { SendOutlined, RobotOutlined, UserOutlined, LinkOutlined } from '@ant-de
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import KnowledgeSubNav from './components/KnowledgeSubNav'
-import { useKnowledgeContext, searchHitsMock } from './KnowledgeContext'
-import { qaPairs, ragSources } from '@/mock/knowledge'
+import { useKnowledgeContext } from './KnowledgeContext'
+import { useMenuData } from '@/mock/useMenuData'
+import type { KnowledgeData } from '@/mock/knowledge'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
 interface ChatMessage {
   role: 'user' | 'ai'
   content: string
-  sources?: typeof ragSources
+  sources?: KnowledgeData['ragSources']
 }
 
 export default function SearchPage() {
   const navigate = useNavigate()
   const { bases, searchHits, setSearchHits } = useKnowledgeContext()
+  const { data } = useMenuData<KnowledgeData>('knowledge')
+  const { qaPairs, ragSources, searchHitsMock } = data
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])

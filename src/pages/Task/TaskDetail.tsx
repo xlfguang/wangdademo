@@ -2,19 +2,22 @@ import { Card, Descriptions, Progress, Button, Result, Table, Tabs, Timeline, Ta
 import { useParams, useNavigate } from 'react-router-dom'
 import TaskStatusTag, { PriorityTag } from './components/TaskStatusTag'
 import { useTaskContext } from './TaskContext'
-import { getChildTasks, progressLogs, operationLogs, taskDocuments, chatMessages } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 
 export default function TaskDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { getTask } = useTaskContext()
+  const { data } = useMenuData<TaskData>('task')
+  const { collabTasks, progressLogs, operationLogs, taskDocuments, chatMessages } = data
   const task = getTask(id ?? '')
 
   if (!task) {
     return <Result status="404" title="任务不存在" extra={<Button type="primary" onClick={() => navigate('/task/overview')}>返回概览</Button>} />
   }
 
-  const children = getChildTasks(task.id)
+  const children = collabTasks.filter((t) => t.parentId === task.id)
   const logs = progressLogs.filter((l) => l.taskId === task.id)
   const ops = operationLogs.filter((o) => o.taskId === task.id)
   const docs = taskDocuments.filter((d) => d.taskId === task.id)

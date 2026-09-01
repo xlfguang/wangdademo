@@ -10,7 +10,7 @@ import type {
 } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface DataMenuData {
+export interface DataMenuData {
   dataPluginMeta: { name: string; description: string; version: string }
   dataOverviewStats: {
     sourceCount: number

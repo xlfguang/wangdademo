@@ -2,15 +2,14 @@ import { useState } from 'react'
 import { Card, Form, Select, Switch, InputNumber, Button, Tag, Table, message } from 'antd'
 import ModelSubNav from './components/ModelSubNav'
 import { useModelContext } from './ModelContext'
-import {
-  modelSettingsDefault,
-  allocatablePlugins,
-  modelOperationLogs,
-} from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ModelData } from '@/mock/model'
 import { delay } from '@/utils/mockApi'
 
 export default function Settings() {
   const { models } = useModelContext()
+  const { data } = useMenuData<ModelData>('model')
+  const { modelSettingsDefault, allocatablePlugins, modelOperationLogs } = data
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
 

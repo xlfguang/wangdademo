@@ -1,12 +1,14 @@
 import { Card, Descriptions, Progress, Button, Result } from 'antd'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
-import { getDataTask } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 
 export default function DataTaskDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const task = getDataTask(id ?? '')
+  const { data } = useMenuData<DataMenuData>('data')
+  const task = data.dataTasks.find((t) => t.id === id)
 
   if (!task) {
     return <Result status="404" title="任务不存在" extra={<Button type="primary" onClick={() => navigate('/data/overview')}>返回概览</Button>} />

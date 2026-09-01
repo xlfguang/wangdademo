@@ -3,7 +3,8 @@ import { Card, Table, Tag, Button, Progress, Row, Col, message } from 'antd'
 import { ExportOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import SearchForm from '@/components/SearchForm'
-import { storedDataRecords, storageStats } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 import CrawlerSubNav from './components/CrawlerSubNav'
 import { filterBySearch, paginate } from '@/utils/mockApi'
 import type { SearchParams } from '@/types'
@@ -16,6 +17,8 @@ const sentimentOptions = [
 ]
 
 export default function DataManage() {
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const { storedDataRecords, storageStats } = data
   const [search, setSearch] = useState<SearchParams>({})
   const [page, setPage] = useState(1)
 

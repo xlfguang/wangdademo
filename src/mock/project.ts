@@ -1,7 +1,7 @@
 import type { Project } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface ProjectData {
+export interface ProjectData {
   projectPluginOptions: string[]
   projects: Project[]
   projectTasks: { id: string; name: string; assignee: string; status: string; deadline: string }[]

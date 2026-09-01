@@ -1,6 +1,8 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import type { CollabTask, TaskProgressLog, TaskNotification } from '@/types'
-import { collabTasks as initialTasks, progressLogs as initialLogs, taskNotifications as initialNotifications } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { TaskData } from '@/mock/task'
 
 interface TaskContextValue {
   tasks: CollabTask[]
@@ -17,19 +19,37 @@ interface TaskContextValue {
 const TaskContext = createContext<TaskContextValue | null>(null)
 
 export function TaskProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<CollabTask[]>(initialTasks)
-  const [progressLogs, setProgressLogs] = useState<TaskProgressLog[]>(initialLogs)
-  const [notifications, setNotifications] = useState<TaskNotification[]>(initialNotifications)
+  const { data } = useMenuData<TaskData>('task')
+  const [tasks, setTasks] = useState<CollabTask[]>(data.collabTasks)
+  const [progressLogs, setProgressLogs] = useState<TaskProgressLog[]>(data.progressLogs)
+  const [notifications, setNotifications] = useState<TaskNotification[]>(data.taskNotifications)
 
-  const addTask = useCallback((task: CollabTask) => setTasks((p) => [...p, task]), [])
+  useEffect(() => {
+    setTasks(data.collabTasks)
+    setProgressLogs(data.progressLogs)
+    setNotifications(data.taskNotifications)
+  }, [data])
+
+  const addTask = useCallback((task: CollabTask) => {
+    setTasks((p) => [...p, task])
+    persistMenuUpdate<TaskData>('task', (d) => ({ ...d, collabTasks: [...d.collabTasks, task] }))
+  }, [])
   const updateTask = useCallback((id: string, patch: Partial<CollabTask>) => {
     setTasks((p) => p.map((t) => (t.id === id ? { ...t, ...patch } : t)))
+    persistMenuUpdate<TaskData>('task', (d) => ({ ...d, collabTasks: d.collabTasks.map((t) => (t.id === id ? { ...t, ...patch } : t)) }))
   }, [])
-  const removeTask = useCallback((id: string) => setTasks((p) => p.filter((t) => t.id !== id)), [])
+  const removeTask = useCallback((id: string) => {
+    setTasks((p) => p.filter((t) => t.id !== id))
+    persistMenuUpdate<TaskData>('task', (d) => ({ ...d, collabTasks: d.collabTasks.filter((t) => t.id !== id) }))
+  }, [])
   const getTask = useCallback((id: string) => tasks.find((t) => t.id === id), [tasks])
-  const addProgressLog = useCallback((log: TaskProgressLog) => setProgressLogs((p) => [log, ...p]), [])
+  const addProgressLog = useCallback((log: TaskProgressLog) => {
+    setProgressLogs((p) => [log, ...p])
+    persistMenuUpdate<TaskData>('task', (d) => ({ ...d, progressLogs: [log, ...d.progressLogs] }))
+  }, [])
   const markNotificationRead = useCallback((id: string) => {
     setNotifications((p) => p.map((n) => (n.id === id ? { ...n, read: true } : n)))
+    persistMenuUpdate<TaskData>('task', (d) => ({ ...d, taskNotifications: d.taskNotifications.map((n) => (n.id === id ? { ...n, read: true } : n)) }))
   }, [])
 
   return (

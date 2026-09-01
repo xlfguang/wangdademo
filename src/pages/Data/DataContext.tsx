@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import type { DataSourceItem, GovernanceTask, SyncTaskItem } from '@/types'
-import { dataSources as initSources, governanceTasks as initGov, syncTasks as initSync } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { DataMenuData } from '@/mock/data'
 
 interface DataContextValue {
   sources: DataSourceItem[]
@@ -17,10 +19,17 @@ interface DataContextValue {
 const DataContext = createContext<DataContextValue | null>(null)
 
 export function DataProvider({ children }: { children: ReactNode }) {
-  const [sources, setSources] = useState<DataSourceItem[]>(initSources)
-  const [governanceTasks, setGovernanceTasks] = useState<GovernanceTask[]>(initGov)
-  const [syncTasks, setSyncTasks] = useState<SyncTaskItem[]>(initSync)
+  const { data } = useMenuData<DataMenuData>('data')
+  const [sources, setSources] = useState<DataSourceItem[]>(data.dataSources)
+  const [governanceTasks, setGovernanceTasks] = useState<GovernanceTask[]>(data.governanceTasks)
+  const [syncTasks, setSyncTasks] = useState<SyncTaskItem[]>(data.syncTasks)
   const progressTimers = useRef<Map<string, ReturnType<typeof setInterval>>>(new Map())
+
+  useEffect(() => {
+    setSources(data.dataSources)
+    setGovernanceTasks(data.governanceTasks)
+    setSyncTasks(data.syncTasks)
+  }, [data])
 
   useEffect(() => () => {
     progressTimers.current.forEach((t) => clearInterval(t))
@@ -47,15 +56,18 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const addSource = useCallback((item: DataSourceItem) => {
     setSources((prev) => [item, ...prev])
+    persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, dataSources: [item, ...d.dataSources] }))
   }, [])
 
   const removeSource = useCallback((id: string) => {
     setSources((prev) => prev.filter((s) => s.id !== id))
+    persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, dataSources: d.dataSources.filter((s) => s.id !== id) }))
   }, [])
 
   const addGovernanceTask = useCallback(
     (task: GovernanceTask) => {
       setGovernanceTasks((prev) => [task, ...prev])
+      persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, governanceTasks: [task, ...d.governanceTasks] }))
       if (task.status === 'running') startGovProgress(task.id)
     },
     [startGovProgress],
@@ -63,14 +75,17 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const updateGovernanceTask = useCallback((id: string, updates: Partial<GovernanceTask>) => {
     setGovernanceTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
+    persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, governanceTasks: d.governanceTasks.map((t) => (t.id === id ? { ...t, ...updates } : t)) }))
   }, [])
 
   const updateSyncTask = useCallback((id: string, updates: Partial<SyncTaskItem>) => {
     setSyncTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
+    persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, syncTasks: d.syncTasks.map((t) => (t.id === id ? { ...t, ...updates } : t)) }))
   }, [])
 
   const removeSyncTask = useCallback((id: string) => {
     setSyncTasks((prev) => prev.filter((t) => t.id !== id))
+    persistMenuUpdate<DataMenuData>('data', (d) => ({ ...d, syncTasks: d.syncTasks.filter((t) => t.id !== id) }))
   }, [])
 
   return (

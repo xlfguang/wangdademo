@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, Progress, Tabs, Descriptions, Table, Button, Result, Row, Col, Statistic, Timeline, Modal, Form, Input, Select, Tag, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import ReactECharts from 'echarts-for-react'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
 import { useProjectContext } from './ProjectContext'
-import { projectTasks, projectPlugins, projectDocs, projectLogs, projectMilestones, projectMembers } from '@/mock/project'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ProjectData } from '@/mock/project'
 
 const milestoneColor: Record<string, string> = {
   completed: 'green',
@@ -24,7 +25,13 @@ export default function ProjectDetail() {
   const navigate = useNavigate()
   const { getProject } = useProjectContext()
   const project = getProject(id ?? '')
+  const { data } = useMenuData<ProjectData>('project')
+  const { projectTasks, projectPlugins, projectDocs, projectLogs, projectMilestones, projectMembers } = data
   const [members, setMembers] = useState(projectMembers)
+
+  useEffect(() => {
+    setMembers(data.projectMembers)
+  }, [data])
   const [memberModalOpen, setMemberModalOpen] = useState(false)
   const [form] = Form.useForm()
 

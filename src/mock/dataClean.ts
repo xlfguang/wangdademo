@@ -3,7 +3,7 @@ import type {
 } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface DataCleanData {
+export interface DataCleanData {
   dataCleanPluginMeta: { name: string; description: string; status: 'running'; version: string }
   dataCleanOverviewStats: {
     totalBatches: number

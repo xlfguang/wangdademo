@@ -1,11 +1,13 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Table, Button, Tag, Popconfirm, message } from 'antd'
 import { StarOutlined, StarFilled } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import SearchForm from '@/components/SearchForm'
 import StatusTag from '@/components/StatusTag'
 import AudioSubNav from './components/AudioSubNav'
-import { historyRecords } from '@/mock/audio'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { AudioData } from '@/mock/audio'
 import { filterBySearch, filterByStatus, paginate, delay } from '@/utils/mockApi'
 import type { AudioHistoryRecord, SearchParams } from '@/types'
 
@@ -16,9 +18,14 @@ const statusOptions = [
 ]
 
 export default function History() {
-  const [records, setRecords] = useState<AudioHistoryRecord[]>(historyRecords)
+  const { data } = useMenuData<AudioData>('audio')
+  const [records, setRecords] = useState<AudioHistoryRecord[]>(data.historyRecords)
   const [search, setSearch] = useState<SearchParams>({})
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    setRecords(data.historyRecords)
+  }, [data])
 
   const filtered = useMemo(() => {
     let r = filterBySearch(records, search.keyword, ['fileName', 'type'])
@@ -29,7 +36,15 @@ export default function History() {
   const paged = paginate(filtered, page, 10)
 
   const toggleStar = (id: string) => {
-    setRecords(records.map((r) => r.id === id ? { ...r, starred: !r.starred } : r))
+    const next = records.map((r) => (r.id === id ? { ...r, starred: !r.starred } : r))
+    setRecords(next)
+    persistMenuUpdate<AudioData>('audio', (d) => ({ ...d, historyRecords: d.historyRecords.map((r) => (r.id === id ? { ...r, starred: !r.starred } : r)) }))
+  }
+
+  const removeRecord = (id: string) => {
+    const next = records.filter((r) => r.id !== id)
+    setRecords(next)
+    persistMenuUpdate<AudioData>('audio', (d) => ({ ...d, historyRecords: d.historyRecords.filter((r) => r.id !== id) }))
   }
 
   const columns = [
@@ -49,7 +64,7 @@ export default function History() {
       title: '操作',
       key: 'action',
       render: (_: unknown, record: AudioHistoryRecord) => (
-        <Popconfirm title="确定删除该记录吗？" onConfirm={async () => { await delay(300); setRecords(records.filter((r) => r.id !== record.id)); message.success('删除成功') }}>
+        <Popconfirm title="确定删除该记录吗？" onConfirm={async () => { await delay(300); removeRecord(record.id); message.success('删除成功') }}>
           <Button type="link" size="small" danger>删除</Button>
         </Popconfirm>
       ),

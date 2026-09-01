@@ -4,11 +4,14 @@ import { BellOutlined, LinkOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import TaskSubNav from './components/TaskSubNav'
 import { useTaskContext } from './TaskContext'
-import { chatMessages, collabTasks } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 import styles from './index.module.css'
 
 export default function Collab() {
   const { notifications, markNotificationRead } = useTaskContext()
+  const { data } = useMenuData<TaskData>('task')
+  const { chatMessages, collabTasks } = data
   const [taskId, setTaskId] = useState('t1-2')
   const [msg, setMsg] = useState('')
   const messages = chatMessages.filter((m) => m.taskId === taskId)

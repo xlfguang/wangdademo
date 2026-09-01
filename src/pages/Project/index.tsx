@@ -4,7 +4,8 @@ import { PlusOutlined, KeyOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import SearchForm from '@/components/SearchForm'
-import { projectPluginOptions } from '@/mock/project'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ProjectData } from '@/mock/project'
 import { useProjectContext } from './ProjectContext'
 import { delay, generateId, filterBySearch, filterByStatus, paginate } from '@/utils/mockApi'
 import type { Project, SearchParams } from '@/types'
@@ -24,6 +25,8 @@ function createAppKey() {
 export default function ProjectPage() {
   const navigate = useNavigate()
   const { projects, addProject, removeProject } = useProjectContext()
+  const { data } = useMenuData<ProjectData>('project')
+  const projectPluginOptions = data.projectPluginOptions
   const [modalOpen, setModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState<SearchParams>({})

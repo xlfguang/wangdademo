@@ -2,8 +2,9 @@ import { useState, useCallback } from 'react'
 import { Card, Form, Input, Select, Radio, Row, Col, Button, Progress, Table, Tag, InputNumber, message } from 'antd'
 import PageHeader from '@/components/PageHeader'
 import CrawlerSubNav from './components/CrawlerSubNav'
-import { useCrawlerContext, searchResultsMock } from './CrawlerContext'
-import { keywordGroups, searchLogsMock } from '@/mock/crawler'
+import { useCrawlerContext } from './CrawlerContext'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 import { useDeepLinkAction } from '@/utils/deepLink'
 import { delay, generateId } from '@/utils/mockApi'
 import type { CrawlerTask } from '@/types'
@@ -11,6 +12,8 @@ import styles from './index.module.css'
 
 export default function Search() {
   const { addTask, searchResults, setSearchResults } = useCrawlerContext()
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const { keywordGroups, searchLogsMock, searchResultsMock } = data
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)

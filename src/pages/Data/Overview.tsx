@@ -7,14 +7,8 @@ import ChartCard from '@/components/ChartCard'
 import StatusTag from '@/components/StatusTag'
 import DataSubNav from './components/DataSubNav'
 import { useDataContext } from './DataContext'
-import {
-  dataPluginMeta,
-  dataOverviewStats,
-  dataTrend,
-  dataSourceDistribution,
-  qualityOverview,
-  dataTasks,
-} from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { dataStatLinks } from '@/config/capabilityLinks'
@@ -23,6 +17,8 @@ import styles from './index.module.css'
 export default function Overview() {
   const navigate = useNavigate()
   const { governanceTasks } = useDataContext()
+  const { data } = useMenuData<DataMenuData>('data')
+  const { dataPluginMeta, dataOverviewStats, dataTrend, dataSourceDistribution, qualityOverview, dataTasks } = data
   const recentTasks = [...governanceTasks.slice(0, 3), ...dataTasks.slice(0, 3)].slice(0, 6)
 
   const lineOption = {

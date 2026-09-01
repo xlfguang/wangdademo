@@ -4,7 +4,7 @@ import type {
 } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface TaskData {
+export interface TaskData {
   taskPluginMeta: { name: string; description: string; status: 'running'; version: string }
   taskOverviewStats: {
     totalTasks: number

@@ -4,13 +4,8 @@ import PageHeader from '@/components/PageHeader'
 import StatusTag from '@/components/StatusTag'
 import ModelSubNav from './components/ModelSubNav'
 import { useModelContext } from './ModelContext'
-import {
-  testScenarios,
-  testScenarioPrompts,
-  mockTestResponses,
-  modelTypeLabels,
-  modelTypeColors,
-} from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ModelData } from '@/mock/model'
 import { formatNumber } from '@/utils/format'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
@@ -25,6 +20,8 @@ interface ChatMessage {
 
 export default function Test() {
   const { models } = useModelContext()
+  const { data } = useMenuData<ModelData>('model')
+  const { testScenarios, testScenarioPrompts, mockTestResponses, modelTypeLabels, modelTypeColors } = data
   const enabledModels = models.filter((m) => m.status === 'enabled')
   const [selectedId, setSelectedId] = useState(enabledModels[0]?.id ?? '')
   const [scenario, setScenario] = useState(testScenarios[0])

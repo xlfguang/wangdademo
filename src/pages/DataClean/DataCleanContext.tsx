@@ -1,6 +1,8 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import type { DataCleanTask, CleanBatch } from '@/types'
-import { dataCleanTasks as initialTasks, cleanBatches as initialBatches } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { DataCleanData } from '@/mock/dataClean'
 
 interface DataCleanContextValue {
   tasks: DataCleanTask[]
@@ -15,19 +17,28 @@ interface DataCleanContextValue {
 const DataCleanContext = createContext<DataCleanContextValue | null>(null)
 
 export function DataCleanProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<DataCleanTask[]>(initialTasks)
-  const [batches, setBatches] = useState<CleanBatch[]>(initialBatches)
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const [tasks, setTasks] = useState<DataCleanTask[]>(data.dataCleanTasks)
+  const [batches, setBatches] = useState<CleanBatch[]>(data.cleanBatches)
+
+  useEffect(() => {
+    setTasks(data.dataCleanTasks)
+    setBatches(data.cleanBatches)
+  }, [data])
 
   const addTask = useCallback((task: DataCleanTask) => {
     setTasks((prev) => [task, ...prev])
+    persistMenuUpdate<DataCleanData>('dataClean', (d) => ({ ...d, dataCleanTasks: [task, ...d.dataCleanTasks] }))
   }, [])
 
   const addBatch = useCallback((batch: CleanBatch) => {
     setBatches((prev) => [batch, ...prev])
+    persistMenuUpdate<DataCleanData>('dataClean', (d) => ({ ...d, cleanBatches: [batch, ...d.cleanBatches] }))
   }, [])
 
   const removeTask = useCallback((id: string) => {
     setTasks((prev) => prev.filter((t) => t.id !== id))
+    persistMenuUpdate<DataCleanData>('dataClean', (d) => ({ ...d, dataCleanTasks: d.dataCleanTasks.filter((t) => t.id !== id) }))
   }, [])
 
   const getTask = useCallback((id: string) => tasks.find((t) => t.id === id), [tasks])

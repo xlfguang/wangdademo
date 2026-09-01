@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import TaskSubNav from './components/TaskSubNav'
 import { useTaskContext } from './TaskContext'
-import { taskLedgers } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 import TaskStatusTag from './components/TaskStatusTag'
 import { useDeepLinkAction } from '@/utils/deepLink'
 import { delay } from '@/utils/mockApi'
@@ -13,6 +14,8 @@ import { delay } from '@/utils/mockApi'
 export default function Closure() {
   const navigate = useNavigate()
   const { tasks, updateTask } = useTaskContext()
+  const { data } = useMenuData<TaskData>('task')
+  const taskLedgers = data.taskLedgers
   const [acceptModal, setAcceptModal] = useState(false)
   const [loading, setLoading] = useState(false)
   const [form] = Form.useForm()

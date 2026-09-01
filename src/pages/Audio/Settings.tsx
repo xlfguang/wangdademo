@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Card, Form, Select, Switch, InputNumber, Button, Checkbox, message } from 'antd'
 import AudioSubNav from './components/AudioSubNav'
-import { audioSettingsDefault } from '@/mock/audio'
+import { useMenuData } from '@/mock/useMenuData'
+import type { AudioData } from '@/mock/audio'
 
 export default function Settings() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<AudioData>('audio')
 
   const handleSave = async () => {
     setSaving(true)
@@ -17,7 +19,7 @@ export default function Settings() {
   return (
     <div>
       <AudioSubNav />
-      <Form form={form} layout="vertical" initialValues={audioSettingsDefault}>
+      <Form form={form} layout="vertical" initialValues={data.audioSettingsDefault}>
         <Card title="基础设置" bordered={false} style={{ marginBottom: 16, boxShadow: 'var(--shadow-card)' }}>
           <Form.Item name="exportFormat" label="默认导出格式"><Select options={[{ label: 'TXT', value: 'txt' }, { label: 'Word', value: 'docx' }]} /></Form.Item>
           <Form.Item name="saveFormat" label="裁剪后默认保存格式"><Select options={[{ label: 'MP3', value: 'mp3' }, { label: 'WAV', value: 'wav' }]} /></Form.Item>

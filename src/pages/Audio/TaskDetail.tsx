@@ -2,13 +2,12 @@ import { Card, Descriptions, Progress, Button, Result, Row, Col, Tag } from 'ant
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
 import { useAudioContext } from './AudioContext'
-import { extractionMock } from '@/mock/audio'
 import styles from './index.module.css'
 
 export default function TaskDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getTask } = useAudioContext()
+  const { getTask, extraction } = useAudioContext()
   const task = getTask(id ?? '')
 
   if (!task) {
@@ -42,7 +41,7 @@ export default function TaskDetail() {
         </Col>
         <Col span={12}>
           <Card title="关键信息预览" bordered={false} style={{ boxShadow: 'var(--shadow-card)' }}>
-            {extractionMock.keywords.slice(0, 5).map((k) => <Tag key={k.text} color="purple" style={{ marginBottom: 4 }}>{k.text}</Tag>)}
+            {extraction.keywords.slice(0, 5).map((k) => <Tag key={k.text} color="purple" style={{ marginBottom: 4 }}>{k.text}</Tag>)}
             <div style={{ marginTop: 12 }}><Button type="link" onClick={() => navigate('/audio/extraction')}>查看完整提取结果</Button></div>
           </Card>
         </Col>

@@ -11,7 +11,8 @@ import {
 import PageHeader from '@/components/PageHeader'
 import StatusTag from '@/components/StatusTag'
 import CommunitySubNav from './components/CommunitySubNav'
-import { channels, pushTemplates, pushStrategies } from '@/mock/community'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CommunityData } from '@/mock/community'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -27,6 +28,8 @@ const iconMap: Record<string, ReactNode> = {
 }
 
 export default function Push() {
+  const { data } = useMenuData<CommunityData>('community')
+  const { channels, pushTemplates, pushStrategies } = data
   const [form] = Form.useForm()
   const [selectedTemplate, setSelectedTemplate] = useState(pushTemplates[0].id)
   const [sending, setSending] = useState(false)

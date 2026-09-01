@@ -6,7 +6,8 @@ import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import CrawlerSubNav from './components/CrawlerSubNav'
 import { useCrawlerContext } from './CrawlerContext'
-import { crawlerPluginMeta, crawlerOverviewStats, crawlerScenarios } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { crawlerScenarioLinks } from '@/config/capabilityLinks'
@@ -17,6 +18,8 @@ const icons = [<CloudDownloadOutlined />, <FireOutlined />, <ThunderboltOutlined
 export default function Overview() {
   const navigate = useNavigate()
   const { tasks } = useCrawlerContext()
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const { crawlerPluginMeta, crawlerOverviewStats, crawlerScenarios } = data
 
   const columns = [
     { title: '任务名称', dataIndex: 'name', key: 'name', ellipsis: true },

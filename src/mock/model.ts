@@ -48,7 +48,7 @@ export interface ModelCallTop5Response {
   items: ModelCallRankItem[]
 }
 
-interface ModelData {
+export interface ModelData {
   modelTypeLabels: Record<ModelType, string>
   modelTypeColors: Record<ModelType, string>
   dispatchStrategyLabels: Record<DispatchStrategy, string>

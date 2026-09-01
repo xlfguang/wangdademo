@@ -4,7 +4,7 @@ import type {
 } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface KnowledgeData {
+export interface KnowledgeData {
   knowledgePluginMeta: { name: string; description: string; status: 'running'; version: string }
   knowledgeOverviewStats: {
     totalBases: number

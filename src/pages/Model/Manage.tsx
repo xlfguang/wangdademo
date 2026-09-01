@@ -6,19 +6,17 @@ import PageHeader from '@/components/PageHeader'
 import StatusTag from '@/components/StatusTag'
 import ModelSubNav from './components/ModelSubNav'
 import { useModelContext } from './ModelContext'
-import {
-  modelTypeLabels,
-  modelTypeColors,
-  allocatablePlugins,
-} from '@/mock/model'
-import type { AiModel, ModelType } from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ModelData, AiModel, ModelType } from '@/mock/model'
 import { delay, generateId } from '@/utils/mockApi'
 
-const typeOptions = Object.entries(modelTypeLabels).map(([value, label]) => ({ value, label }))
 
 export default function Manage() {
   const navigate = useNavigate()
   const { models, addModel, updateModel, removeModel, toggleModelStatus } = useModelContext()
+  const { data } = useMenuData<ModelData>('model')
+  const { modelTypeLabels, modelTypeColors, allocatablePlugins } = data
+  const typeOptions = Object.entries(modelTypeLabels).map(([value, label]) => ({ value, label }))
   const [modalOpen, setModalOpen] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)

@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import ExportReportButton from '@/components/ExportReportButton'
 import DataSubNav from './components/DataSubNav'
-import { reports } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
 import type { ReportItem } from '@/types'
 
 export default function Reports() {
   const navigate = useNavigate()
+  const { data } = useMenuData<DataMenuData>('data')
+  const reports = data.reports
 
   const columns = [
     { title: '报表名称', dataIndex: 'name', key: 'name' },

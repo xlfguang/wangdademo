@@ -3,10 +3,13 @@ import { Card, Table, Upload, Select, Button, List, Row, Col, message } from 'an
 import { UploadOutlined, CommentOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import TaskSubNav from './components/TaskSubNav'
-import { taskDocuments, taskComments } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 import { delay } from '@/utils/mockApi'
 
 export default function Docs() {
+  const { data } = useMenuData<TaskData>('task')
+  const { taskDocuments, taskComments } = data
   const [folder, setFolder] = useState<string | undefined>()
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null)
 

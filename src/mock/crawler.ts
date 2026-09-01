@@ -17,7 +17,7 @@ export interface CrawlerSchedule {
   status: 'completed' | 'running' | 'waiting' | 'failed'
 }
 
-interface CrawlerData {
+export interface CrawlerData {
   crawlerPluginMeta: { name: string; description: string; status: 'running'; version: string }
   crawlerOverviewStats: {
     totalTasks: number

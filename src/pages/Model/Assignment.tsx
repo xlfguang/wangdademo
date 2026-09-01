@@ -1,21 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Table, Button, Modal, Select, Tag, message } from 'antd'
 import { ApiOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import ModelSubNav from './components/ModelSubNav'
 import { useModelContext } from './ModelContext'
-import {
-  pluginAssignments,
-  dispatchStrategyLabels,
-} from '@/mock/model'
-import type { PluginAssignment, DispatchStrategy } from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ModelData, PluginAssignment, DispatchStrategy } from '@/mock/model'
 import { delay } from '@/utils/mockApi'
 
-const strategyOptions = Object.entries(dispatchStrategyLabels).map(([value, label]) => ({ value, label }))
 
 export default function Assignment() {
   const { models } = useModelContext()
+  const { data } = useMenuData<ModelData>('model')
+  const { pluginAssignments, dispatchStrategyLabels } = data
+  const strategyOptions = Object.entries(dispatchStrategyLabels).map(([value, label]) => ({ value, label }))
   const [assignments, setAssignments] = useState<PluginAssignment[]>(pluginAssignments)
+
+  useEffect(() => {
+    setAssignments(data.pluginAssignments)
+  }, [data])
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<PluginAssignment | null>(null)
   const [selectedModels, setSelectedModels] = useState<string[]>([])

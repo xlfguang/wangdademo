@@ -18,20 +18,16 @@ import ModelSubNav from './components/ModelSubNav'
 import ModelCallRankList from './components/ModelCallRankList'
 import { getModelCallTop5 } from '@/api/model'
 import { useModelContext } from './ModelContext'
-import {
-  modelPluginMeta,
-  modelOverviewStats,
-  modelCallTrend,
-  modelTypeLabels,
-  modelTypeColors,
-} from '@/mock/model'
-import type { AiModel, ModelCallRankItem } from '@/mock/model'
+import { useMenuData } from '@/mock/useMenuData'
+import type { ModelData, AiModel, ModelCallRankItem } from '@/mock/model'
 import { formatNumber } from '@/utils/format'
 import styles from './index.module.css'
 
 export default function Overview() {
   const navigate = useNavigate()
   const { models } = useModelContext()
+  const { data } = useMenuData<ModelData>('model')
+  const { modelPluginMeta, modelOverviewStats, modelCallTrend, modelTypeLabels, modelTypeColors } = data
   const recentModels = models.slice(0, 6)
   const [callTop5, setCallTop5] = useState<ModelCallRankItem[]>([])
 

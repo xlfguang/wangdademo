@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Menu, Input, Button, Tag, Typography, Spin } from 'antd'
 import VideoSubNav from './components/VideoSubNav'
-import { videoApiEndpoints } from '@/mock/video'
+import { useMenuData } from '@/mock/useMenuData'
+import type { VideoData } from '@/mock/video'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -9,6 +10,8 @@ const { TextArea } = Input
 const { Paragraph } = Typography
 
 export default function ApiDebug() {
+  const { data } = useMenuData<VideoData>('video')
+  const videoApiEndpoints = data.videoApiEndpoints
   const [selected, setSelected] = useState(videoApiEndpoints[0])
   const [requestBody, setRequestBody] = useState(selected.requestBody)
   const [response, setResponse] = useState<string | null>(null)

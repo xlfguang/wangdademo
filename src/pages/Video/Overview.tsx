@@ -12,10 +12,8 @@ import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import VideoSubNav from './components/VideoSubNav'
 import { useVideoTasks } from './VideoTaskContext'
-import {
-  videoPluginMeta,
-  videoCapabilities,
-} from '@/mock/video'
+import { useMenuData } from '@/mock/useMenuData'
+import type { VideoData } from '@/mock/video'
 import { buildDeepLink } from '@/utils/deepLink'
 import { videoCapabilityLinks } from '@/config/capabilityLinks'
 import styles from './index.module.css'
@@ -32,6 +30,8 @@ const icons = [
 export default function Overview() {
   const navigate = useNavigate()
   const { tasks } = useVideoTasks()
+  const { data } = useMenuData<VideoData>('video')
+  const { videoPluginMeta, videoCapabilities } = data
   const recentTasks = tasks.slice(0, 6)
 
   const columns = [

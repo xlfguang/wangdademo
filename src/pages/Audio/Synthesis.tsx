@@ -3,11 +3,14 @@ import { Row, Col, Card, Button, Slider, Input, Progress, message, Space, Tag, U
 import { SoundOutlined, DownloadOutlined, PlayCircleOutlined, UploadOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import AudioSubNav from './components/AudioSubNav'
-import { voiceProfiles, synthesisScenarios, synthesisHistory } from '@/mock/audio'
+import { useMenuData } from '@/mock/useMenuData'
+import type { AudioData } from '@/mock/audio'
 import { useDeepLinkParam } from '@/utils/deepLink'
 import { delay } from '@/utils/mockApi'
 
 export default function Synthesis() {
+  const { data } = useMenuData<AudioData>('audio')
+  const { voiceProfiles, synthesisScenarios, synthesisHistory } = data
   const [selectedVoice, setSelectedVoice] = useState('v1')
   const [speed, setSpeed] = useState(1.0)
   const [pitch, setPitch] = useState(0)

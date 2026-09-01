@@ -5,7 +5,8 @@ import PageHeader from '@/components/PageHeader'
 import StatusTag from '@/components/StatusTag'
 import KnowledgeSubNav from './components/KnowledgeSubNav'
 import { useKnowledgeContext } from './KnowledgeContext'
-import { docProcessSteps, getAllKnowledgeDocs } from '@/mock/knowledge'
+import { useMenuData } from '@/mock/useMenuData'
+import type { KnowledgeData } from '@/mock/knowledge'
 import { delay, generateId } from '@/utils/mockApi'
 import type { KnowledgeDoc } from '@/types'
 
@@ -13,6 +14,8 @@ const { Dragger } = Upload
 
 export default function Structure() {
   const { bases, addDoc, docs } = useKnowledgeContext()
+  const { data } = useMenuData<KnowledgeData>('knowledge')
+  const { docProcessSteps, knowledgeDocs } = data
   const [selectedKb, setSelectedKb] = useState(bases[0]?.id ?? '')
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -108,7 +111,7 @@ export default function Structure() {
       <Card title="处理中的文档" bordered={false} style={{ boxShadow: 'var(--shadow-card)' }}>
         <Table
           columns={columns}
-          dataSource={processingDocs.length > 0 ? processingDocs : getAllKnowledgeDocs().filter((d) => d.status === 'running')}
+          dataSource={processingDocs.length > 0 ? processingDocs : Object.values(knowledgeDocs).flat().filter((d) => d.status === 'running')}
           rowKey="id"
           pagination={false}
           size="middle"

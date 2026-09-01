@@ -1,7 +1,7 @@
 import type { AudioTask, TranscriptSegment, ExtractedInfo, AudioHistoryRecord } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface AudioData {
+export interface AudioData {
   audioPluginMeta: { name: string; description: string; status: 'running'; version: string }
   audioOverviewStats: {
     totalTasks: number

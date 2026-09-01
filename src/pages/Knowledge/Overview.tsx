@@ -9,7 +9,8 @@ import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import KnowledgeSubNav from './components/KnowledgeSubNav'
 import { useKnowledgeContext } from './KnowledgeContext'
-import { knowledgePluginMeta, knowledgeOverviewStats, knowledgeScenarios } from '@/mock/knowledge'
+import { useMenuData } from '@/mock/useMenuData'
+import type { KnowledgeData } from '@/mock/knowledge'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { knowledgeScenarioLinks } from '@/config/capabilityLinks'
@@ -23,6 +24,8 @@ const icons = [
 export default function Overview() {
   const navigate = useNavigate()
   const { syncTasks } = useKnowledgeContext()
+  const { data } = useMenuData<KnowledgeData>('knowledge')
+  const { knowledgePluginMeta, knowledgeOverviewStats, knowledgeScenarios } = data
 
   const columns = [
     { title: '任务名称', dataIndex: 'name', key: 'name', ellipsis: true },

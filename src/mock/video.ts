@@ -6,7 +6,7 @@ import type {
 } from '@/types'
 import { getLocalData } from './dataSource'
 
-interface VideoData {
+export interface VideoData {
   videoPluginMeta: { name: string; description: string; status: 'running'; version: string }
   videoOverviewStats: {
     totalTasks: number

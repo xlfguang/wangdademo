@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { Card, Form, InputNumber, TimePicker, Switch, Input, Button, message } from 'antd'
 import dayjs from 'dayjs'
 import CommunitySubNav from './components/CommunitySubNav'
-import { communitySettingsDefault } from '@/mock/community'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CommunityData } from '@/mock/community'
 
 export default function Settings() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<CommunityData>('community')
+  const communitySettingsDefault = data.communitySettingsDefault
 
   const initialValues = {
     ...communitySettingsDefault,

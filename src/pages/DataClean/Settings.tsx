@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Card, Form, InputNumber, Select, Switch, Button, Table, message } from 'antd'
 import DataCleanSubNav from './components/DataCleanSubNav'
-import { dataCleanSettingsDefault, negotiationRecords } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataCleanData } from '@/mock/dataClean'
 
 export default function Settings() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { dataCleanSettingsDefault, negotiationRecords } = data
 
   const handleSave = async () => {
     setSaving(true)

@@ -2,7 +2,8 @@ import { Card, Descriptions, Steps, Progress, Row, Col, Button, Result, Table, T
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
 import { DataCleanProvider, useDataCleanContext } from './DataCleanContext'
-import { pipelineLayers, qualityCheckItems, cleanDocuments } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataCleanData } from '@/mock/dataClean'
 import styles from './index.module.css'
 
 const categoryLabel: Record<string, string> = {
@@ -22,6 +23,8 @@ function TaskDetailContent() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { getTask, getBatch } = useDataCleanContext()
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { pipelineLayers, qualityCheckItems, cleanDocuments } = data
   const task = getTask(id ?? '')
   const batch = task?.batchId ? getBatch(task.batchId) : undefined
 

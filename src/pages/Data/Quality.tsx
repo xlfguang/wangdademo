@@ -2,9 +2,12 @@ import { Row, Col, Card, Progress, Table, Button } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import StatusTag from '@/components/StatusTag'
 import DataSubNav from './components/DataSubNav'
-import { qualityMetrics, qualityTrend, qualityAlerts } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 
 export default function Quality() {
+  const { data } = useMenuData<DataMenuData>('data')
+  const { qualityMetrics, qualityTrend, qualityAlerts } = data
   const lineOption = {
     tooltip: { trigger: 'axis' },
     xAxis: { type: 'category', data: qualityTrend.dates, axisLabel: { interval: 4 } },

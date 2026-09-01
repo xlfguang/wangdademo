@@ -3,12 +3,15 @@ import { Row, Col, Card, Form, Select, DatePicker, Button, Statistic, Segmented,
 import ReactECharts from 'echarts-for-react'
 import DataSubNav from './components/DataSubNav'
 import ExportReportButton from '@/components/ExportReportButton'
-import { analysisStats, salesTrend, regionCompare, correlationData } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 import { delay } from '@/utils/mockApi'
 
 const { RangePicker } = DatePicker
 
 export default function Analysis() {
+  const { data } = useMenuData<DataMenuData>('data')
+  const { analysisStats, salesTrend, regionCompare, correlationData } = data
   const [period, setPeriod] = useState('月')
   const [analyzed, setAnalyzed] = useState(true)
 

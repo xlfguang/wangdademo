@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Row, Col, Card, Progress, Table, Button, Tag, message, Drawer } from 'antd'
 import DataCleanSubNav from './components/DataCleanSubNav'
-import { qualityReport, qualityCheckItems as initialItems, cleanCompareSamples } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { DataCleanData } from '@/mock/dataClean'
 import type { QualityCheckItem } from '@/types'
 import styles from './index.module.css'
 
@@ -18,12 +20,19 @@ const severityColor: Record<string, string> = {
 }
 
 export default function Quality() {
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { qualityReport, qualityCheckItems: initialItems, cleanCompareSamples } = data
   const [items, setItems] = useState<QualityCheckItem[]>(initialItems)
   const [compareOpen, setCompareOpen] = useState(false)
   const [compareItem, setCompareItem] = useState(cleanCompareSamples[0])
 
+  useEffect(() => {
+    setItems(data.qualityCheckItems)
+  }, [data])
+
   const handleReview = (id: string) => {
     setItems((prev) => prev.map((item) => item.id === id ? { ...item, status: 'passed' as const } : item))
+    persistMenuUpdate<DataCleanData>('dataClean', (d) => ({ ...d, qualityCheckItems: d.qualityCheckItems.map((item) => (item.id === id ? { ...item, status: 'passed' } : item)) }))
     message.success('复核通过')
   }
 

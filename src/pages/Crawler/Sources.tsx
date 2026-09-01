@@ -3,7 +3,8 @@ import { Card, Row, Col, Table, Tag, Button, Form, InputNumber, Radio, message, 
 import { CheckCircleOutlined, CloseCircleOutlined, ApiOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import CrawlerSubNav from './components/CrawlerSubNav'
-import { dataSources, trustedSources } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 import { useDeepLinkAction } from '@/utils/deepLink'
 import { delay } from '@/utils/mockApi'
 import type { CrawlerDataSource } from '@/types'
@@ -22,6 +23,8 @@ const statusText: Record<CrawlerDataSource['status'], string> = {
 }
 
 export default function Sources() {
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const { dataSources, trustedSources } = data
   const [testing, setTesting] = useState<string | null>(null)
   const [sourceFilter, setSourceFilter] = useState('priority')
 

@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Card, Form, InputNumber, Select, Switch, Button, Checkbox, message } from 'antd'
 import CrawlerSubNav from './components/CrawlerSubNav'
-import { crawlerSettingsDefault } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 
 export default function Settings() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const crawlerSettingsDefault = data.crawlerSettingsDefault
 
   const handleSave = async () => {
     setSaving(true)

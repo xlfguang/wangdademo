@@ -8,7 +8,8 @@ import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import DataCleanSubNav from './components/DataCleanSubNav'
 import { useDataCleanContext } from './DataCleanContext'
-import { dataCleanPluginMeta, dataCleanOverviewStats, dataCleanScenarios, pipelineLayers } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataCleanData } from '@/mock/dataClean'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { dataCleanScenarioLinks } from '@/config/capabilityLinks'
@@ -22,6 +23,8 @@ const icons = [
 export default function Overview() {
   const navigate = useNavigate()
   const { tasks } = useDataCleanContext()
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { dataCleanPluginMeta, dataCleanOverviewStats, dataCleanScenarios, pipelineLayers } = data
 
   const columns = [
     { title: '任务名称', dataIndex: 'name', key: 'name', ellipsis: true },

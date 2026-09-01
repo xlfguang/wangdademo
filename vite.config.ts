@@ -10,4 +10,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3x2157121c.qicp.vip:59924',
+        changeOrigin: true,
+      },
+    },
+  },
 })

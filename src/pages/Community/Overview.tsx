@@ -5,7 +5,8 @@ import StatCard from '@/components/StatCard'
 import FeatureCard from '@/components/FeatureCard'
 import StatusTag from '@/components/StatusTag'
 import CommunitySubNav from './components/CommunitySubNav'
-import { communityPluginMeta, communityOverviewStats, communityScenarios, communityGroups } from '@/mock/community'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CommunityData } from '@/mock/community'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { communityScenarioLinks } from '@/config/capabilityLinks'
@@ -15,6 +16,8 @@ const icons = [<MessageOutlined />, <RobotOutlined />, <SendOutlined />, <TeamOu
 
 export default function Overview() {
   const navigate = useNavigate()
+  const { data } = useMenuData<CommunityData>('community')
+  const { communityPluginMeta, communityOverviewStats, communityScenarios, communityGroups } = data
   const columns = [
     { title: '社群名称', dataIndex: 'name', key: 'name', ellipsis: true },
     { title: '成员数', dataIndex: 'memberCount', key: 'memberCount', render: (v: number) => formatNumber(v) },

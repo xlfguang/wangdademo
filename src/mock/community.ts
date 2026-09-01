@@ -20,7 +20,7 @@ export interface PushStrategyItem {
   lastRun: string
 }
 
-interface CommunityData {
+export interface CommunityData {
   communityPluginMeta: { name: string; description: string; status: 'running'; version: string }
   communityOverviewStats: {
     totalGroups: number

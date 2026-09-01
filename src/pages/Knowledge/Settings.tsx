@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Card, Form, InputNumber, Select, Switch, Button, message } from 'antd'
 import KnowledgeSubNav from './components/KnowledgeSubNav'
-import { knowledgeSettingsDefault } from '@/mock/knowledge'
+import { useMenuData } from '@/mock/useMenuData'
+import type { KnowledgeData } from '@/mock/knowledge'
 
 export default function Settings() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<KnowledgeData>('knowledge')
+  const knowledgeSettingsDefault = data.knowledgeSettingsDefault
 
   const handleSave = async () => {
     setSaving(true)

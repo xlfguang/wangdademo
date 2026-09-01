@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { Card, Form, Input, InputNumber, Switch, Button, message } from 'antd'
 import StatusTag from '@/components/StatusTag'
 import VideoSubNav from './components/VideoSubNav'
-import { videoPluginConfig } from '@/mock/video'
+import { useMenuData } from '@/mock/useMenuData'
+import type { VideoData } from '@/mock/video'
 
 export default function Config() {
   const [form] = Form.useForm()
   const [saving, setSaving] = useState(false)
+  const { data } = useMenuData<VideoData>('video')
+  const videoPluginConfig = data.videoPluginConfig
 
   const handleSave = async () => {
     setSaving(true)

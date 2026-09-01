@@ -6,7 +6,8 @@ import { InboxOutlined, WarningOutlined } from '@ant-design/icons'
 import type { UploadFile, UploadProps } from 'antd'
 import DataCleanSubNav from './components/DataCleanSubNav'
 import { useDataCleanContext } from './DataCleanContext'
-import { quotaLimits, negotiationRecords } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataCleanData } from '@/mock/dataClean'
 import { useDeepLinkAction, useDeepLinkParam } from '@/utils/deepLink'
 import { delay, generateId } from '@/utils/mockApi'
 import type { DocumentCategory, DataCleanTask, CleanBatch } from '@/types'
@@ -40,6 +41,8 @@ function mockPages(name: string, category: DocumentCategory): number {
 
 export default function UploadPage() {
   const { addTask, addBatch } = useDataCleanContext()
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { quotaLimits, negotiationRecords } = data
   const [form] = Form.useForm()
   const [category, setCategory] = useState<DocumentCategory>('office')
   const [fileList, setFileList] = useState<FileMeta[]>([])

@@ -1,7 +1,8 @@
 import { Card, Row, Col, Tag, Statistic, Progress } from 'antd'
 import PageHeader from '@/components/PageHeader'
 import CommunitySubNav from './components/CommunitySubNav'
-import { userPortraits, lifecycleStats, strategyEffectStats } from '@/mock/community'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CommunityData } from '@/mock/community'
 import type { LifecycleStage } from '@/types'
 import styles from './index.module.css'
 
@@ -13,9 +14,12 @@ const lifecycleLabels: Record<LifecycleStage, { label: string; color: string }> 
   vip: { label: 'VIP', color: 'purple' },
 }
 
-const maxLifecycleCount = Math.max(...lifecycleStats.map((s) => s.count))
 
 export default function Portrait() {
+  const { data } = useMenuData<CommunityData>('community')
+  const { userPortraits, lifecycleStats, strategyEffectStats } = data
+  const maxLifecycleCount = Math.max(...lifecycleStats.map((s) => s.count))
+
   return (
     <div>
       <CommunitySubNav />

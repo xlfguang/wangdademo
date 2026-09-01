@@ -3,12 +3,15 @@ import { Row, Col, Card, Tag, Timeline, Tabs, message } from 'antd'
 import VideoSubNav from './components/VideoSubNav'
 import VideoUpload from './components/VideoUpload'
 import VideoPlayer from './components/VideoPlayer'
-import { videoAnalysis } from '@/mock/video'
+import { useMenuData } from '@/mock/useMenuData'
+import type { VideoData } from '@/mock/video'
 import { createLocalVideoUrl } from '@/utils/videoFile'
 import { setAnalysisVideoUrl, getAnalysisVideoUrl } from './videoFileStore'
 import styles from './index.module.css'
 
 export default function Analysis() {
+  const { data } = useMenuData<VideoData>('video')
+  const videoAnalysis = data.videoAnalysis
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [videoUrl, setVideoUrl] = useState<string | undefined>(() => getAnalysisVideoUrl())
 

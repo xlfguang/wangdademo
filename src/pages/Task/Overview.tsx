@@ -7,7 +7,8 @@ import StatusTag from '@/components/StatusTag'
 import TaskSubNav from './components/TaskSubNav'
 import TaskStatusTag from './components/TaskStatusTag'
 import { useTaskContext } from './TaskContext'
-import { taskPluginMeta, taskOverviewStats, taskScenarios } from '@/mock/task'
+import { useMenuData } from '@/mock/useMenuData'
+import type { TaskData } from '@/mock/task'
 import { formatNumber } from '@/utils/format'
 import { buildDeepLink } from '@/utils/deepLink'
 import { taskScenarioLinks } from '@/config/capabilityLinks'
@@ -18,6 +19,8 @@ const icons = [<ThunderboltOutlined />, <ClockCircleOutlined />, <TeamOutlined /
 export default function Overview() {
   const navigate = useNavigate()
   const { tasks } = useTaskContext()
+  const { data } = useMenuData<TaskData>('task')
+  const { taskPluginMeta, taskOverviewStats, taskScenarios } = data
   const rootTasks = tasks.filter((t) => !t.parentId)
 
   const columns = [

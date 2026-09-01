@@ -18,15 +18,8 @@ import StatCard from '@/components/StatCard'
 import ChartCard from '@/components/ChartCard'
 import StatusTag from '@/components/StatusTag'
 import { getGreeting, formatNumber } from '@/utils/format'
-import {
-  dashboardStats,
-  taskTrendData,
-  pluginUsageData,
-  taskStatusData,
-  recentTasks,
-  pendingTodos,
-  dashboardQuickActions,
-} from '@/mock/dashboard'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DashboardData } from '@/mock/dashboard'
 import styles from './index.module.css'
 
 const quickActionIcons: Record<string, ReactNode> = {
@@ -46,6 +39,16 @@ const priorityColor: Record<string, string> = {
 
 export default function Dashboard() {
   const navigate = useNavigate()
+  const { data } = useMenuData<DashboardData>('dashboard')
+  const {
+    dashboardStats,
+    taskTrendData,
+    pluginUsageData,
+    taskStatusData,
+    recentTasks,
+    pendingTodos,
+    dashboardQuickActions,
+  } = data
 
   const lineOption = {
     tooltip: { trigger: 'axis' },

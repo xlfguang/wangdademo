@@ -2,12 +2,15 @@ import { Card, Descriptions, Progress, Button, Result, Table, Tag } from 'antd'
 import { useParams, useNavigate } from 'react-router-dom'
 import StatusTag from '@/components/StatusTag'
 import { useCrawlerContext } from './CrawlerContext'
-import { searchLogsMock } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import type { CrawlerData } from '@/mock/crawler'
 
 export default function TaskDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { getTask } = useCrawlerContext()
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const searchLogsMock = data.searchLogsMock
   const task = getTask(id ?? '')
 
   if (!task) {

@@ -3,7 +3,9 @@ import { Row, Col, Card, Checkbox, Button, Progress, Timeline, Input, Switch, Fo
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
 import AudioSubNav from './components/AudioSubNav'
-import { useAudioContext, transcriptMock } from './AudioContext'
+import { useAudioContext } from './AudioContext'
+import { useMenuData } from '@/mock/useMenuData'
+import type { AudioData } from '@/mock/audio'
 import { delay } from '@/utils/mockApi'
 import styles from './index.module.css'
 
@@ -12,6 +14,7 @@ const { TextArea } = Input
 export default function Transcription() {
   const navigate = useNavigate()
   const { clips, transcript, setTranscript, transcriptText, setTranscriptText } = useAudioContext()
+  const { data } = useMenuData<AudioData>('audio')
   const [selected, setSelected] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -39,8 +42,8 @@ export default function Transcription() {
       setProgress(i)
       await delay(500)
     }
-    setTranscript(transcriptMock)
-    setTranscriptText(transcriptMock.map((s) => `[${s.timestamp}] ${s.speaker}：${s.text}`).join('\n\n'))
+    setTranscript(data.transcriptMock)
+    setTranscriptText(data.transcriptMock.map((s) => `[${s.timestamp}] ${s.speaker}：${s.text}`).join('\n\n'))
     setLoading(false)
     message.success('语音转文字完成')
   }

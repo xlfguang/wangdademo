@@ -1,13 +1,15 @@
 import { Row, Col, Card, Statistic, Table, Button, Result } from 'antd'
 import ReactECharts from 'echarts-for-react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { reportDashboard } from '@/mock/data'
-import { getReport } from '@/mock/data'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataMenuData } from '@/mock/data'
 
 export default function ReportDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const report = getReport(id ?? '')
+  const { data } = useMenuData<DataMenuData>('data')
+  const reportDashboard = data.reportDashboard
+  const report = data.reports.find((r) => r.id === id)
 
   if (!report) {
     return <Result status="404" title="报表不存在" extra={<Button type="primary" onClick={() => navigate('/data/reports')}>返回列表</Button>} />

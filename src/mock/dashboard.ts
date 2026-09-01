@@ -15,7 +15,7 @@ export interface QuickAction {
   icon: string
 }
 
-interface DashboardData {
+export interface DashboardData {
   dashboardStats: {
     totalTasks: number
     totalTasksChange: number

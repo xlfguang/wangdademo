@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import type { VideoTask } from '@/types'
-import { videoTasks as initialTasks, getVideoTasks, setVideoTasks } from '@/mock/video'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { VideoData } from '@/mock/video'
 import { getTaskVideoUrl } from './videoFileStore'
 
 interface VideoTaskContextValue {
@@ -16,12 +18,13 @@ interface VideoTaskContextValue {
 const VideoTaskContext = createContext<VideoTaskContextValue | null>(null)
 
 export function VideoTaskProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasksState] = useState<VideoTask[]>(() => getVideoTasks())
+  const { data } = useMenuData<VideoData>('video')
+  const [tasks, setTasksState] = useState<VideoTask[]>(data.videoTasks)
   const progressTimers = useRef<Map<string, ReturnType<typeof setInterval>>>(new Map())
 
   useEffect(() => {
-    setVideoTasks(tasks)
-  }, [tasks])
+    setTasksState(data.videoTasks)
+  }, [data])
 
   useEffect(() => {
     return () => {
@@ -61,6 +64,7 @@ export function VideoTaskProvider({ children }: { children: ReactNode }) {
   const addTask = useCallback(
     (task: VideoTask) => {
       setTasksState((prev) => [task, ...prev])
+      persistMenuUpdate<VideoData>('video', (d) => ({ ...d, videoTasks: [task, ...d.videoTasks] }))
       if (task.status === 'running') {
         startProgressSimulation(task.id)
       }
@@ -70,6 +74,7 @@ export function VideoTaskProvider({ children }: { children: ReactNode }) {
 
   const updateTask = useCallback((id: string, updates: Partial<VideoTask>) => {
     setTasksState((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
+    persistMenuUpdate<VideoData>('video', (d) => ({ ...d, videoTasks: d.videoTasks.map((t) => (t.id === id ? { ...t, ...updates } : t)) }))
   }, [])
 
   const cancelTask = useCallback((id: string) => {
@@ -97,13 +102,13 @@ export function VideoTaskProvider({ children }: { children: ReactNode }) {
   )
 
   const getTask = useCallback(
-    (id: string) => tasks.find((t) => t.id === id) ?? initialTasks.find((t) => t.id === id),
+    (id: string) => tasks.find((t) => t.id === id) ?? data.videoTasks.find((t) => t.id === id),
     [tasks],
   )
 
   const getVideoUrl = useCallback(
     (id: string) => {
-      const task = tasks.find((t) => t.id === id) ?? initialTasks.find((t) => t.id === id)
+      const task = tasks.find((t) => t.id === id) ?? data.videoTasks.find((t) => t.id === id)
       return task?.localVideoUrl ?? task?.outputUrl ?? getTaskVideoUrl(id)
     },
     [tasks],

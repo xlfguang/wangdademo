@@ -1,19 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Table, Button, Switch, Modal, Form, Input, Select, message, Space } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import PageHeader from '@/components/PageHeader'
 import StatusTag from '@/components/StatusTag'
 import CrawlerSubNav from './components/CrawlerSubNav'
-import { crawlerSchedules as initialSchedules, type CrawlerSchedule } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { CrawlerData, CrawlerSchedule } from '@/mock/crawler'
 import { generateId } from '@/utils/mockApi'
 
 export default function Schedules() {
-  const [schedules, setSchedules] = useState<CrawlerSchedule[]>(initialSchedules.map((s) => ({ ...s })))
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const [schedules, setSchedules] = useState<CrawlerSchedule[]>(data.crawlerSchedules.map((s) => ({ ...s })))
+
+  useEffect(() => {
+    setSchedules(data.crawlerSchedules.map((s) => ({ ...s })))
+  }, [data])
   const [modalOpen, setModalOpen] = useState(false)
   const [form] = Form.useForm()
 
   const toggleEnabled = (id: string, enabled: boolean) => {
     setSchedules((prev) => prev.map((s) => (s.id === id ? { ...s, enabled, status: enabled ? 'waiting' : s.status } : s)))
+    persistMenuUpdate<CrawlerData>('crawler', (d) => ({ ...d, crawlerSchedules: d.crawlerSchedules.map((s) => (s.id === id ? { ...s, enabled, status: enabled ? 'waiting' : s.status } : s)) }))
     message.success(enabled ? '定时任务已启用' : '定时任务已停用')
   }
 
@@ -32,6 +40,7 @@ export default function Schedules() {
       status: 'waiting',
     }
     setSchedules((prev) => [newTask, ...prev])
+    persistMenuUpdate<CrawlerData>('crawler', (d) => ({ ...d, crawlerSchedules: [newTask, ...d.crawlerSchedules] }))
     setModalOpen(false)
     form.resetFields()
     message.success('定时任务已创建')

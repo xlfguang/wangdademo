@@ -1,20 +1,35 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Card, Table, Tag, Drawer, Descriptions, Timeline, Form, Input, Select, Button, message } from 'antd'
 import PageHeader from '@/components/PageHeader'
 import CrawlerSubNav from './components/CrawlerSubNav'
 import OpinionLevelTag from './components/OpinionLevelTag'
-import { opinionHotspots, alertRecords, levelStrategy } from '@/mock/crawler'
+import { useMenuData } from '@/mock/useMenuData'
+import { persistMenuUpdate } from '@/mock/dataSource'
+import type { CrawlerData } from '@/mock/crawler'
 import { useDeepLinkAction } from '@/utils/deepLink'
 import type { OpinionHotspot } from '@/types'
 import styles from './index.module.css'
 
 export default function Opinion() {
+  const { data } = useMenuData<CrawlerData>('crawler')
+  const { opinionHotspots, alertRecords, levelStrategy } = data
   const [detail, setDetail] = useState<OpinionHotspot | null>(null)
   const [alerts, setAlerts] = useState(alertRecords)
+
+  useEffect(() => {
+    setAlerts(data.alertRecords)
+  }, [data])
 
   useDeepLinkAction('detail', useCallback(() => {
     if (opinionHotspots[0]) setDetail(opinionHotspots[0])
   }, []))
+
+  const handleAlertStatus = (id: string, status: string) => {
+    const handleStatus = status as '未处理' | '处理中' | '已处理'
+    const next = alerts.map((a) => (a.id === id ? { ...a, handleStatus } : a))
+    setAlerts(next)
+    persistMenuUpdate<CrawlerData>('crawler', (d) => ({ ...d, alertRecords: d.alertRecords.map((a) => (a.id === id ? { ...a, handleStatus } : a)) }))
+  }
 
   const hotspotColumns = [
     { title: '等级', dataIndex: 'level', key: 'level', width: 80, render: (l: OpinionHotspot['level']) => <OpinionLevelTag level={l} /> },
@@ -37,7 +52,7 @@ export default function Opinion() {
     {
       title: '处理状态', dataIndex: 'handleStatus', key: 'handleStatus',
       render: (s: string, r: typeof alerts[0]) => (
-        <Select size="small" value={s} style={{ width: 90 }} options={['未处理', '处理中', '已处理'].map((v) => ({ label: v, value: v }))} onChange={(v) => setAlerts(alerts.map((a) => a.id === r.id ? { ...a, handleStatus: v as typeof a.handleStatus } : a))} />
+        <Select size="small" value={s} style={{ width: 90 }} options={['未处理', '处理中', '已处理'].map((v) => ({ label: v, value: v }))} onChange={(v) => handleAlertStatus(r.id, v)} />
       ),
     },
   ]

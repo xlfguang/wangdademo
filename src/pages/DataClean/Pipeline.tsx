@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, type ReactNode } from 'react'
 import { Card, Button, Progress, Tag, message, Select } from 'antd'
 import { PlayCircleOutlined, CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import DataCleanSubNav from './components/DataCleanSubNav'
-import { pipelineLayers as initialLayers, cleanBatches } from '@/mock/dataClean'
+import { useMenuData } from '@/mock/useMenuData'
+import type { DataCleanData } from '@/mock/dataClean'
 import type { PipelineStep } from '@/types'
 import styles from './index.module.css'
 
@@ -28,6 +29,8 @@ const statusLabel: Record<string, string> = {
 }
 
 export default function Pipeline() {
+  const { data } = useMenuData<DataCleanData>('dataClean')
+  const { pipelineLayers: initialLayers, cleanBatches } = data
   const [selectedBatch, setSelectedBatch] = useState(cleanBatches[0].id)
   const [steps, setSteps] = useState<PipelineStep[]>(initialLayers.map((s) => ({ ...s })))
   const [executing, setExecuting] = useState(false)
