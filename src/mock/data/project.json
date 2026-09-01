@@ -3,47 +3,47 @@
     {
       "name": "项目需求规格说明书.pdf",
       "size": "3.8 MB",
-      "updatedAt": "2026-03-15"
+      "updatedAt": "2025-01-15"
     },
     {
       "name": "技术方案设计文档.docx",
       "size": "5.2 MB",
-      "updatedAt": "2026-04-01"
+      "updatedAt": "2025-01-01"
     },
     {
       "name": "测试报告_v2.0.pdf",
       "size": "3.3 MB",
-      "updatedAt": "2026-08-10"
+      "updatedAt": "2025-02-10"
     },
     {
       "name": "用户操作手册.pdf",
       "size": "16 MB",
-      "updatedAt": "2026-08-20"
+      "updatedAt": "2025-02-20"
     }
   ],
   "projectLogs": [
     {
-      "time": "2026-08-28 10:30",
+      "time": "2025-02-28 10:30",
       "user": "张明",
       "action": "更新了项目进度至 78%"
     },
     {
-      "time": "2026-08-28 09:15",
+      "time": "2025-02-28 09:15",
       "user": "李华",
       "action": "完成了视频处理插件部署"
     },
     {
-      "time": "2026-08-27 16:40",
+      "time": "2025-02-27 16:40",
       "user": "王芳",
       "action": "提交了数据清洗流程配置"
     },
     {
-      "time": "2026-08-27 14:00",
+      "time": "2025-02-27 14:00",
       "user": "赵强",
       "action": "创建了智能客服模型微调任务"
     },
     {
-      "time": "2026-08-26 11:30",
+      "time": "2025-02-26 11:30",
       "user": "陈伟",
       "action": "上传了测试报告 v2.0"
     }
@@ -89,31 +89,31 @@
     {
       "id": "m1",
       "title": "需求调研与方案设计",
-      "date": "2026-03-15",
+      "date": "2025-01-15",
       "status": "completed"
     },
     {
       "id": "m2",
       "title": "知识库文档导入",
-      "date": "2026-05-20",
+      "date": "2025-01-20",
       "status": "completed"
     },
     {
       "id": "m3",
       "title": "视频处理插件部署",
-      "date": "2026-08-30",
+      "date": "2025-02-28",
       "status": "running"
     },
     {
       "id": "m4",
       "title": "数据清洗流程配置",
-      "date": "2026-09-05",
+      "date": "2025-02-05",
       "status": "waiting"
     },
     {
       "id": "m5",
       "title": "系统联调与验收",
-      "date": "2026-09-30",
+      "date": "2025-02-28",
       "status": "waiting"
     }
   ],
@@ -158,35 +158,35 @@
       "name": "知识库文档导入",
       "assignee": "张明",
       "status": "completed",
-      "deadline": "2026-08-15"
+      "deadline": "2025-02-15"
     },
     {
       "id": "pt2",
       "name": "视频处理插件部署",
       "assignee": "李华",
       "status": "running",
-      "deadline": "2026-08-30"
+      "deadline": "2025-02-28"
     },
     {
       "id": "pt3",
       "name": "数据清洗流程配置",
       "assignee": "王芳",
       "status": "running",
-      "deadline": "2026-09-05"
+      "deadline": "2025-02-05"
     },
     {
       "id": "pt4",
       "name": "智能客服模型微调",
       "assignee": "赵强",
       "status": "waiting",
-      "deadline": "2026-09-15"
+      "deadline": "2025-02-15"
     },
     {
       "id": "pt5",
       "name": "系统联调测试",
       "assignee": "陈伟",
       "status": "waiting",
-      "deadline": "2026-09-30"
+      "deadline": "2025-02-28"
     }
   ],
   "projects": [
@@ -197,8 +197,8 @@
       "manager": "张明",
       "status": "implementing",
       "progress": 55,
-      "startDate": "2026-03-01",
-      "endDate": "2026-12-31",
+      "startDate": "2025-01-01",
+      "endDate": "2025-02-28",
       "description": "为大型制造企业提供 AI 驱动的生产优化、质量检测和知识管理解决方案。",
       "appKey": "wd-app-a1b2c3d4e5f67890"
     },
@@ -210,7 +210,7 @@
       "status": "operating",
       "progress": 83,
       "startDate": "2025-09-01",
-      "endDate": "2026-08-31",
+      "endDate": "2025-02-28",
       "description": "构建政务领域智能知识库，支持政策查询、办事指南和智能问答。",
       "appKey": "wd-app-b2c3d4e5f6789012"
     },
@@ -222,7 +222,7 @@
       "status": "operating",
       "progress": 97,
       "startDate": "2025-11-01",
-      "endDate": "2026-10-31",
+      "endDate": "2025-02-28",
       "description": "基于大模型的智能客服系统，支持多渠道接入和知识库驱动的精准应答。",
       "appKey": "wd-app-c3d4e5f678901234"
     },
@@ -233,8 +233,8 @@
       "manager": "赵强",
       "status": "planning",
       "progress": 26,
-      "startDate": "2026-06-01",
-      "endDate": "2027-03-31",
+      "startDate": "2025-01-01",
+      "endDate": "2025-01-31",
       "description": "零售企业全链路数据治理，包括数据采集、清洗、标准化和智能分析。",
       "appKey": "wd-app-d4e5f67890123456"
     },
@@ -245,8 +245,8 @@
       "manager": "陈伟",
       "status": "implementing",
       "progress": 84,
-      "startDate": "2026-01-15",
-      "endDate": "2026-09-30",
+      "startDate": "2025-01-15",
+      "endDate": "2025-02-28",
       "description": "基于搜索爬虫和 AI 分析的舆情监测与预警系统。",
       "appKey": "wd-app-e5f6789012345678"
     },
@@ -258,7 +258,7 @@
       "status": "completed",
       "progress": 100,
       "startDate": "2025-06-01",
-      "endDate": "2026-05-31",
+      "endDate": "2025-01-31",
       "description": "AI 驱动的智能助教系统，支持个性化学习和知识问答。",
       "appKey": "wd-app-f678901234567890"
     }

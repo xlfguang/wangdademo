@@ -27,8 +27,8 @@
         "任务协作助手"
       ],
       "status": "enabled",
-      "createdAt": "2026-06-15 10:30",
-      "lastCallAt": "2026-08-31 14:32",
+      "createdAt": "2025-01-15 10:30",
+      "lastCallAt": "2025-02-28 14:32",
       "callCount": 52341,
       "avgLatency": "约 200-800ms"
     },
@@ -42,8 +42,8 @@
         "音频交互处理"
       ],
       "status": "enabled",
-      "createdAt": "2026-06-20 09:15",
-      "lastCallAt": "2026-08-31 13:58",
+      "createdAt": "2025-01-20 09:15",
+      "lastCallAt": "2025-02-28 13:58",
       "callCount": 78350,
       "avgLatency": "约 100-300ms"
     },
@@ -57,8 +57,8 @@
         "视频处理插件"
       ],
       "status": "enabled",
-      "createdAt": "2026-07-01 14:20",
-      "lastCallAt": "2026-08-31 12:45",
+      "createdAt": "2025-02-01 14:20",
+      "lastCallAt": "2025-02-28 12:45",
       "callCount": 12480,
       "avgLatency": "约 500-1200ms"
     },
@@ -72,8 +72,8 @@
         "视频处理插件"
       ],
       "status": "enabled",
-      "createdAt": "2026-07-05 11:00",
-      "lastCallAt": "2026-08-31 11:20",
+      "createdAt": "2025-02-05 11:00",
+      "lastCallAt": "2025-02-28 11:20",
       "callCount": 34520,
       "avgLatency": "约 50-150ms"
     },
@@ -88,8 +88,8 @@
         "数据清洗服务"
       ],
       "status": "enabled",
-      "createdAt": "2026-07-10 16:30",
-      "lastCallAt": "2026-08-31 10:15",
+      "createdAt": "2025-02-10 16:30",
+      "lastCallAt": "2025-02-28 10:15",
       "callCount": 45670,
       "avgLatency": "约 80-200ms"
     },
@@ -103,8 +103,8 @@
         "知识库管理"
       ],
       "status": "enabled",
-      "createdAt": "2026-07-12 08:45",
-      "lastCallAt": "2026-08-31 09:30",
+      "createdAt": "2025-02-12 08:45",
+      "lastCallAt": "2025-02-28 09:30",
       "callCount": 89200,
       "avgLatency": "约 30-100ms"
     },
@@ -118,8 +118,8 @@
         "社群管理"
       ],
       "status": "enabled",
-      "createdAt": "2026-07-18 13:20",
-      "lastCallAt": "2026-08-30 18:42",
+      "createdAt": "2025-02-18 13:20",
+      "lastCallAt": "2025-02-28 18:42",
       "callCount": 15680,
       "avgLatency": "约 150-400ms"
     },
@@ -131,8 +131,8 @@
       "apiKey": "sk-whisper-xx******",
       "plugins": [],
       "status": "disabled",
-      "createdAt": "2026-07-22 10:00",
-      "lastCallAt": "2026-08-28 16:20",
+      "createdAt": "2025-02-22 10:00",
+      "lastCallAt": "2025-02-28 16:20",
       "callCount": 8920,
       "avgLatency": "约 200-500ms"
     }
@@ -195,13 +195,13 @@
   },
   "modelCallTrend": {
     "dates": [
-      "08-25",
-      "08-26",
-      "08-27",
-      "08-28",
-      "08-29",
-      "08-30",
-      "08-31"
+      "02-25",
+      "02-26",
+      "02-27",
+      "02-28",
+      "02-28",
+      "02-28",
+      "02-28"
     ],
     "values": [
       15800,
@@ -216,7 +216,7 @@
   "modelOperationLogs": [
     {
       "id": "l1",
-      "time": "2026-08-31 14:30",
+      "time": "2025-02-28 14:30",
       "operator": "admin",
       "action": "启用模型",
       "target": "Qwen2.5-72B-Instruct",
@@ -224,7 +224,7 @@
     },
     {
       "id": "l2",
-      "time": "2026-08-31 11:20",
+      "time": "2025-02-28 11:20",
       "operator": "admin",
       "action": "分配插件",
       "target": "PaddleOCR-v4",
@@ -232,7 +232,7 @@
     },
     {
       "id": "l3",
-      "time": "2026-08-30 16:45",
+      "time": "2025-02-28 16:45",
       "operator": "admin",
       "action": "新增模型",
       "target": "ChatGLM4-9B",
@@ -240,7 +240,7 @@
     },
     {
       "id": "l4",
-      "time": "2026-08-30 09:10",
+      "time": "2025-02-28 09:10",
       "operator": "admin",
       "action": "停用模型",
       "target": "Whisper-Large-v3",
@@ -248,7 +248,7 @@
     },
     {
       "id": "l5",
-      "time": "2026-08-29 14:00",
+      "time": "2025-02-28 14:00",
       "operator": "admin",
       "action": "修改配置",
       "target": "系统设置",

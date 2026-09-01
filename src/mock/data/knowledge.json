@@ -19,8 +19,8 @@
       "storage": "1.8 GB",
       "embeddingModel": "text-embedding-v3",
       "status": "running",
-      "createdAt": "2026-01-15 10:00",
-      "updatedAt": "2026-08-28 10:00"
+      "createdAt": "2025-01-15 10:00",
+      "updatedAt": "2025-02-28 10:00"
     },
     {
       "id": "kb2",
@@ -33,8 +33,8 @@
       "storage": "620 MB",
       "embeddingModel": "text-embedding-v3",
       "status": "completed",
-      "createdAt": "2026-03-20 14:00",
-      "updatedAt": "2026-08-27 16:30"
+      "createdAt": "2025-01-20 14:00",
+      "updatedAt": "2025-02-27 16:30"
     },
     {
       "id": "kb3",
@@ -47,8 +47,8 @@
       "storage": "980 MB",
       "embeddingModel": "text-embedding-v3",
       "status": "running",
-      "createdAt": "2026-02-10 09:00",
-      "updatedAt": "2026-08-28 09:30"
+      "createdAt": "2025-01-10 09:00",
+      "updatedAt": "2025-02-28 09:30"
     },
     {
       "id": "kb4",
@@ -61,8 +61,8 @@
       "storage": "2.4 GB",
       "embeddingModel": "text-embedding-v3",
       "status": "completed",
-      "createdAt": "2026-04-01 08:00",
-      "updatedAt": "2026-08-27 14:00"
+      "createdAt": "2025-01-01 08:00",
+      "updatedAt": "2025-02-27 14:00"
     },
     {
       "id": "kb5",
@@ -75,8 +75,8 @@
       "storage": "450 MB",
       "embeddingModel": "text-embedding-v3",
       "status": "completed",
-      "createdAt": "2026-05-15 11:00",
-      "updatedAt": "2026-08-26 18:00"
+      "createdAt": "2025-01-15 11:00",
+      "updatedAt": "2025-02-26 18:00"
     }
   ],
   "knowledgeDocs": {
@@ -90,7 +90,7 @@
         "sliceCount": 48,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-28 09:00"
+        "updatedAt": "2025-02-28 09:00"
       },
       {
         "id": "doc2",
@@ -101,18 +101,18 @@
         "sliceCount": 24,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-27 16:00"
+        "updatedAt": "2025-02-27 16:00"
       },
       {
         "id": "doc3",
         "kbId": "kb1",
-        "name": "2026年度战略规划.pptx",
+        "name": "2025年度战略规划.pptx",
         "fileType": "PPTX",
         "size": "28.6 MB",
         "sliceCount": 86,
         "status": "running",
         "processStep": 3,
-        "updatedAt": "2026-08-28 10:00"
+        "updatedAt": "2025-02-28 10:00"
       },
       {
         "id": "doc4",
@@ -123,7 +123,7 @@
         "sliceCount": 32,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-26 14:00"
+        "updatedAt": "2025-02-26 14:00"
       },
       {
         "id": "doc5",
@@ -134,7 +134,7 @@
         "sliceCount": 12,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-25 10:00"
+        "updatedAt": "2025-02-25 10:00"
       }
     ],
     "kb2": [
@@ -147,7 +147,7 @@
         "sliceCount": 62,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-27 14:00"
+        "updatedAt": "2025-02-27 14:00"
       },
       {
         "id": "doc7",
@@ -158,7 +158,7 @@
         "sliceCount": 38,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-26 10:00"
+        "updatedAt": "2025-02-26 10:00"
       }
     ],
     "kb3": [
@@ -171,7 +171,7 @@
         "sliceCount": 120,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-28 08:00"
+        "updatedAt": "2025-02-28 08:00"
       },
       {
         "id": "doc9",
@@ -182,20 +182,20 @@
         "sliceCount": 45,
         "status": "running",
         "processStep": 2,
-        "updatedAt": "2026-08-28 09:30"
+        "updatedAt": "2025-02-28 09:30"
       }
     ],
     "kb4": [
       {
         "id": "doc10",
         "kbId": "kb4",
-        "name": "2026 AI 行业趋势报告.pdf",
+        "name": "2025 AI 行业趋势报告.pdf",
         "fileType": "PDF",
         "size": "22.3 MB",
         "sliceCount": 95,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-27 12:00"
+        "updatedAt": "2025-02-27 12:00"
       },
       {
         "id": "doc11",
@@ -206,7 +206,7 @@
         "sliceCount": 78,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-26 16:00"
+        "updatedAt": "2025-02-26 16:00"
       }
     ],
     "kb5": [
@@ -219,7 +219,7 @@
         "sliceCount": 42,
         "status": "completed",
         "processStep": 5,
-        "updatedAt": "2026-08-25 15:00"
+        "updatedAt": "2025-02-25 15:00"
       }
     ]
   },
@@ -349,7 +349,7 @@
       "id": "rs4",
       "kbId": "kb4",
       "kbName": "行业知识库",
-      "docName": "2026 AI 行业趋势报告.pdf",
+      "docName": "2025 AI 行业趋势报告.pdf",
       "snippet": "检索增强生成（RAG）已成为企业级 AI 应用的核心架构，通过向量检索 + 大模型生成实现精准问答...",
       "score": 0.88
     }
@@ -391,7 +391,7 @@
       "snippet": "目前已交付制造业 AI 智能化项目、政务知识库项目、金融智能客服项目、零售数据治理项目等多个行业解决方案...",
       "kbId": "kb4",
       "kbName": "行业知识库",
-      "docName": "2026 AI 行业趋势报告.pdf",
+      "docName": "2025 AI 行业趋势报告.pdf",
       "score": 0.88,
       "searchType": "semantic"
     },
@@ -401,7 +401,7 @@
       "snippet": "检索增强生成（RAG）已成为企业级 AI 应用的核心架构，通过向量检索 + 大模型生成实现精准问答...",
       "kbId": "kb4",
       "kbName": "行业知识库",
-      "docName": "2026 AI 行业趋势报告.pdf",
+      "docName": "2025 AI 行业趋势报告.pdf",
       "score": 0.85,
       "searchType": "keyword"
     },
@@ -428,8 +428,8 @@
       "frequency": "每天 02:00",
       "docCount": 51,
       "status": "completed",
-      "lastSync": "2026-08-28 02:00",
-      "nextSync": "2026-08-29 02:00"
+      "lastSync": "2025-02-28 02:00",
+      "nextSync": "2025-02-28 02:00"
     },
     {
       "id": "s2",
@@ -442,8 +442,8 @@
       "frequency": "每 4 小时",
       "docCount": 20,
       "status": "running",
-      "lastSync": "2026-08-28 08:00",
-      "nextSync": "2026-08-28 12:00"
+      "lastSync": "2025-02-28 08:00",
+      "nextSync": "2025-02-28 12:00"
     },
     {
       "id": "s3",
@@ -456,8 +456,8 @@
       "frequency": "每周一 01:00",
       "docCount": 15,
       "status": "completed",
-      "lastSync": "2026-08-25 01:00",
-      "nextSync": "2026-09-01 01:00"
+      "lastSync": "2025-02-25 01:00",
+      "nextSync": "2025-02-01 01:00"
     },
     {
       "id": "s4",
@@ -470,8 +470,8 @@
       "frequency": "每天 03:00",
       "docCount": 2,
       "status": "waiting",
-      "lastSync": "2026-08-27 03:00",
-      "nextSync": "2026-08-28 03:00"
+      "lastSync": "2025-02-27 03:00",
+      "nextSync": "2025-02-28 03:00"
     },
     {
       "id": "s5",
@@ -484,8 +484,8 @@
       "frequency": "每周五 00:00",
       "docCount": 16,
       "status": "completed",
-      "lastSync": "2026-08-22 00:00",
-      "nextSync": "2026-08-29 00:00"
+      "lastSync": "2025-02-22 00:00",
+      "nextSync": "2025-02-28 00:00"
     },
     {
       "id": "s6",
@@ -498,19 +498,19 @@
       "frequency": "每天 06:00",
       "docCount": 24,
       "status": "running",
-      "lastSync": "2026-08-28 06:00",
-      "nextSync": "2026-08-29 06:00"
+      "lastSync": "2025-02-28 06:00",
+      "nextSync": "2025-02-28 06:00"
     }
   ],
   "validationRecords": [
     {
       "id": "v1",
-      "docName": "2026年度战略规划.pptx",
+      "docName": "2025年度战略规划.pptx",
       "kbId": "kb1",
       "kbName": "企业知识库",
       "submitter": "张明",
-      "submitTime": "2026-08-28 09:45",
-      "content": "包含公司2026年度战略目标、业务布局与资源配置方案",
+      "submitTime": "2025-02-28 09:45",
+      "content": "包含公司2025年度战略目标、业务布局与资源配置方案",
       "status": "pending"
     },
     {
@@ -519,7 +519,7 @@
       "kbId": "kb3",
       "kbName": "客服知识库",
       "submitter": "李芳",
-      "submitTime": "2026-08-28 09:20",
+      "submitTime": "2025-02-28 09:20",
       "content": "新版客服标准话术，含投诉处理、产品咨询等场景",
       "status": "pending"
     },
@@ -529,8 +529,8 @@
       "kbId": "kb4",
       "kbName": "行业知识库",
       "submitter": "王磊",
-      "submitTime": "2026-08-27 17:30",
-      "content": "2026年AI监管新政要点解读与合规建议",
+      "submitTime": "2025-02-27 17:30",
+      "content": "2025年AI监管新政要点解读与合规建议",
       "status": "pending"
     },
     {
@@ -539,11 +539,11 @@
       "kbId": "kb1",
       "kbName": "企业知识库",
       "submitter": "陈静",
-      "submitTime": "2026-08-26 14:00",
+      "submitTime": "2025-02-26 14:00",
       "content": "企业文化价值观、行为准则与员工关怀政策",
       "status": "approved",
       "reviewer": "赵总",
-      "reviewTime": "2026-08-26 16:30",
+      "reviewTime": "2025-02-26 16:30",
       "comment": "内容准确，准予发布"
     },
     {
@@ -552,11 +552,11 @@
       "kbId": "kb4",
       "kbName": "行业知识库",
       "submitter": "刘洋",
-      "submitTime": "2026-08-25 11:00",
+      "submitTime": "2025-02-25 11:00",
       "content": "主要竞品功能对比与市场定位分析",
       "status": "rejected",
       "reviewer": "赵总",
-      "reviewTime": "2026-08-25 15:00",
+      "reviewTime": "2025-02-25 15:00",
       "comment": "包含未公开竞品内部信息，需脱敏后重新提交"
     },
     {
@@ -565,11 +565,11 @@
       "kbId": "kb2",
       "kbName": "产品知识库",
       "submitter": "周婷",
-      "submitTime": "2026-08-26 10:00",
+      "submitTime": "2025-02-26 10:00",
       "content": "AI 平台全功能模块说明与操作指南",
       "status": "approved",
       "reviewer": "产品总监",
-      "reviewTime": "2026-08-26 11:30",
+      "reviewTime": "2025-02-26 11:30",
       "comment": "已通过"
     }
   ]

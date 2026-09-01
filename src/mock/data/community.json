@@ -6,7 +6,7 @@
       "channelType": "wework",
       "sender": "张经理",
       "content": "请问 AI 插件的最新版本什么时候发布？我们需要提前做集成测试。",
-      "receivedAt": "2026-08-28 10:28",
+      "receivedAt": "2025-02-28 10:28",
       "status": "unread",
       "groupName": "AI 技术交流社群"
     },
@@ -16,7 +16,7 @@
       "channelType": "wechat",
       "sender": "李用户",
       "content": "订阅的周报还没收到，能帮我查一下吗？",
-      "receivedAt": "2026-08-28 10:15",
+      "receivedAt": "2025-02-28 10:15",
       "status": "unread"
     },
     {
@@ -25,7 +25,7 @@
       "channelType": "sms",
       "sender": "138****8821",
       "content": "【验证码】您的验证码是 826491，5分钟内有效。",
-      "receivedAt": "2026-08-28 10:02",
+      "receivedAt": "2025-02-28 10:02",
       "status": "read"
     },
     {
@@ -34,7 +34,7 @@
       "channelType": "email",
       "sender": "wang@company.com",
       "content": "关于下周产品演示的安排，请确认参会人员名单。",
-      "receivedAt": "2026-08-28 09:45",
+      "receivedAt": "2025-02-28 09:45",
       "status": "replied"
     },
     {
@@ -43,7 +43,7 @@
       "channelType": "web",
       "sender": "访客_1024",
       "content": "平台支持私有化部署吗？有没有相关文档？",
-      "receivedAt": "2026-08-28 09:30",
+      "receivedAt": "2025-02-28 09:30",
       "status": "unread"
     },
     {
@@ -52,7 +52,7 @@
       "channelType": "wework",
       "sender": "陈总监",
       "content": "社群推送频率太高了，能否调整一下？",
-      "receivedAt": "2026-08-28 09:12",
+      "receivedAt": "2025-02-28 09:12",
       "status": "transferred",
       "groupName": "企业数字化转型社群"
     },
@@ -62,7 +62,7 @@
       "channelType": "wechat",
       "sender": "赵同学",
       "content": "有没有 AI 智能体的入门教程推荐？",
-      "receivedAt": "2026-08-28 08:50",
+      "receivedAt": "2025-02-28 08:50",
       "status": "replied"
     },
     {
@@ -71,7 +71,7 @@
       "channelType": "web",
       "sender": "访客_2048",
       "content": "申请试用账号，企业规模约 200 人。",
-      "receivedAt": "2026-08-28 08:30",
+      "receivedAt": "2025-02-28 08:30",
       "status": "unread"
     }
   ],
@@ -113,7 +113,7 @@
   "communityAlerts": [
     {
       "id": "ca1",
-      "time": "2026-08-28 09:12",
+      "time": "2025-02-28 09:12",
       "type": "频率投诉",
       "title": "用户反馈推送频率过高",
       "level": "warning",
@@ -121,7 +121,7 @@
     },
     {
       "id": "ca2",
-      "time": "2026-08-28 08:00",
+      "time": "2025-02-28 08:00",
       "type": "活跃度下降",
       "title": "智能制造解决方案群活跃度低于阈值",
       "level": "info",
@@ -129,7 +129,7 @@
     },
     {
       "id": "ca3",
-      "time": "2026-08-27 16:30",
+      "time": "2025-02-27 16:30",
       "type": "渠道异常",
       "title": "Telegram 渠道连接超时",
       "level": "critical",
@@ -137,7 +137,7 @@
     },
     {
       "id": "ca4",
-      "time": "2026-08-27 10:00",
+      "time": "2025-02-27 10:00",
       "type": "成员激增",
       "title": "AI 技术交流社群今日新增超 200 人",
       "level": "info",
@@ -150,7 +150,7 @@
       "name": "AI 技术交流社群",
       "memberCount": 15420,
       "activity": 89,
-      "lastActive": "2026-08-28 10:30",
+      "lastActive": "2025-02-28 10:30",
       "status": "running"
     },
     {
@@ -158,7 +158,7 @@
       "name": "企业数字化转型社群",
       "memberCount": 7744,
       "activity": 62,
-      "lastActive": "2026-08-28 10:15",
+      "lastActive": "2025-02-28 10:15",
       "status": "running"
     },
     {
@@ -166,7 +166,7 @@
       "name": "新能源行业资讯群",
       "memberCount": 13863,
       "activity": 68,
-      "lastActive": "2026-08-28 09:50",
+      "lastActive": "2025-02-28 09:50",
       "status": "running"
     },
     {
@@ -174,7 +174,7 @@
       "name": "智能制造解决方案群",
       "memberCount": 9029,
       "activity": 52,
-      "lastActive": "2026-08-28 08:30",
+      "lastActive": "2025-02-28 08:30",
       "status": "completed"
     },
     {
@@ -182,7 +182,7 @@
       "name": "金融科技创新社群",
       "memberCount": 10326,
       "activity": 51,
-      "lastActive": "2026-08-27 18:00",
+      "lastActive": "2025-02-27 18:00",
       "status": "running"
     },
     {
@@ -190,7 +190,7 @@
       "name": "政务数字化交流群",
       "memberCount": 6165,
       "activity": 41,
-      "lastActive": "2026-08-27 16:00",
+      "lastActive": "2025-02-27 16:00",
       "status": "waiting"
     }
   ],
@@ -333,7 +333,7 @@
       "trigger": "用户首次加入社群",
       "frequency": "即时",
       "status": "running",
-      "lastRun": "2026-08-28 10:20"
+      "lastRun": "2025-02-28 10:20"
     },
     {
       "id": "ps2",
@@ -342,7 +342,7 @@
       "trigger": "定时任务",
       "frequency": "每周一 09:00",
       "status": "running",
-      "lastRun": "2026-08-26 09:00"
+      "lastRun": "2025-02-26 09:00"
     },
     {
       "id": "ps3",
@@ -351,7 +351,7 @@
       "trigger": "7 天未活跃",
       "frequency": "每天 10:00",
       "status": "running",
-      "lastRun": "2026-08-28 10:00"
+      "lastRun": "2025-02-28 10:00"
     },
     {
       "id": "ps4",
@@ -360,7 +360,7 @@
       "trigger": "生命周期 = VIP",
       "frequency": "每月 1 日",
       "status": "completed",
-      "lastRun": "2026-08-01 09:00"
+      "lastRun": "2025-02-01 09:00"
     },
     {
       "id": "ps5",
@@ -369,7 +369,7 @@
       "trigger": "版本发布事件",
       "frequency": "即时",
       "status": "waiting",
-      "lastRun": "2026-08-20 15:00"
+      "lastRun": "2025-02-20 15:00"
     }
   ],
   "pushTemplates": [
@@ -385,7 +385,7 @@
         "日期",
         "链接"
       ],
-      "updatedAt": "2026-08-27 14:00"
+      "updatedAt": "2025-02-27 14:00"
     },
     {
       "id": "t2",
@@ -399,7 +399,7 @@
         "时间",
         "链接"
       ],
-      "updatedAt": "2026-08-26 10:30"
+      "updatedAt": "2025-02-26 10:30"
     },
     {
       "id": "t3",
@@ -412,7 +412,7 @@
         "订单号",
         "状态"
       ],
-      "updatedAt": "2026-08-25 16:00"
+      "updatedAt": "2025-02-25 16:00"
     },
     {
       "id": "t4",
@@ -426,7 +426,7 @@
         "日期",
         "摘要内容"
       ],
-      "updatedAt": "2026-08-24 09:00"
+      "updatedAt": "2025-02-24 09:00"
     }
   ],
   "strategyEffectStats": {
@@ -446,7 +446,7 @@
         "高活跃"
       ],
       "lifecycle": "vip",
-      "lastActive": "2026-08-28 10:28",
+      "lastActive": "2025-02-28 10:28",
       "messageCount": 183,
       "responseRate": 91,
       "preferredChannel": "企业微信",
@@ -461,7 +461,7 @@
         "内容消费"
       ],
       "lifecycle": "active",
-      "lastActive": "2026-08-28 10:15",
+      "lastActive": "2025-02-28 10:15",
       "messageCount": 26,
       "responseRate": 70,
       "preferredChannel": "微信公众号",
@@ -476,7 +476,7 @@
         "API 集成"
       ],
       "lifecycle": "active",
-      "lastActive": "2026-08-27 18:00",
+      "lastActive": "2025-02-27 18:00",
       "messageCount": 73,
       "responseRate": 76,
       "preferredChannel": "邮件",
@@ -491,7 +491,7 @@
         "投诉反馈"
       ],
       "lifecycle": "silent",
-      "lastActive": "2026-08-20 14:00",
+      "lastActive": "2025-02-20 14:00",
       "messageCount": 43,
       "responseRate": 42,
       "preferredChannel": "企业微信",
@@ -506,7 +506,7 @@
         "新手"
       ],
       "lifecycle": "new",
-      "lastActive": "2026-08-28 08:50",
+      "lastActive": "2025-02-28 08:50",
       "messageCount": 12,
       "responseRate": 99,
       "preferredChannel": "Web",
@@ -521,7 +521,7 @@
         "已流失"
       ],
       "lifecycle": "churned",
-      "lastActive": "2026-07-15 10:00",
+      "lastActive": "2025-02-15 10:00",
       "messageCount": 17,
       "responseRate": 12,
       "preferredChannel": "短信",

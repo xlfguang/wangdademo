@@ -5,21 +5,21 @@
       "taskId": "t1-2",
       "sender": "王芳",
       "content": "爬虫模块 build 已通过，可以开始联调了",
-      "time": "2026-08-28 10:15"
+      "time": "2025-02-28 10:15"
     },
     {
       "id": "m2",
       "taskId": "t1-2",
       "sender": "赵强",
       "content": "收到，我这边下午开始对接 MainLayout breadcrumb",
-      "time": "2026-08-28 10:20"
+      "time": "2025-02-28 10:20"
     },
     {
       "id": "m3",
       "taskId": "t1",
       "sender": "张明",
       "content": "@李华 @王芳 本周五前完成全部插件验收",
-      "time": "2026-08-28 09:00"
+      "time": "2025-02-28 09:00"
     }
   ],
   "collabTasks": [
@@ -39,9 +39,9 @@
       "watchers": [
         "刘总"
       ],
-      "startDate": "2026-07-01",
-      "endDate": "2026-09-30",
-      "createdAt": "2026-07-01 09:00",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28",
+      "createdAt": "2025-02-01 09:00",
       "createdBy": "张明"
     },
     {
@@ -56,9 +56,9 @@
         "王芳"
       ],
       "watchers": [],
-      "startDate": "2026-08-01",
-      "endDate": "2026-08-28",
-      "createdAt": "2026-08-01 10:00",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28",
+      "createdAt": "2025-02-01 10:00",
       "createdBy": "张明",
       "upstreamIds": []
     },
@@ -74,9 +74,9 @@
         "赵强"
       ],
       "watchers": [],
-      "startDate": "2026-08-15",
-      "endDate": "2026-08-30",
-      "createdAt": "2026-08-15 10:00",
+      "startDate": "2025-02-15",
+      "endDate": "2025-02-28",
+      "createdAt": "2025-02-15 10:00",
       "createdBy": "张明",
       "upstreamIds": [
         "t1-1"
@@ -94,9 +94,9 @@
         "李华"
       ],
       "watchers": [],
-      "startDate": "2026-08-20",
-      "endDate": "2026-09-05",
-      "createdAt": "2026-08-20 10:00",
+      "startDate": "2025-02-20",
+      "endDate": "2025-02-05",
+      "createdAt": "2025-02-20 10:00",
       "createdBy": "张明",
       "upstreamIds": [
         "t1-2"
@@ -116,9 +116,9 @@
       "watchers": [
         "李总"
       ],
-      "startDate": "2026-06-01",
-      "endDate": "2026-08-25",
-      "createdAt": "2026-06-01 09:00",
+      "startDate": "2025-01-01",
+      "endDate": "2025-02-25",
+      "createdAt": "2025-01-01 09:00",
       "createdBy": "陈伟"
     },
     {
@@ -130,9 +130,9 @@
       "owner": "刘洋",
       "participants": [],
       "watchers": [],
-      "startDate": "2026-09-01",
-      "endDate": "2026-09-30",
-      "createdAt": "2026-08-28 14:00",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28",
+      "createdAt": "2025-02-28 14:00",
       "createdBy": "刘洋",
       "upstreamIds": [
         "t2"
@@ -149,9 +149,9 @@
         "张明"
       ],
       "watchers": [],
-      "startDate": "2026-08-01",
-      "endDate": "2026-08-20",
-      "createdAt": "2026-08-01 09:00",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-20",
+      "createdAt": "2025-02-01 09:00",
       "createdBy": "王芳"
     }
   ],
@@ -161,14 +161,14 @@
       "taskId": "t1",
       "action": "创建总任务",
       "operator": "张明",
-      "time": "2026-07-01 09:00"
+      "time": "2025-02-01 09:00"
     },
     {
       "id": "o2",
       "taskId": "t1-1",
       "action": "拆解子任务",
       "operator": "张明",
-      "time": "2026-08-01 10:00",
+      "time": "2025-02-01 10:00",
       "detail": "从 t1 拆解"
     },
     {
@@ -176,14 +176,14 @@
       "taskId": "t1-1",
       "action": "提交验收",
       "operator": "李华",
-      "time": "2026-08-28 09:00"
+      "time": "2025-02-28 09:00"
     },
     {
       "id": "o4",
       "taskId": "t4",
       "action": "任务超时预警",
       "operator": "系统",
-      "time": "2026-08-21 09:00"
+      "time": "2025-02-21 09:00"
     }
   ],
   "progressLogs": [
@@ -193,7 +193,7 @@
       "progress": 85,
       "note": "舆情监控与检索页已完成，待联调",
       "operator": "王芳",
-      "time": "2026-08-28 10:00"
+      "time": "2025-02-28 10:00"
     },
     {
       "id": "pl2",
@@ -201,7 +201,7 @@
       "progress": 60,
       "note": "Overview 与 Search 页开发完成",
       "operator": "王芳",
-      "time": "2026-08-27 16:30"
+      "time": "2025-02-27 16:30"
     },
     {
       "id": "pl3",
@@ -209,7 +209,7 @@
       "progress": 100,
       "note": "build 通过，已提交验收",
       "operator": "李华",
-      "time": "2026-08-28 09:00"
+      "time": "2025-02-28 09:00"
     },
     {
       "id": "pl4",
@@ -217,7 +217,7 @@
       "progress": 68,
       "note": "整体进度同步更新",
       "operator": "张明",
-      "time": "2026-08-28 10:30"
+      "time": "2025-02-28 10:30"
     }
   ],
   "taskComments": [
@@ -226,14 +226,14 @@
       "docId": "d2",
       "content": "第 3 节路由表需补充 legacy redirect 说明",
       "author": "赵强",
-      "time": "2026-08-27 19:00"
+      "time": "2025-02-27 19:00"
     },
     {
       "id": "c2",
       "docId": "d2",
       "content": "已补充，请复核 @王芳",
       "author": "王芳",
-      "time": "2026-08-27 19:30"
+      "time": "2025-02-27 19:30"
     }
   ],
   "taskDocuments": [
@@ -243,7 +243,7 @@
       "name": "Q3交付计划_v2.docx",
       "size": "2.4 MB",
       "folder": "原始素材",
-      "updatedAt": "2026-08-28 09:00",
+      "updatedAt": "2025-02-28 09:00",
       "updatedBy": "张明"
     },
     {
@@ -252,7 +252,7 @@
       "name": "爬虫插件规格说明.md",
       "size": "48 KB",
       "folder": "阶段性成果",
-      "updatedAt": "2026-08-27 18:00",
+      "updatedAt": "2025-02-27 18:00",
       "updatedBy": "王芳"
     },
     {
@@ -261,7 +261,7 @@
       "name": "音频插件验收报告.pdf",
       "size": "1.2 MB",
       "folder": "最终成果",
-      "updatedAt": "2026-08-28 08:30",
+      "updatedAt": "2025-02-28 08:30",
       "updatedBy": "李华"
     },
     {
@@ -270,7 +270,7 @@
       "name": "知识库二期方案.docx",
       "size": "3.8 MB",
       "folder": "原始素材",
-      "updatedAt": "2026-08-26 14:00",
+      "updatedAt": "2025-02-26 14:00",
       "updatedBy": "陈伟"
     }
   ],
@@ -284,10 +284,10 @@
         "王芳",
         "赵强"
       ],
-      "plannedEnd": "2026-08-15",
-      "actualEnd": "2026-08-14",
+      "plannedEnd": "2025-02-15",
+      "actualEnd": "2025-02-14",
       "acceptResult": "通过",
-      "archivedAt": "2026-08-15 16:00"
+      "archivedAt": "2025-02-15 16:00"
     },
     {
       "id": "l2",
@@ -297,10 +297,10 @@
       "participants": [
         "张明"
       ],
-      "plannedEnd": "2026-08-10",
-      "actualEnd": "2026-08-12",
+      "plannedEnd": "2025-02-10",
+      "actualEnd": "2025-02-12",
       "acceptResult": "通过",
-      "archivedAt": "2026-08-12 18:00"
+      "archivedAt": "2025-02-12 18:00"
     }
   ],
   "taskNotifications": [
@@ -308,9 +308,9 @@
       "id": "n1",
       "taskId": "t1-2",
       "type": "change",
-      "content": "截止时间由 2026-08-25 调整为 2026-08-30",
+      "content": "截止时间由 2025-02-25 调整为 2025-02-28",
       "operator": "张明",
-      "time": "2026-08-26 11:00",
+      "time": "2025-02-26 11:00",
       "read": false
     },
     {
@@ -319,7 +319,7 @@
       "type": "warning",
       "content": "任务已超时，请尽快更新进度",
       "operator": "系统",
-      "time": "2026-08-21 09:00",
+      "time": "2025-02-21 09:00",
       "read": false
     },
     {
@@ -328,7 +328,7 @@
       "type": "change",
       "content": "李华 更新进度至 100%",
       "operator": "李华",
-      "time": "2026-08-28 09:00",
+      "time": "2025-02-28 09:00",
       "read": true
     },
     {
@@ -337,7 +337,7 @@
       "type": "change",
       "content": "陈伟 提交验收申请",
       "operator": "陈伟",
-      "time": "2026-08-27 17:00",
+      "time": "2025-02-27 17:00",
       "read": true
     }
   ],

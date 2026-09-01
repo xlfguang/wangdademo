@@ -6,7 +6,7 @@
 //   POST /api/file/write  { filename, content }
 // 后端基地址：
 //   开发环境（import.meta.env.DEV）走相对路径 /api/...，由 vite.config.ts 代理转发到后端（避免跨域）。
-//   生产环境使用 http://192.168.2.48:22301。
+//   生产环境使用 http://192.168.2.48:8001。
 //   也可通过环境变量 VITE_API_BASE_URL 覆盖（设为空字符串即走相对路径）。
 // ─────────────────────────────────────────────
 import dashboard from './data/dashboard.json'
@@ -53,7 +53,7 @@ const localRegistry: Record<MockMenuKey, unknown> = {
 /** 后端基地址（可用环境变量 VITE_API_BASE_URL 覆盖；开发环境默认走相对路径 /api 代理） */
 const API_BASE =
   (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/+$/, '') ??
-  (import.meta.env.DEV ? '' : 'http://192.168.2.48:22301')
+  (import.meta.env.DEV ? '' : 'http://192.168.2.48:8001')
 
 /** 同步读取本地打包 JSON（无网络时的兜底数据源）。 */
 export function getLocalData<T = unknown>(key: MockMenuKey): T {

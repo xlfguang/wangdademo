@@ -2,7 +2,7 @@
   "cleanBatches": [
     {
       "id": "b1",
-      "batchNo": "DC202608280001",
+      "batchNo": "DC202502280001",
       "name": "产品资料库清洗批次",
       "category": "office",
       "submitter": "张产品",
@@ -12,13 +12,13 @@
       "status": "running",
       "progress": 74,
       "qualityRate": 96.7,
-      "createdAt": "2026-08-28 08:50",
-      "updatedAt": "2026-08-28 10:20",
+      "createdAt": "2025-02-28 08:50",
+      "updatedAt": "2025-02-28 10:20",
       "taskId": "dc1"
     },
     {
       "id": "b2",
-      "batchNo": "DC202608280002",
+      "batchNo": "DC202502280002",
       "name": "多模态客服资料批次",
       "category": "multimodal",
       "submitter": "李运营",
@@ -28,13 +28,13 @@
       "status": "running",
       "progress": 54,
       "qualityRate": 88.3,
-      "createdAt": "2026-08-28 09:15",
-      "updatedAt": "2026-08-28 10:05",
+      "createdAt": "2025-02-28 09:15",
+      "updatedAt": "2025-02-28 10:05",
       "taskId": "dc4"
     },
     {
       "id": "b3",
-      "batchNo": "DC202608270003",
+      "batchNo": "DC202502270003",
       "name": "政策文件结构化批次",
       "category": "office",
       "submitter": "王合规",
@@ -44,13 +44,13 @@
       "status": "completed",
       "progress": 100,
       "qualityRate": 97.3,
-      "createdAt": "2026-08-27 14:00",
-      "updatedAt": "2026-08-27 16:30",
+      "createdAt": "2025-02-27 14:00",
+      "updatedAt": "2025-02-27 16:30",
       "taskId": "dc2"
     },
     {
       "id": "b4",
-      "batchNo": "DC202608260004",
+      "batchNo": "DC202502260004",
       "name": "供应链文档治理批次",
       "category": "office",
       "submitter": "赵采购",
@@ -60,13 +60,13 @@
       "status": "completed",
       "progress": 100,
       "qualityRate": 97.1,
-      "createdAt": "2026-08-26 10:00",
-      "updatedAt": "2026-08-26 18:00",
+      "createdAt": "2025-02-26 10:00",
+      "updatedAt": "2025-02-26 18:00",
       "taskId": "dc3"
     },
     {
       "id": "b5",
-      "batchNo": "DC202608280005",
+      "batchNo": "DC202502280005",
       "name": "影像档案数字化批次",
       "category": "multimodal",
       "submitter": "陈法务",
@@ -75,8 +75,8 @@
       "totalPages": 13,
       "status": "queued",
       "progress": 0,
-      "createdAt": "2026-08-28 10:30",
-      "updatedAt": "2026-08-28 10:30"
+      "createdAt": "2025-02-28 10:30",
+      "updatedAt": "2025-02-28 10:30"
     }
   ],
   "cleanCompareSamples": [
@@ -84,8 +84,8 @@
       "id": "cmp1",
       "document": "行业监管政策汇编.pdf",
       "field": "生效日期",
-      "before": "2026年8月（OCR 模糊）",
-      "after": "2026-08-01",
+      "before": "2025年2月（OCR 模糊）",
+      "after": "2025-02-01",
       "category": "structure"
     },
     {
@@ -156,7 +156,7 @@
     },
     {
       "id": "doc5",
-      "name": "培训录音_202603.mp3",
+      "name": "培训录音_202501.mp3",
       "fileType": "音频",
       "category": "multimodal",
       "docType": "audio",
@@ -280,9 +280,9 @@
   "dataCleanTasks": [
     {
       "id": "dc1",
-      "taskId": "DC202608280001",
+      "taskId": "DC202502280001",
       "batchId": "b1",
-      "batchNo": "DC202608280001",
+      "batchNo": "DC202502280001",
       "name": "产品资料库清洗",
       "dataSource": "产品中心",
       "category": "office",
@@ -296,14 +296,14 @@
       "structureScore": 96.9,
       "progress": 93,
       "status": "running",
-      "createdAt": "2026-08-28 08:50",
-      "updatedAt": "2026-08-28 10:20"
+      "createdAt": "2025-02-28 08:50",
+      "updatedAt": "2025-02-28 10:20"
     },
     {
       "id": "dc2",
-      "taskId": "DC202608270003",
+      "taskId": "DC202502270003",
       "batchId": "b3",
-      "batchNo": "DC202608270003",
+      "batchNo": "DC202502270003",
       "name": "政策文件结构化",
       "dataSource": "合规部",
       "category": "office",
@@ -317,14 +317,14 @@
       "structureScore": 97.2,
       "progress": 100,
       "status": "completed",
-      "createdAt": "2026-08-27 14:00",
-      "updatedAt": "2026-08-27 16:30"
+      "createdAt": "2025-02-27 14:00",
+      "updatedAt": "2025-02-27 16:30"
     },
     {
       "id": "dc3",
-      "taskId": "DC202608260004",
+      "taskId": "DC202502260004",
       "batchId": "b4",
-      "batchNo": "DC202608260004",
+      "batchNo": "DC202502260004",
       "name": "供应链文档治理",
       "dataSource": "供应链",
       "category": "office",
@@ -338,14 +338,14 @@
       "structureScore": 95.5,
       "progress": 100,
       "status": "completed",
-      "createdAt": "2026-08-26 10:00",
-      "updatedAt": "2026-08-26 18:00"
+      "createdAt": "2025-02-26 10:00",
+      "updatedAt": "2025-02-26 18:00"
     },
     {
       "id": "dc4",
-      "taskId": "DC202608280002",
+      "taskId": "DC202502280002",
       "batchId": "b2",
-      "batchNo": "DC202608280002",
+      "batchNo": "DC202502280002",
       "name": "多模态客服资料清洗",
       "dataSource": "客服中心",
       "category": "multimodal",
@@ -359,26 +359,26 @@
       "structureScore": 86.2,
       "progress": 64,
       "status": "running",
-      "createdAt": "2026-08-28 09:15",
-      "updatedAt": "2026-08-28 10:05"
+      "createdAt": "2025-02-28 09:15",
+      "updatedAt": "2025-02-28 10:05"
     }
   ],
   "negotiationRecords": [
     {
       "id": "n1",
-      "batchNo": "DC202608150001",
+      "batchNo": "DC202502150001",
       "reason": "合规核查超量（68 份办公文档）",
       "status": "已确认",
       "result": "分两批处理，加急 SLA 4 小时",
-      "time": "2026-08-15 14:30"
+      "time": "2025-02-15 14:30"
     },
     {
       "id": "n2",
-      "batchNo": "DC202608200002",
+      "batchNo": "DC202502200002",
       "reason": "多模态批次等效页数 25 页超限",
       "status": "协商中",
       "result": "—",
-      "time": "2026-08-20 09:00"
+      "time": "2025-02-20 09:00"
     }
   ],
   "pipelineLayers": [
@@ -455,7 +455,7 @@
     {
       "id": "q3",
       "field": "—",
-      "document": "培训录音_202603.mp3",
+      "document": "培训录音_202501.mp3",
       "issue": "背景噪声较大，转写文本部分段落低置信",
       "confidence": 61,
       "category": "format",

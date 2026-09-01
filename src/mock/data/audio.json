@@ -76,9 +76,9 @@
   "audioTasks": [
     {
       "id": "a1",
-      "taskId": "AU202608280001",
+      "taskId": "AU202502280001",
       "name": "产品发布会会议纪要",
-      "audioFile": "launch_meeting_2026.wav",
+      "audioFile": "launch_meeting_2025.wav",
       "processType": "语音转文字+提取",
       "duration": "118:53",
       "format": "WAV",
@@ -86,12 +86,12 @@
       "status": "completed",
       "progress": 100,
       "clipCount": 8,
-      "createdAt": "2026-08-28 09:15",
-      "updatedAt": "2026-08-28 09:45"
+      "createdAt": "2025-02-28 09:15",
+      "updatedAt": "2025-02-28 09:45"
     },
     {
       "id": "a2",
-      "taskId": "AU202608280002",
+      "taskId": "AU202502280002",
       "name": "客服通话录音分析",
       "audioFile": "call_batch_08.mp3",
       "processType": "语音转文字",
@@ -101,12 +101,12 @@
       "status": "running",
       "progress": 65,
       "clipCount": 14,
-      "createdAt": "2026-08-28 08:30",
-      "updatedAt": "2026-08-28 10:00"
+      "createdAt": "2025-02-28 08:30",
+      "updatedAt": "2025-02-28 10:00"
     },
     {
       "id": "a3",
-      "taskId": "AU202608280003",
+      "taskId": "AU202502280003",
       "name": "科研人员访谈提炼",
       "audioFile": "research_interview.mp3",
       "processType": "关键信息提取",
@@ -116,12 +116,12 @@
       "status": "completed",
       "progress": 100,
       "clipCount": 2,
-      "createdAt": "2026-08-27 17:00",
-      "updatedAt": "2026-08-27 17:30"
+      "createdAt": "2025-02-27 17:00",
+      "updatedAt": "2025-02-27 17:30"
     },
     {
       "id": "a4",
-      "taskId": "AU202608270004",
+      "taskId": "AU202502270004",
       "name": "培训课程重点提取",
       "audioFile": "training_course_03.wav",
       "processType": "语音转文字",
@@ -131,12 +131,12 @@
       "status": "running",
       "progress": 86,
       "clipCount": 5,
-      "createdAt": "2026-08-27 14:00",
-      "updatedAt": "2026-08-28 08:00"
+      "createdAt": "2025-02-27 14:00",
+      "updatedAt": "2025-02-28 08:00"
     },
     {
       "id": "a5",
-      "taskId": "AU202608270005",
+      "taskId": "AU202502270005",
       "name": "个人学习笔记整理",
       "audioFile": "study_notes.mp3",
       "processType": "语音转文字",
@@ -146,8 +146,8 @@
       "status": "queued",
       "progress": 0,
       "clipCount": 1,
-      "createdAt": "2026-08-27 11:00",
-      "updatedAt": "2026-08-27 11:00"
+      "createdAt": "2025-02-27 11:00",
+      "updatedAt": "2025-02-27 11:00"
     }
   ],
   "extractionMock": {
@@ -194,7 +194,7 @@
         "source": "00:01:15"
       },
       {
-        "text": "2026-08-30",
+        "text": "2025-02-28",
         "type": "日期",
         "source": "00:01:15"
       },
@@ -213,7 +213,7 @@
       {
         "text": "完成会议纪要",
         "assignee": "张三",
-        "deadline": "2026-08-30",
+        "deadline": "2025-02-28",
         "source": "00:01:15"
       },
       {
@@ -227,51 +227,51 @@
   "historyRecords": [
     {
       "id": "h1",
-      "time": "2026-08-28 09:45",
+      "time": "2025-02-28 09:45",
       "type": "关键信息提取",
-      "fileName": "launch_meeting_2026.wav",
+      "fileName": "launch_meeting_2025.wav",
       "status": "completed",
       "starred": true
     },
     {
       "id": "h2",
-      "time": "2026-08-28 09:30",
+      "time": "2025-02-28 09:30",
       "type": "语音转文字",
-      "fileName": "launch_meeting_2026.wav",
+      "fileName": "launch_meeting_2025.wav",
       "status": "completed",
       "starred": true
     },
     {
       "id": "h3",
-      "time": "2026-08-28 09:15",
+      "time": "2025-02-28 09:15",
       "type": "音频裁剪",
-      "fileName": "launch_meeting_2026.wav",
+      "fileName": "launch_meeting_2025.wav",
       "status": "completed"
     },
     {
       "id": "h4",
-      "time": "2026-08-28 09:10",
+      "time": "2025-02-28 09:10",
       "type": "音频上传",
-      "fileName": "launch_meeting_2026.wav",
+      "fileName": "launch_meeting_2025.wav",
       "status": "completed"
     },
     {
       "id": "h5",
-      "time": "2026-08-28 08:30",
+      "time": "2025-02-28 08:30",
       "type": "语音转文字",
       "fileName": "call_batch_08.mp3",
       "status": "running"
     },
     {
       "id": "h6",
-      "time": "2026-08-27 17:30",
+      "time": "2025-02-27 17:30",
       "type": "关键信息提取",
       "fileName": "research_interview.mp3",
       "status": "completed"
     },
     {
       "id": "h7",
-      "time": "2026-08-27 14:00",
+      "time": "2025-02-27 14:00",
       "type": "音频上传",
       "fileName": "training_course_03.wav",
       "status": "failed"
@@ -283,27 +283,27 @@
       "text": "会议纪要 — Q3 产品路线图讨论",
       "voice": "商务女声",
       "duration": "00:28",
-      "createdAt": "2026-08-28 10:15"
+      "createdAt": "2025-02-28 10:15"
     },
     {
       "id": "sh2",
       "text": "客服话术 — 账号重置指引",
       "voice": "标准女声",
       "duration": "00:15",
-      "createdAt": "2026-08-28 09:40"
+      "createdAt": "2025-02-28 09:40"
     },
     {
       "id": "sh3",
       "text": "产品发布旁白",
       "voice": "标准男声",
       "duration": "00:42",
-      "createdAt": "2026-08-27 16:20"
+      "createdAt": "2025-02-27 16:20"
     }
   ],
   "synthesisScenarios": {
     "meeting": {
       "title": "会议纪要生成",
-      "template": "各位同事大家好，本次会议主要讨论了 Q3 产品路线图与 AI 能力插件交付计划。会议决议：下周完成音频插件验收，责任人张三，截止 2026-08-30。"
+      "template": "各位同事大家好，本次会议主要讨论了 Q3 产品路线图与 AI 能力插件交付计划。会议决议：下周完成音频插件验收，责任人张三，截止 2025-02-28。"
     },
     "reply": {
       "title": "语音交互回复",
@@ -324,7 +324,7 @@
     {
       "timestamp": "00:01:15",
       "speaker": "说话人1",
-      "text": "会议纪要需要在本周五前完成，责任人张三，时间节点 2026-08-30。"
+      "text": "会议纪要需要在本周五前完成，责任人张三，时间节点 2025-02-28。"
     },
     {
       "timestamp": "00:02:08",

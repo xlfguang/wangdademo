@@ -105,7 +105,7 @@
       "method": "POST",
       "path": "/video/process",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"process_type\": \"transcode\",\n  \"params\": {\n    \"format\": \"mp4\",\n    \"resolution\": \"1920x1080\"\n  }\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280001\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280001\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "transcode",
@@ -113,7 +113,7 @@
       "method": "POST",
       "path": "/video/transcode",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mov\",\n  \"target_format\": \"mp4\",\n  \"codec\": \"h265\",\n  \"resolution\": \"1920x1080\",\n  \"fps\": 30\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280002\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280002\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "compress",
@@ -121,7 +121,7 @@
       "method": "POST",
       "path": "/video/compress",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"quality\": 80,\n  \"target_size_mb\": 100\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280003\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280003\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "keyframes",
@@ -129,7 +129,7 @@
       "method": "POST",
       "path": "/video/keyframes",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"mode\": \"scene_change\",\n  \"filter_blur\": true\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280004\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280004\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "ocr",
@@ -137,7 +137,7 @@
       "method": "POST",
       "path": "/video/ocr",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"language\": \"zh-CN\"\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280005\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280005\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "summary",
@@ -145,23 +145,23 @@
       "method": "POST",
       "path": "/video/summary",
       "requestBody": "{\n  \"video_url\": \"https://example.com/video.mp4\",\n  \"options\": {\n    \"keywords\": true,\n    \"scenes\": true\n  }\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280006\",\n  \"status\": \"processing\"\n}"
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280006\",\n  \"status\": \"processing\"\n}"
     },
     {
       "id": "query",
       "name": "任务查询",
       "method": "GET",
       "path": "/video/task/{task_id}",
-      "requestBody": "{\n  \"task_id\": \"VP202608280001\"\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"task_id\": \"VP202608280001\",\n    \"status\": \"completed\",\n    \"progress\": 100,\n    \"output_url\": \"https://cdn.example.com/output.mp4\"\n  }\n}"
+      "requestBody": "{\n  \"task_id\": \"VP202502280001\"\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"task_id\": \"VP202502280001\",\n    \"status\": \"completed\",\n    \"progress\": 100,\n    \"output_url\": \"https://cdn.example.com/output.mp4\"\n  }\n}"
     },
     {
       "id": "cancel",
       "name": "任务取消",
       "method": "POST",
       "path": "/video/task/{task_id}/cancel",
-      "requestBody": "{\n  \"task_id\": \"VP202608280001\"\n}",
-      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202608280001\",\n  \"status\": \"cancelled\"\n}"
+      "requestBody": "{\n  \"task_id\": \"VP202502280001\"\n}",
+      "responseBody": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"task_id\": \"VP202502280001\",\n  \"status\": \"cancelled\"\n}"
     }
   ],
   "videoCapabilities": [
@@ -233,7 +233,7 @@
     "name": "视频处理插件",
     "version": "v2.6.1",
     "status": "running",
-    "appKey": "vp_app_key_20260828",
+    "appKey": "vp_app_key_20250228",
     "appSecret": "vp_secret_************************",
     "signMethod": "HMAC-SHA256",
     "ipWhitelist": "192.168.1.0/24, 10.0.0.0/8",
@@ -252,14 +252,14 @@
   "videoTasks": [
     {
       "id": "v1",
-      "taskId": "VP202608280001",
+      "taskId": "VP202502280001",
       "name": "企业宣传视频 AI 全量分析",
-      "fileName": "enterprise_promo_2026.mp4",
+      "fileName": "enterprise_promo_2025.mp4",
       "processType": "全量分析",
       "progress": 38,
       "status": "running",
-      "createdAt": "2026-08-28 10:32",
-      "updatedAt": "2026-08-28 10:45",
+      "createdAt": "2025-02-28 10:32",
+      "updatedAt": "2025-02-28 10:45",
       "originalSize": "2.1 GB",
       "duration": "02:06",
       "resolution": "1920x1080",
@@ -267,14 +267,14 @@
     },
     {
       "id": "v2",
-      "taskId": "VP202608280002",
+      "taskId": "VP202502280002",
       "name": "培训视频转码 H.265",
       "fileName": "training_session_08.mov",
       "processType": "视频转码",
       "progress": 100,
       "status": "completed",
-      "createdAt": "2026-08-28 09:20",
-      "updatedAt": "2026-08-28 09:35",
+      "createdAt": "2025-02-28 09:20",
+      "updatedAt": "2025-02-28 09:35",
       "originalSize": "2.6 GB",
       "outputSize": "680 MB",
       "duration": "01:14:52",
@@ -285,14 +285,14 @@
     },
     {
       "id": "v3",
-      "taskId": "VP202608280003",
+      "taskId": "VP202502280003",
       "name": "发布会录像智能摘要",
       "fileName": "launch_event_full.mp4",
       "processType": "AI视频摘要",
       "progress": 65,
       "status": "running",
-      "createdAt": "2026-08-28 08:50",
-      "updatedAt": "2026-08-28 09:10",
+      "createdAt": "2025-02-28 08:50",
+      "updatedAt": "2025-02-28 09:10",
       "originalSize": "2.3 GB",
       "duration": "01:47:48",
       "resolution": "3840x2160",
@@ -300,14 +300,14 @@
     },
     {
       "id": "v4",
-      "taskId": "VP202608280004",
+      "taskId": "VP202502280004",
       "name": "产品演示视频剪辑",
       "fileName": "product_intro_raw.mp4",
       "processType": "视频剪辑",
       "progress": 0,
       "status": "queued",
-      "createdAt": "2026-08-28 08:15",
-      "updatedAt": "2026-08-28 08:15",
+      "createdAt": "2025-02-28 08:15",
+      "updatedAt": "2025-02-28 08:15",
       "originalSize": "1.6 GB",
       "duration": "01:31:51",
       "resolution": "1920x1080",
@@ -315,14 +315,14 @@
     },
     {
       "id": "v5",
-      "taskId": "VP202608270005",
+      "taskId": "VP202502270005",
       "name": "品牌宣传片 OCR 识别",
       "fileName": "brand_video_final.webm",
       "processType": "OCR识别",
       "progress": 100,
       "status": "completed",
-      "createdAt": "2026-08-27 16:40",
-      "updatedAt": "2026-08-27 17:20",
+      "createdAt": "2025-02-27 16:40",
+      "updatedAt": "2025-02-27 17:20",
       "originalSize": "230 MB",
       "outputSize": "12 MB",
       "duration": "35:39",
@@ -333,14 +333,14 @@
     },
     {
       "id": "v6",
-      "taskId": "VP202608270006",
+      "taskId": "VP202502270006",
       "name": "会议录像语音转写",
       "fileName": "weekly_meeting.m4a",
       "processType": "语音转文字",
       "progress": 100,
       "status": "completed",
-      "createdAt": "2026-08-27 14:00",
-      "updatedAt": "2026-08-27 14:30",
+      "createdAt": "2025-02-27 14:00",
+      "updatedAt": "2025-02-27 14:30",
       "originalSize": "3.6 GB",
       "outputSize": "256 KB",
       "duration": "55:59",
@@ -349,14 +349,14 @@
     },
     {
       "id": "v7",
-      "taskId": "VP202608270007",
+      "taskId": "VP202502270007",
       "name": "峰会录像关键帧提取",
       "fileName": "summit_recording.avi",
       "processType": "关键帧提取",
       "progress": 47,
       "status": "failed",
-      "createdAt": "2026-08-27 11:00",
-      "updatedAt": "2026-08-27 11:15",
+      "createdAt": "2025-02-27 11:00",
+      "updatedAt": "2025-02-27 11:15",
       "originalSize": "251 MB",
       "duration": "02:34",
       "resolution": "1920x1080",
